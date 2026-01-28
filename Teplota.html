@@ -31,7 +31,7 @@
     <script>
     async function loadTemp() {
       try {
-        const response = await fetch('http://192.168.1.153:5000/temp');
+        const response = await fetch('data.csv');
         const data = await response.json();
         document.getElementById('temp').innerText = data.temperature + ' °C';
         document.getElementById('time').innerText = 'Aktualizováno: ' + new Date().toLocaleTimeString();
