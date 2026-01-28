@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>TVHEADEND</title>
+  </head>
+  <body>
+    <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+      font-family: -webkit-standard; font-size: medium; font-style:
+      normal; font-variant-caps: normal; font-weight: 400;
+      letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none; display: inline !important; float: none;"><a
+        href="../index.html">zpět</a><br>
+      <br>
+      <b>TVHEADEND:</b><br>
+      sudo systemctl start tvheadend<br>
+      sudo systemctl stop tvheadend<br>
+      sudo systemctl restart tvheadend<br>
+      sudo systemctl status tvheadend<br>
+      <br>
+      <b>připojení USB FLASH:</b><br>
+      sudo mkdir -p /mnt/usb # vytvoření adresáře<br>
+      sudo umount /mnt/usb 2&gt;/dev/null # odpojení disku<br>
+      sudo mount -o uid=1000,gid=1000,umask=000 /dev/sda1 /mnt/usb #
+      připojení disku, práva pro všechny<br>
+      ls -ld /mnt/usb # ověření, musíš vidět: drwxrwxrwx&nbsp; ...&nbsp;
+      pi&nbsp; pi&nbsp; /mnt/usb<br>
+      <br>
+      <b>spouštění při startu:</b><br>
+      sudo nano /etc/fstab&nbsp;&nbsp; # uprav, přidej řádek nakonec<br>
+      UUID=B890-A59B /mnt/usb exfat defaults,uid=1000,gid=1000,umask=000
+      0 0<br>
+      <br>
+    </span>
+  </body>
+</html>

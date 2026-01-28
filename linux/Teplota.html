@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Teplota</title>
+    <style>
+  body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 40px;
+    color: #333;
+  }
+  #temp {
+    font-size: 3em;
+    font-weight: bold;
+  }
+  #time {
+    color: #777;
+    font-size: 0.9em;
+  }
+</style>
+  </head>
+  <body>
+    <h1><a href="../index.html"><font size="-1" face="Courier New,
+          Courier, monospace">back</font></a><br>
+    </h1>
+    <h1>Aktuální teplota</h1>
+    <div id="temp">Načítám...</div>
+    <script>
+    async function loadTemp() {
+      try {
+        const response = await fetch('http://192.168.1.153:5000/temp');
+        const data = await response.json();
+        document.getElementById('temp').innerText = data.temperature + ' °C';
+        document.getElementById('time').innerText = 'Aktualizováno: ' + new Date().toLocaleTimeString();
+      } catch (error) {
+        document.getElementById('temp').innerText = 'Chyba při načítání';
+      }
+    }
+
+    loadTemp();
+    setInterval(loadTemp, 10000); // aktualizace každých 10 s
+  </script>
+  </body>
+</html>

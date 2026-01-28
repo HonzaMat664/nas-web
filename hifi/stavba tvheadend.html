@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>stavba tvheadend</title>
+  </head>
+  <body>
+    <a href="../index.html">zpět</a><br>
+    diskutil list<br>
+    diskutil unmountDisk /dev/disk3&nbsp; <br>
+    sudo diskutil eraseDisk FAT32 SD_CARD MBR /dev/disk3<br>
+    <br>
+    flash1A_backup.img<br>
+    <br>
+    <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+      font-family: &quot;Courier New&quot;, Courier, monospace;
+      font-size: small; font-style: normal; font-variant-caps: normal;
+      font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: -webkit-left; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none; display:
+      inline !important; float: none;">ssh-keygen -R 192.168.1.144 </span><span
+      style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+      font-family: &quot;Courier New&quot;, Courier, monospace;
+      font-size: small; font-style: normal; font-variant-caps: normal;
+      font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: -webkit-left; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none; display:
+      inline !important; float: none;"><span style="caret-color: rgb(0,
+        0, 0); color: rgb(0, 0, 0); font-family: &quot;Courier
+        New&quot;, Courier, monospace; font-size: small; font-style:
+        normal; font-variant-caps: normal; font-weight: 400;
+        letter-spacing: normal; orphans: auto; text-align: -webkit-left;
+        text-indent: 0px; text-transform: none; white-space: normal;
+        widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+        text-decoration: none; display: inline !important; float: none;">#
+        Permission denied, please try again <br>
+        <br>
+https://blog.zonepi.cz/raspberry-pi-tv-hat-kompletni-pruvodce/#0-co-to-je<br>
+        <br>
+        <br>
+      </span></span>sudo apt remove --purge tvheadend -y&nbsp; #
+    odinstalace balíčku<br>
+    <br>
+    sudo apt update<br>
+    <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+      font-family: &quot;Courier New&quot;, Courier, monospace;
+      font-size: small; font-style: normal; font-variant-caps: normal;
+      font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: -webkit-left; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none; display:
+      inline !important; float: none;"><span style="caret-color: rgb(0,
+        0, 0); color: rgb(0, 0, 0); font-family: &quot;Courier
+        New&quot;, Courier, monospace; font-size: small; font-style:
+        normal; font-variant-caps: normal; font-weight: 400;
+        letter-spacing: normal; orphans: auto; text-align: -webkit-left;
+        text-indent: 0px; text-transform: none; white-space: normal;
+        widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+        text-decoration: none; display: inline !important; float: none;"><span style="caret-color: rgb(48, 77, 71); color: rgb(48, 77, 71); font-family: &quot;Courier 10 Pitch&quot;, Courier, monospace; font-size: 12.8px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(197, 232, 225); text-decoration: none; display: inline !important; float: none;">sudo apt install tvheadend<br><br><br><br><br></span></span>&nbsp;
+
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      instalace nižší verse:<br>
+      tvheadend -v<br>
+      version 4.2.8-34~g24a2f59e9 # moje původní verse<br>
+      <br>
+      curl -1sLf
+      'https://dl.cloudsmith.io/public/tvheadend/tvheadend/setup.deb.sh'
+      | sudo -E bash # doporučení serveru:
+      https://tvheadend.org/p/downloads<br>
+      <br>
+      sudo apt install tvheadend=4.3-2155~*<br>
+      sudo apt-mark hold tvheadend # zamčení verse<br>
+      apt-mark showhold <br>
+      <br>
+      <br>
+      cat /etc/os-release # verse OS<br>
+      cat /proc/device-tree/model # HW<br>
+      vcgencmd measure_temp # teplota<br>
+      <br>
+      <br>
+      <b>NextPVR instalace:</b><br>
+      sudo apt update &amp;&amp; sudo apt upgrade -y<br>
+      sudo apt install -y dotnet-runtime-6.0<br>
+      <br>
+      <br>
+      <br>
+      <meta charset="UTF-8">
+    </span>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Meteostanice – aktuální stav</title>
+  </head>
+  <body>
+    <h1>Meteostanice (CSV)</h1>
+    <div id="out">Načítám…</div>
+    <script>
+fetch("http://192.168.1.116/meteostanice/data.csv")
+  .then(r => r.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    const last = lines[lines.length - 1].split(",");
+
+    document.getElementById("out").innerHTML = `
+      Čas: ${last[0]}<br>
+      Teplota: ${last[1]} °C<br>
+      Vlhkost: ${last[2]} %<br>
+      Tlak: ${last[3]} hPa
+    `;
+  })
+  .catch(() => {
+    document.getElementById("out").innerText = "Nelze načíst data";
+  });
+</script>
+  </body>
+</html>
