@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Meteostanice – vzdálená</title>
+  </head>
+  <body>
+    <pre id="out">Načítám…</pre>
+    <script>
+fetch("data.csv")
+  .then(r => {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.text();
+  })
+  .then(text => {
+    const lines = text.trim().split("\n");
+    document.getElementById("out").innerText =
+      lines[lines.length - 1];
+  })
+  .catch(err => {
+    document.getElementById("out").innerText = "Chyba: " + err;
+  });
+</script>toto <br>
+    <br>
+    vložení
+  </body>
+</html>
