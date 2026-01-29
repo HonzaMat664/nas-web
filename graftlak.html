@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Meteostanice – aktuální stav</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { font-family: sans-serif; margin: 20px; }
+#values { font-size: 1.1em; margin-bottom: 20px; }
+</style>
+</head>
+
+<body>
+
+<h1>Meteostanice (192.168.1.116)</h1>
+
+<div id="values">Načítám…</div>
+
+<canvas id="pressureChart" height="120"></canvas>
+
+<script>
+const CSV_URL = "data.csv";
+const ALTITUDE = 350; // m – uprav dle skutečnosti
+const DAYS_BACK = 3;
+
+// přepočet tlaku na hladinu moře
+function pressureToMSL(p, h) {
+  return p / Math.pow(1 - h / 44330, 5.255);
+}
+
+fetch(CSV_URL)
+  .then(r => r.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    const header = lines.shift().split(",");
+
+    const idx = {
+      time: header.indexOf("cas"),
+      tempAHT: header.indexOf("teplota_aht"),
+      hum: header.indexOf("vlhkost_aht"),
+      tempBMP: header.indexOf("teplota_bmp"),
+      pressure: header.indexOf("tlak")
+    };
+
+    const now = Date.now();
+    const limit = now - DAYS_BACK * 24 * 3600 * 1000;
+
+    let labels = [];
+    let pressures = [];
+
+    lines.forEach(line => {
+      const c = line.split(",");
+      const t = new Date(c[idx.time].replace(" ", "T")).getTime();
+      if (t >= limit) {
+        const pMSL = pressureToMSL(parseFloat(c[idx.pressure]), ALTITUDE);
+        labels.push(new Date(t).toLocaleString("cs-CZ"));
+        pressures.push(pMSL.toFixed(1));
+      }
+    });
+
+    const last = lines[lines.length - 1].split(",");
+    const lastMSL = pressureToMSL(parseFloat(last[idx.pressure]), ALTITUDE).toFixed(1);
+
+    document.getElementById("values").innerHTML = `
+      <b>Čas:</b> ${last[idx.time]}<br>
+      <b>Teplota AHT20:</b> ${last[idx.tempAHT]} °C<br>
+      <b>Teplota BMP180:</b> ${last[idx.tempBMP]} °C<br>
+      <b>Vlhkost:</b> ${last[idx.hum]} %<br>
+      <b>Tlak (hladina moře):</b> ${lastMSL} hPa
+    `;
+
+    new Chart(document.getElementById("pressureChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Tlak na hladinu moře (hPa)",
+          data: pressures,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2
+        }]
+      },
+      options: {
+        scales: {
+          x: { display: false },
+          y: { ticks: { callback: v => v + " hPa" } }
+        }
+      }
+    });
+  })
+  .catch(err => {
+    document.getElementById("values").innerText = "Chyba: " + err;
+  });
+</script>
+
+</body>
+</html>
