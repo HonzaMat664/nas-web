@@ -4,22 +4,32 @@
 <meta charset="utf-8">
 <title>Tlak – korekce (3 dny)</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
 
 <style>
-body { font-family: sans-serif; margin: 20px; }
-#info { margin: 10px 0; color: #444; }
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+#info {
+  margin-bottom: 10px;
+  color: #444;
+}
 </style>
 </head>
 
 <body>
 
 <h1>Tlak – korekce (poslední 3 dny)</h1>
-<div id="info">Načítám CSV…</div>
+<div id="info">Načítám data…</div>
+
 <canvas id="chart" height="120"></canvas>
 
 <script>
-fetch("pressure_correction.csv")
+const CSV_URL = "pressure_correction.csv";
+const DAYS_BACK = 3;
+
+fetch(CSV_URL)
   .then(r => {
     if (!r.ok) throw "CSV nelze načíst";
     return r.text();
@@ -31,48 +41,77 @@ fetch("pressure_correction.csv")
     if (lines.length < 2) throw "CSV nemá data";
 
     const header = lines.shift().split(",");
-    info.innerHTML =
-      "Sloupce CSV:<br>" +
-      header.join("<br>") +
-      "<br><br>Řádků: " + lines.length;
+    info.innerHTML = "Řádků CSV: " + lines.length;
 
-    const col = name => header.indexOf(name);
+    const idx = name => header.indexOf(name);
 
-    const iTime  = col("timestamp");
-    const iMsl   = col("pressure_msl_calc");
-    const iRef   = col("pressure_ref_chotusice");
-    const iFinal = col("pressure_final_hpa");
+    const iTime  = idx("timestamp");
+    const iMsl   = idx("pressure_msl_calc");
+    const iRef   = idx("pressure_ref_chotusice");
+    const iFinal = idx("pressure_final_hpa");
 
-    if (iTime < 0) throw "Chybí sloupec timestamp";
+    const limit = Date.now() - DAYS_BACK * 24 * 3600 * 1000;
 
-    const limit = Date.now() - 3 * 24 * 3600 * 1000;
+    let labels = [];
+    let msl = [];
+    let ref = [];
+    let fin = [];
 
-    let labels = [], msl = [], ref = [], fin = [];
-
-    lines.forEach(l => {
-      const c = l.split(",");
+    lines.forEach(line => {
+      const c = line.split(",");
       const t = new Date(c[iTime].replace(" ", "T")).getTime();
       if (isNaN(t) || t < limit) return;
 
       labels.push(new Date(t).toLocaleString("cs-CZ"));
-      msl.push(iMsl >= 0 ? parseFloat(c[iMsl]) : null);
-      ref.push(iRef >= 0 && c[iRef] ? parseFloat(c[iRef]) : null);
-      fin.push(iFinal >= 0 ? parseFloat(c[iFinal]) : null);
+      msl.push(parseFloat(c[iMsl]));
+      ref.push(c[iRef] ? parseFloat(c[iRef]) : null);
+      fin.push(parseFloat(c[iFinal]));
     });
 
-    new Chart(chart, {
+    const ctx = document.getElementById("chart").getContext("2d");
+
+    new Chart(ctx, {
       type: "line",
       data: {
         labels,
         datasets: [
-          { label: "MSL z čidla", data: msl, pointRadius: 0 },
-          { label: "Chotusice", data: ref, pointRadius: 0 },
-          { label: "Finální tlak", data: fin, pointRadius: 0 }
+          {
+            label: "MSL z čidla (bez korekce)",
+            data: msl,
+            borderWidth: 2,
+            pointRadius: 0
+          },
+          {
+            label: "Referenční Chotusice",
+            data: ref,
+            borderWidth: 2,
+            pointRadius: 0
+          },
+          {
+            label: "Finální tlak",
+            data: fin,
+            borderWidth: 3,
+            pointRadius: 0
+          }
         ]
       },
       options: {
-        plugins: { legend: { position: "bottom" } },
-        scales: { x: { display: false } }
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          },
+          y: {
+            ticks: {
+              callback: v => v + " hPa"
+            }
+          }
+        }
       }
     });
   })
