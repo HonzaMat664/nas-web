@@ -4,51 +4,37 @@
 <meta charset="utf-8">
 <title>Tlak – korekce (3 dny)</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
-  font-family: sans-serif;
-  margin: 20px;
-}
-#info {
-  margin-bottom: 10px;
-  color: #444;
-}
+body { font-family: sans-serif; margin: 20px; }
+#info { margin-bottom: 10px; color: #444; }
 </style>
 </head>
 
 <body>
 
 <h1>Tlak – korekce (poslední 3 dny)</h1>
-<div id="info">Načítám data…</div>
+<div id="info">Načítám…</div>
 
-<canvas id="chart" height="120"></canvas>
+<canvas id="pressureChart" height="120"></canvas>
 
 <script>
 const CSV_URL = "pressure_correction.csv";
 const DAYS_BACK = 3;
 
 fetch(CSV_URL)
-  .then(r => {
-    if (!r.ok) throw "CSV nelze načíst";
-    return r.text();
-  })
+  .then(r => r.text())
   .then(text => {
-    const info = document.getElementById("info");
-
-    const lines = text.trim().split(/\r?\n/);
-    if (lines.length < 2) throw "CSV nemá data";
-
+    const lines = text.trim().split("\n");
     const header = lines.shift().split(",");
-    info.innerHTML = "Řádků CSV: " + lines.length;
 
-    const idx = name => header.indexOf(name);
-
-    const iTime  = idx("timestamp");
-    const iMsl   = idx("pressure_msl_calc");
-    const iRef   = idx("pressure_ref_chotusice");
-    const iFinal = idx("pressure_final_hpa");
+    const idx = {
+      time: header.indexOf("timestamp"),
+      msl: header.indexOf("pressure_msl_calc"),
+      ref: header.indexOf("pressure_ref_chotusice"),
+      final: header.indexOf("pressure_final_hpa")
+    };
 
     const limit = Date.now() - DAYS_BACK * 24 * 3600 * 1000;
 
@@ -59,65 +45,59 @@ fetch(CSV_URL)
 
     lines.forEach(line => {
       const c = line.split(",");
-      const t = new Date(c[iTime].replace(" ", "T")).getTime();
-      if (isNaN(t) || t < limit) return;
+      const t = new Date(c[idx.time].replace(" ", "T")).getTime();
+      if (t < limit) return;
 
       labels.push(new Date(t).toLocaleString("cs-CZ"));
-      msl.push(parseFloat(c[iMsl]));
-      ref.push(c[iRef] ? parseFloat(c[iRef]) : null);
-      fin.push(parseFloat(c[iFinal]));
+      msl.push(parseFloat(c[idx.msl]));
+      fin.push(parseFloat(c[idx.final]));
+
+      // ⬅️ KLÍČOVÁ OPRAVA
+      ref.push(c[idx.ref] ? parseFloat(c[idx.ref]) : null);
     });
 
-    const ctx = document.getElementById("chart").getContext("2d");
+    document.getElementById("info").innerText =
+      "Řádků: " + labels.length;
 
-    new Chart(ctx, {
+    new Chart(document.getElementById("pressureChart"), {
       type: "line",
       data: {
         labels,
         datasets: [
           {
-            label: "MSL z čidla (bez korekce)",
+            label: "MSL z čidla",
             data: msl,
-            borderWidth: 2,
-            pointRadius: 0
+            pointRadius: 0,
+            borderWidth: 2
           },
           {
-            label: "Referenční Chotusice",
+            label: "Chotusice",
             data: ref,
-            borderWidth: 2,
-            pointRadius: 0
+            pointRadius: 0,
+            borderWidth: 2
           },
           {
             label: "Finální tlak",
             data: fin,
-            borderWidth: 3,
-            pointRadius: 0
+            pointRadius: 0,
+            borderWidth: 3
           }
         ]
       },
       options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom"
-          }
-        },
         scales: {
-          x: {
-            display: false
-          },
-          y: {
-            ticks: {
-              callback: v => v + " hPa"
-            }
-          }
+          x: { display: false },
+          y: { ticks: { callback: v => v + " hPa" } }
+        },
+        plugins: {
+          legend: { position: "bottom" }
         }
       }
     });
   })
   .catch(e => {
-    document.getElementById("info").innerHTML =
-      "❌ CHYBA: " + e;
+    document.getElementById("info").innerText =
+      "Chyba: " + e;
   });
 </script>
 
