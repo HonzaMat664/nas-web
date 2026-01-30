@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Tlak – korekce (3 dny)</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+canvas {
+  max-width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Tlak – korekce (poslední 3 dny)</h1>
+
+<canvas id="chart" height="120"></canvas>
+
+<script>
+const CSV_URL = "pressure_correction.csv";
+const DAYS_BACK = 3;
+
+fetch(CSV_URL)
+  .then(r => r.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    const header = lines.shift().split(",");
+
+    const idx = {
+      time: header.indexOf("timestamp"),
+      msl: header.indexOf("pressure_msl_calc"),
+      ref: header.indexOf("pressure_ref_chotusice"),
+      final: header.indexOf("pressure_final_hpa")
+    };
+
+    const limit = Date.now() - DAYS_BACK * 24 * 3600 * 1000;
+
+    let labels = [];
+    let msl = [];
+    let ref = [];
+    let finalP = [];
+
+    lines.forEach(line => {
+      const c = line.split(",");
+      const t = new Date(c[idx.time].replace(" ", "T")).getTime();
+
+      if (t >= limit) {
+        labels.push(new Date(t).toLocaleString("cs-CZ"));
+        msl.push(parseFloat(c[idx.msl]));
+        ref.push(c[idx.ref] ? parseFloat(c[idx.ref]) : null);
+        finalP.push(parseFloat(c[idx.final]));
+      }
+    });
+
+    new Chart(document.getElementById("chart"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "MSL z čidla (bez korekce)",
+            data: msl,
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.2
+          },
+          {
+            label: "Referenční Chotusice",
+            data: ref,
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.2
+          },
+          {
+            label: "Finální tlak",
+            data: finalP,
+            borderWidth: 3,
+            pointRadius: 0,
+            tension: 0.2
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          },
+          y: {
+            ticks: {
+              callback: v => v + " hPa"
+            }
+          }
+        }
+      }
+    });
+  })
+  .catch(err => {
+    document.body.innerHTML = "Chyba při načítání CSV: " + err;
+  });
+</script>
+
+</body>
+</html>
