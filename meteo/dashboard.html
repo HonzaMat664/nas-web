@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+
+</a>
+	
+</div>
+
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0b0f0b;
+    color: #00ff66;
+    font-family: monospace;
+    overflow: hidden;
+}
+
+/* NAV */
+.nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.nav a {
+    color: #00ff66;
+    text-decoration: none;
+    margin: 0 10px;
+    opacity: 0.7;
+}
+
+.nav a:hover {
+    opacity: 1;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    text-align: center;
+}
+
+/* MAIN TEMP */
+.temp {
+    font-size: 14vw;
+    line-height: 1;
+    margin: 0;
+}
+
+/* SECONDARY ROW */
+.row {
+    display: flex;
+    gap: 5vw;
+    margin-top: 3vh;
+    font-size: 3.5vw;
+    opacity: 0.85;
+}
+
+/* QUICK MENU */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2vw;
+    margin-top: 4vh;
+    width: 60%;
+}
+
+.menu div {
+    border: 1px solid #00ff66;
+    padding: 1.5vh;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2.5vw;
+    opacity: 0.8;
+}
+
+.menu div:hover {
+    background: rgba(0,255,102,0.1);
+    opacity: 1;
+}
+
+/* FOOTER */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.6vw;
+    opacity: 0.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- MAIN TEMP -->
+    <div class="temp" id="temp">-- °C</div>
+
+    <!-- SECONDARY DATA -->
+    <div class="row">
+        <div id="hum">-- %</div>
+        <div id="sea">-- hPa</div>
+    </div>
+
+    <!-- QUICK MENU -->
+    <div class="menu">
+        <div onclick="location.href='/meteo/grafy.html'">📊 Grafy</div>
+        <div onclick="location.href='/meteo/cidla.html'">📡 Čidla</div>
+        <div onclick="location.href='/meteo/sun.html'">☀️ Poloha Slunce</div>
+    </div>
+
+</div>
+
+<div class="footer">
+    poslední aktualizace: <span id="time">--:--</span> • 
+    stav: <span id="status">OK</span> • 
+    auto refresh 30s
+</div>
+
+<script>
+function loadData(){
+    fetch("../data/current.json?t=" + Date.now())
+    .then(r => r.json())
+    .then(d => {
+
+        const t = new Date(d.time);
+
+        document.getElementById("time").textContent =
+            t.toLocaleTimeString("cs-CZ", {hour: "2-digit", minute: "2-digit"});
+
+        document.getElementById("temp").textContent =
+            d.temperature.toFixed(1) + " °C";
+
+        document.getElementById("hum").textContent =
+            d.humidity.toFixed(0) + " %";
+
+        document.getElementById("sea").textContent =
+            d.pressure_sl.toFixed(0) + " hPa";
+
+        document.getElementById("status").textContent = "OK";
+    })
+    .catch(e => {
+        document.getElementById("temp").textContent = "⚠️";
+        document.getElementById("status").textContent = "ERROR";
+        console.log(e);
+    });
+}
+
+// init
+loadData();
+setInterval(loadData, 30000);
+</script>
+ <script src="../js/menu.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>hifi</title>
+	<style>
+	    body {
+	        font-family: Arial, sans-serif;
+	        background: #111;
+	        color: #fff;
+	        text-align: center;
+	        margin-top: 30px;
+	    }
+
+	    .box {
+	        background: #222;
+	        padding: 18px;
+	        margin: 15px auto;
+	        display: inline-block;
+	        border-radius: 15px;
+	        min-width: 320px;
+	    }
+
+	    button {
+	        padding: 10px 14px;
+	        margin: 5px;
+	        font-size: 14px;
+	        border: none;
+	        border-radius: 10px;
+	        cursor: pointer;
+	        background: #2d6cdf;
+	        color: white;
+	    }
+
+	    button:hover {
+	        background: #1f4ea8;
+	    }
+
+	    .amp button {
+	        background: #e06c2f;
+	    }
+
+	    .amp button:hover {
+	        background: #b8521f;
+	    }
+
+	    input[type=range] {
+	        width: 250px;
+	    }
+	</style>
+	
+  </head>
+  <body>
+      <div id="menu"></div>
+     
+	  
+
+	  <!-- VOLUMIO 1 -->
+	  <div class="box">
+	    <a href="http://pioneer.local/browse">Pioneer</a>
+		
+		
+
+	      <button onclick="v1('play')">▶</button>
+	      <button onclick="v1('pause')">⏸</button>
+	      <button onclick="v1('prev')">⏮</button>
+	      <button onclick="v1('next')">⏭</button>
+	      <input type="range" min="0" max="100" value="50"
+	             oninput="vol1(this.value)">
+
+	  </div>
+	  
+ 	  <!-- AMPLIFIER -->
+ 	  <div class="box amp">
+ 	      ax 496
+
+ 	      <button onclick="amp('0x7A1F')">⏻ ON/OFF</button>
+ 	      <button onclick="amp('0x7A1B')"> - </button>
+ 		  <button onclick="amp('0x7A1A')"> + </button>
+           <button onclick="amp('0x7A19')">MD tv</button>
+ 	      <button onclick="amp('0x7A15')">CD</button>
+ 	      <button onclick="amp('0x7A17')">AUX volumio</button><br>
+	      
+ 	  </div>
+<br>
+	  <!-- VOLUMIO 2 -->
+	  <div class="box">
+Out
+
+	      <button onclick="v2('play')">▶ Play</button>
+	      <button onclick="v2('pause')">⏸ Pause</button>
+	      <button onclick="v2('prev')">⏮ Prev</button>
+	      <button onclick="v2('next')">⏭ Next</button>
+
+	      <input type="range" min="0" max="100" value="50"
+	             oninput="vol2(this.value)">
+	  </div>
+	  <br>
+	  	  <!-- VOLUMIO 3 -->
+	  	  <div class="box">
+	  půda
+
+	  	      <button onclick="v3('play')">▶ Play</button>
+	  	      <button onclick="v3('pause')">⏸ Pause</button>
+	  	      <button onclick="v3('prev')">⏮ Prev</button>
+	  	      <button onclick="v3('next')">⏭ Next</button>
+
+	  	      <input type="range" min="0" max="100" value="50"
+	  	             oninput="vol3(this.value)">
+	  	  </div>
+
+	 
+
+	  <script>
+
+	  // Volumio IPs
+	  const V1 = "http://192.168.1.139:3000/api/v1/commands/?cmd=";
+	  const V2 = "http://192.168.1.105:3000/api/v1/commands/?cmd=";
+      const V3 = "http://192.168.1.138:3000/api/v1/commands/?cmd=";
+	  // IR server
+	  const AMP = "http://192.168.1.151:5000/send?code=";
+
+	  function v1(cmd) {
+	      fetch(V1 + cmd).catch(console.error);
+	  }
+
+	  function v2(cmd) {
+	      fetch(V2 + cmd).catch(console.error);
+	  }
+	  function v3(cmd) {
+	      fetch(V3 + cmd).catch(console.error);
+	  }
+
+	  function vol1(v) {
+	      fetch(V1 + "volume&volume=" + v).catch(console.error);
+	  }
+
+	  function vol2(v) {
+	      fetch(V2 + "volume&volume=" + v).catch(console.error);
+	  }
+	  function vol3(v) {
+	      fetch(V3 + "volume&volume=" + v).catch(console.error);
+	  }
+	  function amp(code) {
+	      fetch(AMP + code).catch(console.error);
+	  }
+
+	  </script>
+<br>
+<a href="https://www.manualslib.com/manual/767482/Yamaha-Ax-496.html?page=41">Pioneer manuál</a>   
+
+      <a href="http://192.168.1.151:5000/send?code=0x7A1F">on/off</a>
+	  <a href="http://192.168.1.151:5000/send?code=0x7A15">CD</a>
+	  <a href="http://192.168.1.151:5000/send?code=0x7A17">aux</a>
+	  <a href="http://192.168.1.151:5000/send?code=0x7A1A">+</a>
+	  <a href="http://192.168.1.151:5000/send?code=0x7A1B">-</a>
+	  
+	  <a href="http://192.168.1.151:5000/send?code=0x7A0A">disc</a>
+
+	  <button id="standbyBtn" onclick="sendCode()">Standby</button>
+
+	  <script>
+	  function sendCode() {
+	      const btn = document.getElementById("standbyBtn");
+
+	      btn.disabled = true;
+	      btn.innerText = "⏳ Odesílám...";
+
+	      fetch("http://192.168.1.151:5000/send?code=0x7A1F")
+	          .then(() => btn.innerText = "✔ Hotovo")
+	          .catch(() => btn.innerText = "✖ Chyba")
+	          .finally(() => {
+	              setTimeout(() => {
+	                  btn.disabled = false;
+	                  btn.innerText = "Standby";
+	              }, 1200);
+	          });
+	  }
+	  </script>
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=play">play</a>
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=stop">stop</a> 
+	<pre> 
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=play">play</a>
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=stop">stop</a>
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=toggle">play/pause</a>
+	<a href="http://192.168.1.139:3000/api/v1/commands/?cmd=stop">stop</a>
+	yamaha
+	ax 496 zesilovač, ovladač YAMAHA RAX9, https://www.manualslib.com/manual/767482/Yamaha-Ax-496.html?page=41
+
+	E 320 pianocraft
+	
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=play"
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=pause"
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=stop"
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=next"
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=volume&volume=50"
+	curl -v -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=pause" # když chceš vidět odpověď
+	<script src="../js/menu.js"></script>
+<footer>
+	© 2026
+</footer>
+  </body>
+</html>

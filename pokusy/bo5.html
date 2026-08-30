@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>bo2</title>
+    <style>
+body {
+    font-family: monospace;
+    background-color: #111;
+    color: #eee;
+    padding: 20px;
+}
+
+pre {
+    margin: 4px 0;
+}
+
+canvas {
+    margin-top: 20px;
+    background: #000;
+    border: 1px solid #444;
+}
+</style>
+  </head>
+  <body>
+    <p>čidla tail -f</p>
+    <pre id="time">Načítám čas…</pre>
+    <pre id="out1">Načítám CSV #1…</pre>
+    <canvas id="chart" width="800" height="300"></canvas>
+    <script>
+function pad(n) {
+    return n.toString().padStart(2, "0");
+}
+
+function formatTime(d) {
+    return d.getFullYear() + "-" +
+           pad(d.getMonth() + 1) + "-" +
+           pad(d.getDate()) + " " +
+           pad(d.getHours()) + ":" +
+           pad(d.getMinutes()) + ":" +
+           pad(d.getSeconds());
+}
+
+function updateTime() {
+    document.getElementById("time").innerText =
+        formatTime(new Date());
+}
+
+function loadLastLine(file, elementId) {
+    const url = file + "?t=" + Date.now();
+
+    fetch(url, { cache: "no-store" })
+    .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+    })
+    .then(text => {
+        const lines = text.trim().split("\n");
+        document.getElementById(elementId).innerText =
+            lines[lines.length - 1];
+    })
+    .catch(err => {
+        document.getElementById(elementId).innerText =
+            "Chyba: " + err;
+    });
+}
+
+function loadChart() {
+    const url = "../data/data4.csv?t=" + Date.now();
+
+    fetch(url, { cache: "no-store" })
+    .then(r => r.text())
+    .then(text => {
+
+        const lines = text.trim().split("\n");
+        const now = new Date();
+        const twoDaysAgo = new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000);
+
+        let data = [];
+
+        lines.forEach(line => {
+            const parts = line.split(",");
+            if (parts.length < 3) return;
+
+            const dt = new Date(parts[0].replace(" ", "T"));
+            const value = parseFloat(parts[2]);
+
+            if (!isNaN(dt) && !isNaN(value) && dt >= twoDaysAgo) {
+                data.push({ time: dt, value: value });
+            }
+        });
+
+        drawChart(data);
+    });
+}
+
+function drawChart(data) {
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (data.length < 2) return;
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 30;
+
+    const minVal = Math.min(...data.map(d => d.value));
+    const maxVal = Math.max(...data.map(d => d.value));
+
+    const minTime = data[0].time.getTime();
+    const maxTime = data[data.length - 1].time.getTime();
+
+    ctx.strokeStyle = "#0f0";
+    ctx.beginPath();
+
+    data.forEach((point, i) => {
+
+        const x = padding +
+            (point.time.getTime() - minTime) /
+            (maxTime - minTime) *
+            (width - 2 * padding);
+
+        const y = height - padding -
+            (point.value - minVal) /
+            (maxVal - minVal) *
+            (height - 2 * padding);
+
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+
+    ctx.stroke();
+
+    ctx.strokeStyle = "#444";
+    ctx.strokeRect(padding, padding,
+                   width - 2 * padding,
+                   height - 2 * padding);
+}
+
+function tick() {
+    updateTime();
+    loadLastLine("../data/data4.csv", "out1");
+    loadChart();
+}
+
+tick();
+setInterval(tick, 10000);  // graf stačí obnovovat po 10 s
+setInterval(updateTime, 1000);
+</script>
+  </body>
+</html>

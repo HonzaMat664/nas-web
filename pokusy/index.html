@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Meteostanice – vzdálená</title>
+  </head>
+  <body>
+    <pre id="out">Načítám…</pre>
+    <script>
+fetch("data.csv")
+  .then(r => {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.text();
+  })
+  .then(text => {
+    const lines = text.trim().split("\n");
+    document.getElementById("out").innerText =
+      lines[lines.length - 1];
+  })
+  .catch(err => {
+    document.getElementById("out").innerText = "Chyba: " + err;
+  }); </script><br>
+    <font face="Times New Roman, Times, serif"><a
+        href="meteo/index.html">meteo</a> &nbsp;&nbsp; <a
+        href="linux/index.html">linux</a>&nbsp;&nbsp;&nbsp; <a
+        href="file:///Volumes/html/vlaky/vlaky.html">vlaky</a>&nbsp;&nbsp;&nbsp;
+
+
+      <a href="file:///Volumes/html/literatura/index.html">literatura</a>&nbsp;&nbsp;&nbsp;
+
+
+      vesmír&nbsp;&nbsp;&nbsp; včely&nbsp;&nbsp;&nbsp;
+      joga&nbsp;&nbsp;&nbsp; Raspberry&nbsp;&nbsp;&nbsp; <a
+        href="hifi/index.html">HiFi</a><br>
+      <br>
+      <a href="graftlak2.html">tlak graf&nbsp;</a>&nbsp; <a
+        href="pressure_correction.csv">korekce</a>&nbsp;&nbsp;&nbsp; <a
+        href="http://192.168.1.153:5000/temp">sklep</a><br>
+      <br>
+      <a href="http://192.168.1.152:3000/api/v1/getState"><span
+          class="s6">stav</span></a><br>
+      <a href="http://192.168.1.151:5000/send?code=0x7A1F">standby/on</a><br>
+      <br>
+      <br>
+    </font>
+  </body>
+</html>

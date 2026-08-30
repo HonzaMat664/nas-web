@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0">
+    <title>obsah</title>
+    <style>
+    /* Reset a základní styl */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: monospace;
+      background-color: #111;
+      color: #00cc66; /* zelený text */
+      line-height: 1.5;
+    }
+
+    header {
+      background: #222;
+      padding: 15px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.5em;
+      color: #eee;
+    }
+
+    /* Navigace */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #1a1a1a;
+      padding: 10px;
+      justify-content: center;
+    }
+    nav a {
+      color: #0af;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    nav a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    #out {
+      background: #222;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      white-space: pre-wrap; /* zachová nový řádek */
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section a {
+      margin-right: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #222;
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
+  </head>
+  <body>
+    <header>
+      <h1>obsah</h1>
+    </header>
+    <nav> <a href="meteo/index.html">meteo</a> <a
+        href="linux/index.html">linux</a> <a
+        href="file:///Volumes/html/vlaky/vlaky.html">vlaky</a> <a
+        href="file:///Volumes/html/literatura/index.html">literatura</a>
+      <span>vesmír</span> <span>včely</span> <span>joga</span> <span>Raspberry</span>
+      <a href="hifi/index.html">HiFi</a> </nav>
+    <main>
+      <!-- Výstup CSV -->
+      <div id="out">Načítám…</div>
+      <!-- Další odkazy -->
+      <div class="section"> <a href="graftlak2.html">tlak graf</a> <a
+          href="pressure_correction.csv">korekce</a> <a
+          href="http://192.168.1.153:5000/temp">sklep</a> </div>
+      <div class="section"> <a
+          href="http://192.168.1.152:3000/api/v1/getState">stav</a> <a
+          href="http://192.168.1.151:5000/send?code=0x7A1F">standby/on</a>
+      </div>
+    </main>
+    <footer> © 2026 Meteostanice – vzdálená </footer>
+    <script>
+fetch("data/data.csv")
+  .then(response => {
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    return response.text();
+  })
+  .then(text => {
+    const lines = text.trim().split("\n");
+    document.getElementById("out").innerText = lines[lines.length - 1];
+  })
+  .catch(err => {
+    document.getElementById("out").innerText = "Chyba: " + err;
+  });
+</script>
+  </body>
+</html>

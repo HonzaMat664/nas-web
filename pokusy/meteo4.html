@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Poslední záznam DS18B20</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace; /* terminálový font */
+            font-size: 14px; /* malý, stejný font */
+            background-color: #1e1e1e; /* tmavé pozadí */
+            color: #d4d4d4; /* světlý text */
+            margin: 20px;
+        }
+        h1 {
+            font-size: 16px;
+            text-transform: lowercase; /* všechno malé */
+            margin-bottom: 10px;
+        }
+        pre {
+            font-size: 14px;
+            text-transform: lowercase; /* všechno malé */
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>poslední záznam teploty</h1>
+    <pre id="last-line">načítám...</pre>
+
+    <script>
+        async function loadLastLine() {
+            try {
+                const response = await fetch('data4.csv'); // CSV ve stejné složce
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                const lastLine = lines[lines.length - 1]; // poslední řádek
+                document.getElementById('last-line').textContent = lastLine.toLowerCase();
+            } catch (err) {
+                document.getElementById('last-line').textContent = "chyba při načítání csv";
+                console.error(err);
+            }
+        }
+
+        loadLastLine();
+        // automatická aktualizace každých 10 sekund
+        setInterval(loadLastLine, 10000);
+    </script>
+</body>
+</html>

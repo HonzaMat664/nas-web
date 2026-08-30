@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>jiljiklen index</title>
+
+<link rel="stylesheet" href="css/style.css">
+  
+
+<style>
+
+body {
+    font-family: monospace;
+}
+
+/* layout */
+.section {
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+/* karta */
+.card {
+    border: 1px solid #00ff66;
+    padding: 15px;
+    background: #0f1510;
+}
+
+/* text */
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.small {
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 10px;
+}
+
+pre {
+    font-family: monospace;
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- horní menu -->
+<div id="menu"></div>
+<br>
+   <!-- hledat -->
+   <input id="searchBox" type="text" placeholder="Hledat..." style="width:90%;padding:10px;font-size:16px;">
+
+   <div id="results" style="margin-top:20px;"></div>
+
+
+
+<!-- =========================
+     METEOSTANICE
+========================= -->
+<div class="section">
+
+    <div class="card">
+
+        <h2>Meteostanice</h2>
+
+        <pre id="current">Načítám...</pre>
+
+        <div class="small">
+            <a href="meteo/dashboard.html">➡ otevřít meteo</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// ==========================
+// CURRENT.JSON
+// ==========================
+function loadData(){
+    fetch("../data/current.json?t=" + Date.now())
+    .then(r => r.json())
+    .then(d => {
+
+        const t = new Date(d.time);
+        const time = t.toLocaleTimeString("cs-CZ", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+        document.getElementById("current").textContent =
+`TIME:  ${time}
+TEMP:  ${d.temperature} °C
+HUM :  ${d.humidity} %
+PRESS: ${d.pressure} hPa
+SEA  : ${d.pressure_sl} hPa`;
+
+    })
+    .catch(e => {
+        document.getElementById("current").textContent = "Chyba načtení dat";
+        console.log(e);
+    });
+}
+
+loadData();
+setInterval(loadData, 30000);
+
+</script>
+   <script>
+   let data = [];
+
+   // načtení indexu
+   fetch("search.json?v=" + Date.now())
+     .then(r => r.json())
+     .then(json => {
+       data = json;
+       console.log("Index načten:", data.length);
+     });
+
+   // search funkce
+   function doSearch(query) {
+     const q = query.toLowerCase().trim();
+     const resultsDiv = document.getElementById("results");
+
+     if (!q) {
+       resultsDiv.innerHTML = "";
+       return;
+     }
+
+     let results = [];
+
+     for (let item of data) {
+       let title = item.title.toLowerCase();
+       let text = item.text.toLowerCase();
+
+       let score = 0;
+
+       // 🧠 relevance scoring
+       if (title.includes(q)) score += 5;
+       if (text.includes(q)) score += 1;
+
+       if (score > 0) {
+         results.push({ ...item, score });
+       }
+     }
+
+     // seřazení podle relevance
+     results.sort((a, b) => b.score - a.score);
+
+     // omezení výsledků
+     results = results.slice(0, 30);
+
+     // render
+     resultsDiv.innerHTML = results.map(r => `
+       <div style="padding:10px;border-bottom:1px solid #444;">
+         <a href="${r.url}" style="font-size:18px;color:#4ea1ff;text-decoration:none;">
+           ${r.title}
+         </a>
+         <div style="font-size:12px;color:#aaa;">
+           ${r.text.slice(0, 150)}...
+         </div>
+       </div>
+     `).join("");
+   }
+
+   // event listener
+   document.getElementById("searchBox").addEventListener("input", e => {
+     doSearch(e.target.value);
+   });
+   </script>
+<script src="../js/menu.js"></script>
+
+<footer>
+    © 2026 
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>SZZ panel – stanice demo</title>
+
+<style>
+body {
+    margin: 0;
+    background: #05070a;
+    font-family: Arial;
+    color: #cfd8dc;
+}
+
+/* ===== TOP BAR ===== */
+header {
+    background: #0c1117;
+    padding: 10px 20px;
+    border-bottom: 1px solid #1f2a33;
+    font-weight: bold;
+}
+
+/* ===== PANEL ===== */
+.panel {
+    width: 1000px;
+    height: 500px;
+    margin: 30px auto;
+    background: #0a0f14;
+    border: 2px solid #1e2b36;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* ===== KOLEJE ===== */
+.track {
+    position: absolute;
+    height: 6px;
+    background: #3a4a55;
+    border-radius: 3px;
+}
+
+/* aktivní úsek */
+.track.active {
+    background: #00e676;
+    box-shadow: 0 0 10px #00e676;
+}
+
+/* ===== VÝHYBKA ===== */
+.switch {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffb300;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px #000;
+}
+
+.switch.diverging {
+    background: #ff3d00;
+}
+
+/* ===== VLAK ===== */
+.train {
+    position: absolute;
+    width: 34px;
+    height: 14px;
+    background: #29b6f6;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #29b6f6;
+}
+
+/* ===== LABEL ===== */
+.label {
+    position: absolute;
+    font-size: 11px;
+    color: #90a4ae;
+}
+
+/* ===== INFO ===== */
+.info {
+    text-align: center;
+    margin-top: 10px;
+    color: #78909c;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🚦 SZZ PANEL – stanice (simulace)
+</header>
+
+<div class="panel" id="panel"></div>
+
+<div class="info">
+Klikni na výhybky • zelená = aktivní trať • modrá = vlak
+</div>
+
+<script>
+/* =========================
+   🧠 MODEL (3kolejná stanice)
+========================= */
+
+const model = {
+  tracks: {
+    T1: { x1: 60, x2: 940, y: 160 },
+    T2: { x1: 300, x2: 940, y: 240 },
+    T3: { x1: 300, x2: 700, y: 320 }
+  },
+
+  switches: {
+    SW1: { x: 300, y: 160, state: "straight" },
+    SW2: { x: 300, y: 240, state: "straight" }
+  },
+
+  trains: [
+    { id: "TRAIN1", x: 520, y: 240 },
+    { id: "TRAIN2", x: 420, y: 320 }
+  ]
+};
+
+
+/* =========================
+   🔁 RENDER
+========================= */
+
+function render() {
+    const panel = document.getElementById("panel");
+    panel.innerHTML = "";
+
+    /* ===== KOLEJE ===== */
+    Object.entries(model.tracks).forEach(([id, t]) => {
+        const el = document.createElement("div");
+        el.className = "track";
+
+        el.style.left = t.x1 + "px";
+        el.style.top = t.y + "px";
+        el.style.width = (t.x2 - t.x1) + "px";
+
+        panel.appendChild(el);
+
+        const label = document.createElement("div");
+        label.className = "label";
+        label.style.left = t.x1 + "px";
+        label.style.top = (t.y - 18) + "px";
+        label.innerText = id;
+
+        panel.appendChild(label);
+    });
+
+    /* ===== VÝHYBKY ===== */
+    Object.entries(model.switches).forEach(([id, sw]) => {
+        const el = document.createElement("div");
+        el.className = "switch " + (sw.state === "diverging" ? "diverging" : "");
+        el.style.left = sw.x + "px";
+        el.style.top = sw.y + "px";
+
+        el.onclick = () => {
+            sw.state = sw.state === "straight" ? "diverging" : "straight";
+            render();
+        };
+
+        panel.appendChild(el);
+    });
+
+    /* ===== VLAKY ===== */
+    model.trains.forEach(t => {
+        const el = document.createElement("div");
+        el.className = "train";
+        el.style.left = t.x + "px";
+        el.style.top = t.y + "px";
+        panel.appendChild(el);
+    });
+}
+
+render();
+</script>
+
+</body>
+</html>

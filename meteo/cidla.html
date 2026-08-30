@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>čidla</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+<body>
+<div class="nav">
+  <a href="/index.html" title="Domů" class="home">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+    </svg>
+  </a>
+	<a href="/meteo/dashboard.html">Dashboard</a>
+    <a href="/meteo/grafy.html">Grafy</a>
+    <a href="/meteo/cidla.html">Čidla</a>
+    <a href="/meteo/sun.html">Slunce</a>
+	
+</div>
+</body>
+
+<script src="../menu.js"></script>
+
+<h1>čidla tail -f</h1>
+
+<pre id="time">Načítám čas…</pre>
+<pre id="out1">Načítám data4.json…</pre>
+<span id="out2">Načítám data.csv…</span>
+<!-- <a  href="https://www.chmi.cz/namerena-data/data-z-mericich-stanic/tlak-vzduchu?c=49.7249,15.9325,10&l=layer_vector,kraje,ZTM">Chotusice, letiště</a> -->
+
+<pre id="out3">Načítám data3.csv…</pre>
+
+<canvas id="chart" width="800" height="300"></canvas>
+
+<script>
+
+function pad(n){
+    return n.toString().padStart(2,"0");
+}
+
+function formatTime(d){
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+" "+
+           pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+}
+
+function updateTime(){
+    document.getElementById("time").innerText =
+        formatTime(new Date());
+}
+
+// ==========================
+// JSON – poslední hodnota
+// ==========================
+function loadLastValueJSON(){
+
+    fetch("../data/data4.json?t="+Date.now())
+    .then(r=>r.json())
+    .then(data=>{
+
+        if(data.length === 0) return;
+
+        const last = data[data.length-1];
+        const sensorKeys = Object.keys(last.values);
+
+        if(sensorKeys.length === 0) return;
+
+        const val = last.values[sensorKeys[0]];
+
+        document.getElementById("out1").innerText =
+            `${last.time}, ${val} °C`;
+
+    })
+    .catch(err=>{
+        document.getElementById("out1").innerText =
+            "Chyba JSON: "+err;
+    });
+
+}
+
+// ==========================
+// JSON → graf
+// ==========================
+function loadChart(){
+
+    fetch("../data/data4.json?t="+Date.now())
+    .then(r=>r.json())
+    .then(json=>{
+
+        let data = [];
+
+        json.forEach(d=>{
+
+            const keys = Object.keys(d.values);
+            if(keys.length === 0) return;
+
+            const v = parseFloat(d.values[keys[0]]);
+            const t = new Date(d.time.replace(" ","T"));
+
+            if(!isNaN(v) && !isNaN(t))
+                data.push({time:t,value:v});
+
+        });
+
+        drawChart(data);
+
+    })
+    .catch(err=>{
+        console.log("Chyba graf JSON:", err);
+    });
+
+}
+
+// ==========================
+// kreslení grafu
+// ==========================
+function drawChart(data){
+
+    const c=document.getElementById("chart");
+    const ctx=c.getContext("2d");
+
+    ctx.clearRect(0,0,c.width,c.height);
+
+    if(data.length<1) return;
+
+    const w=c.width;
+    const h=c.height;
+    const p=40;
+
+    const values=data.map(d=>d.value);
+
+    const minV=Math.min(...values,50);
+    const maxV=Math.max(...values,60);
+
+    const minT=data[0].time.getTime();
+    const maxT=data[data.length-1].time.getTime();
+
+    const rangeV = maxV - minV || 1;
+    const rangeT = maxT - minT || 1;
+
+    ctx.strokeStyle="#444";
+    ctx.strokeRect(p,p,w-2*p,h-2*p);
+
+    function getY(v){
+        return h-p-(v-minV)/rangeV*(h-2*p);
+    }
+
+    // 50°C
+    ctx.beginPath();
+    ctx.moveTo(p, getY(50));
+    ctx.lineTo(w-p, getY(50));
+    ctx.strokeStyle="#888";
+    ctx.setLineDash([5,5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText("50°C",5,getY(50)+4);
+
+    // 60°C
+    ctx.beginPath();
+    ctx.moveTo(p, getY(60));
+    ctx.lineTo(w-p, getY(60));
+    ctx.strokeStyle="#aaa";
+    ctx.setLineDash([5,5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText("60°C",5,getY(60)+4);
+
+    // data
+    if(data.length===1){
+        const x=w/2;
+        const y=getY(data[0].value);
+
+        ctx.beginPath();
+        ctx.arc(x,y,5,0,2*Math.PI);
+        ctx.fillStyle="#0f0";
+        ctx.fill();
+        return;
+    }
+
+    ctx.beginPath();
+
+    data.forEach((d,i)=>{
+        const x=p+(d.time-minT)/rangeT*(w-2*p);
+        const y=getY(d.value);
+
+        if(i===0) ctx.moveTo(x,y);
+        else ctx.lineTo(x,y);
+    });
+
+    ctx.strokeStyle="#0f0";
+    ctx.lineWidth=2;
+    ctx.stroke();
+}
+
+// ==========================
+// původní CSV (zatím necháme)
+// ==========================
+function loadLastLine(file,id){
+
+    fetch(file+"?t="+Date.now(),{cache:"no-store"})
+    .then(r=>r.text())
+    .then(text=>{
+        const lines=text.trim().split("\n");
+        document.getElementById(id).innerText =
+            lines[lines.length-1];
+    })
+    .catch(err=>{
+        document.getElementById(id).innerText =
+            "Chyba: "+err;
+    });
+
+}
+
+// ==========================
+// hlavní smyčka
+// ==========================
+function tick(){
+
+    updateTime();
+
+    loadLastValueJSON(); // ⬅️ JSON místo CSV
+    loadLastLine("../data/data.csv","out2");
+    loadLastLine("../data/data3.csv","out3");
+
+    loadChart();
+
+}
+
+tick();
+
+setInterval(tick,10000);
+setInterval(updateTime,1000);
+
+</script>
+
+<footer>
+© 2026 – Meteostanice teploty
+</footer>
+
+</body>
+</html>

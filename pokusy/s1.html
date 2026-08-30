@@ -1,0 +1,37 @@
+<h2>Slunce a Měsíc – dnes</h2>
+<table id="sunTable" border="1">
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Východ slunce</th>
+      <th>Západ slunce</th>
+      <th>Délka dne</th>
+      <th>Východ Měsíce</th>
+      <th>Západ Měsíce</th>
+      <th>Fáze Měsíce</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data se načtou sem -->
+  </tbody>
+</table>
+
+<script>
+fetch('sun.csv')
+  .then(response => response.text())
+  .then(data => {
+    const rows = data.trim().split('\n');
+    const tbody = document.querySelector('#sunTable tbody');
+    for(let i=1; i<rows.length; i++){ // přeskočí hlavičku
+      const cols = rows[i].split(',');
+      const tr = document.createElement('tr');
+      cols.forEach(col => {
+        const td = document.createElement('td');
+        td.textContent = col;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+  })
+  .catch(err => console.error('Chyba při načítání sun.csv:', err));
+</script>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Měsíc – 30denní přehled</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #111;
+    color: #fff;
+    margin: 20px;
+}
+
+h1 { text-align: center; }
+
+.box {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 6px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+th {
+    background: #333;
+}
+
+.good { color: #4ade80; }
+.mid { color: #facc15; }
+.bad { color: #f87171; }
+</style>
+</head>
+
+<body>
+
+<h1>🌙 30 dní Měsíce</h1>
+
+<div class="box" id="today">
+Načítám data...
+</div>
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Fáze</th>
+            <th>%</th>
+            <th>Emoji</th>
+            <th>Astro</th>
+            <th>Hodnocení</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+fetch("/data/staticM.json")
+.then(r => r.json())
+.then(data => {
+
+    const today = data.mesic_predpoved[0];
+
+    document.getElementById("today").innerHTML = `
+        <h2>Dnes</h2>
+        <b>${today.emoji} ${today.faze}</b><br>
+        Osvětlení: ${today.osvetleni_procent}%<br>
+        Stáří: ${today.stari_dnu ?? "-"} dní<br>
+        Vzdálenost: ${today.vzdalenost_km} km<br>
+        Astro skóre: ${today.astro_skore}/100<br>
+        <b>${today.astro_hodnoceni}</b>
+    `;
+
+    const tbody = document.querySelector("#table tbody");
+
+    data.mesic_predpoved.forEach(d => {
+
+        let cls = "mid";
+        if (d.astro_skore >= 80) cls = "good";
+        else if (d.astro_skore < 40) cls = "bad";
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${d.datum.split(" ")[0]}</td>
+            <td>${d.faze}</td>
+            <td>${d.osvetleni_procent}</td>
+            <td>${d.emoji}</td>
+            <td class="${cls}">${d.astro_skore}</td>
+            <td>${d.astro_hodnoceni}</td>
+        </tr>
+        `;
+    });
+
+});
+</script>
+
+</body>
+</html>

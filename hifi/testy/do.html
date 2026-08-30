@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Dual Volumio + Amp Remote</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .box {
+        background: #222;
+        padding: 18px;
+        margin: 15px auto;
+        display: inline-block;
+        border-radius: 15px;
+        min-width: 320px;
+    }
+
+    button {
+        padding: 10px 14px;
+        margin: 5px;
+        font-size: 14px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #2d6cdf;
+        color: white;
+    }
+
+    button:hover {
+        background: #1f4ea8;
+    }
+
+    .amp button {
+        background: #e06c2f;
+    }
+
+    .amp button:hover {
+        background: #b8521f;
+    }
+
+    input[type=range] {
+        width: 250px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🎛️ Audio Control Center</h1>
+
+<!-- VOLUMIO 1 -->
+<div class="box">
+    <h2>🎵 Volumio 192.168.1.139</h2>
+
+    <button onclick="v1('play')">▶ Play</button>
+    <button onclick="v1('pause')">⏸ Pause</button>
+    <button onclick="v1('prev')">⏮ Prev</button>
+    <button onclick="v1('next')">⏭ Next</button>
+
+    <p>🔊 Volume</p>
+    <input type="range" min="0" max="100" value="50"
+           oninput="vol1(this.value)">
+</div>
+
+<!-- VOLUMIO 2 -->
+<div class="box">
+    <h2>🎵 Volumio 192.168.1.105</h2>
+
+    <button onclick="v2('play')">▶ Play</button>
+    <button onclick="v2('pause')">⏸ Pause</button>
+    <button onclick="v2('prev')">⏮ Prev</button>
+    <button onclick="v2('next')">⏭ Next</button>
+
+    <p>🔊 Volume</p>
+    <input type="range" min="0" max="100" value="50"
+           oninput="vol2(this.value)">
+</div>
+
+<!-- AMPLIFIER -->
+<div class="box amp">
+    <h2>🔊 Amplifier (IR)</h2>
+
+    <button onclick="amp('0x7A1F')">⏻ ON/OFF</button><br>
+
+    <button onclick="amp('0x7A15')">CD</button>
+    <button onclick="amp('0x7A17')">AUX</button><br>
+
+    <button onclick="amp('0x7A1A')">➕ Volume</button>
+    <button onclick="amp('0x7A1B')">➖ Volume</button>
+</div>
+
+<script>
+
+// Volumio IPs
+const V1 = "http://192.168.1.139:3000/api/v1/commands/?cmd=";
+const V2 = "http://192.168.1.105:3000/api/v1/commands/?cmd=";
+
+// IR server
+const AMP = "http://192.168.1.151:5000/send?code=";
+
+function v1(cmd) {
+    fetch(V1 + cmd).catch(console.error);
+}
+
+function v2(cmd) {
+    fetch(V2 + cmd).catch(console.error);
+}
+
+function vol1(v) {
+    fetch(V1 + "volume&volume=" + v).catch(console.error);
+}
+
+function vol2(v) {
+    fetch(V2 + "volume&volume=" + v).catch(console.error);
+}
+
+function amp(code) {
+    fetch(AMP + code).catch(console.error);
+}
+
+</script>
+
+</body>
+</html>

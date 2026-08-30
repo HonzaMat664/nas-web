@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Meteostanice – aktuální data</title>
+
+<style>
+body {
+    font-family: monospace;
+    background: #0b0f0b;
+    color: #00ff66;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.box {
+    border: 1px solid #00ff66;
+    padding: 15px;
+    background: #0f1510;
+    max-width: 400px;
+    margin: 0 auto;
+    white-space: pre;
+}
+</style>
+</head>
+
+<body>
+
+<h1>AKTUÁLNÍ DATA</h1>
+
+<div class="box" id="data">Načítám...</div>
+
+<script>
+
+// ==========================
+// LOAD CURRENT.JSON
+// ==========================
+function loadData(){
+    fetch("../data/current.json?t=" + Date.now())
+    .then(r => r.json())
+    .then(d => {
+
+        document.getElementById("data").textContent =
+`TIME:  ${d.time}
+TEMP:  ${d.temperature} °C
+HUM :  ${d.humidity} %
+PRESS: ${d.pressure} hPa
+SEA  : ${d.pressure_sl} hPa`;
+
+    })
+    .catch(e => {
+        document.getElementById("data").textContent = "Chyba načtení dat";
+        console.log(e);
+    });
+}
+
+// první načtení
+loadData();
+
+// auto refresh každých 30 s
+setInterval(loadData, 30000);
+
+</script>
+
+</body>
+</html>

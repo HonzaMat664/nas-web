@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>stavba</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+    <h1>stavba Raspberry</h1>
+   <img src="../img/vykres.svg" alt="vykres">
+	 <pre>
+	•	🟢 SDA → zelená
+	•	🟡 SCL → žlutá
+	•	🔴 VCC (3.3V / 5V) → červená
+	•	⚫ GND → černá 
+	•	🔵 GPIO signál → modrá
+	•	⚪ GPIO signál (alternativa) → bílá
+	•	🟣 PWM / speciální funkce → fialová (volitelné)
+	
+	TSOP4838 # IR přijímač
+	TSAL6100 infračervená LED
+	LITE ON LTE-5208AC infračervená LED
+    
+
+            GPIO27 (pin 13)
+                   │
+                   │
+                 [1kΩ]   ← R1 (báze)
+                   │
+                   │
+                   ├───────┐
+                   │       │
+                  B│      C│
+                ┌──┴──┐   │
+                │ NPN │   │   (např. BC547, 2N2222)
+                └──┬──┘   │
+                  E│      │
+                   │      │
+                  GND     │
+                          │
+                       →| │  TSAL6100
+                          │
+                        [100Ω] ← R2 (LED)
+                          │
+                         3.3V
+						 
+	Při pohledu na čidlo zepředu (čočka k tobě, nožičky dolů):
+						    _______
+						   |       |
+						   | TSOP  |
+						   |_______|
+						    |  |  |
+						    1  2  3
+
+						 1 = OUT (výstup)
+						 2 = GND (zem)
+						 3 = VCC (napájení)
+						 
+					 	•	Napájej 3.3 V, ne 5 V (GPIO by mohl být poškozen!)
+					 	•	Výstup je digitální signál (LOW když přijímá IR)
+					 	•	Doporučuje se přidat odrušovací kondenzátor:
+					 	•	100 nF mezi VCC a GND (co nejblíž čidlu)
+	</pre>
+	 <img src="../img/hifi/led.jpg" alt="led">
+	 <img src="../img/hifi/smd2.jpeg" alt="smd2" width="300">
+	 <img src="../img/hifi/BC547b.jpg" alt="T"><br>
+	 <p>zatím pouze dve smd led a dva předřadné odpory</p>
+	<img src="../img/hifi/bonnet3.jpg" alt="osazená" width="800"><br>
+	
+	<img src="../img/hifi/bonnet.jpg" alt="bonnet"><br>
+	<img src="../img/hifi/adafruit.jpg" alt="adafruit" width="800"><br>
+	<img src="../img/hifi/zeropin.jpg" alt="zeropin" width="800">
+    </p>
+    <script src="../js/menu.js"></script>
+  </body>
+</html>

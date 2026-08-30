@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Meteostanice – astronomie</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.row {
+    display: flex;
+    margin: 5px 0;
+}
+.label {
+    min-width: 160px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 700px){
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    background: #000;
+    border:1px solid #444;
+}
+
+.card b {
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <a href="/index.html" title="Domů" class="home">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+    </svg>
+  </a>
+</div>
+<pre>
+	<span class="search">Himmelswege (Nebeské cesty), solstice = slunovrat</span>
+	
+	Disk z <a href="#nebra">Nebry</a> stáří asi 3 600 let, zobrazeny Plejády, Slunce, * nejstarší konkrétní zobrazení oblohy na světě
+	Goseck stáří asi 6 900 let
+	úhel přesně odpovídá výseči na obzoru mezi body, kde vychází a zapadá slunce během letního a zimního slunovratu 82°
+	
+	
+	<img src="/img/nebra.jpg" alt="nebra" width="1200">
+	
+	Rondely u Kolína (4) a Bylan, na místě dnes téměř nic neuvidíš — většina staveb je pod zemí v polích 49°56'8.088"N 15°14'31.488"E
+	
+	<img src="/img/bylany.jpeg" alt="nebra" width="600">
+	
+
+	<span id="nebra" class="search">NEBRA, výpočet plejád</span>
+	.... dodělat
+	<h2 id="mesic">Měsíc</h2>
+	
+	
+	<div class="grid">
+	  <div>python nebra.py  výpočet
+	python slunovrat_azimut.py
+	Letní slunovrat:
+	  datum: 2026-06-21 10:24:31.360142
+	  západ: 2026-06-21 21:15:05.264399
+	  azimut západu (°): 310.90911818871325
+	Zimní slunovrat:
+	  datum: 2026-12-21 21:49:59.830144
+	  západ: 2026-12-21 16:00:31.290708
+	  azimut západu (°): 234.04380851479053</div>
+
+	  <div>python kalkulacka.py
+	  Součet: 544
+	  Rozdíl: 76
+	  Násobení: 72540
+	  Dělení: 1.3247863247863247
+	  
+	  Výpočet podle Goseck, u mne vyšel 76°
+  Hradiště Semín u HK</div>
+	</div>
+	
+	
+	  
+	  
+</pre>
+	
+<div class="page">
+
+<div class="card">
+    <canvas id="sunrose" width="600" height="600"></canvas>
+</div>
+
+<div class="grid">
+
+    <!-- SLUNCE -->
+    <div class="card" id="info">Načítám...</div>
+
+    <!-- AKTUÁLNÍ -->
+    <div class="card" id="current">Načítám aktuální polohu...</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+    meteostanice • astronomie • refresh 10 min
+</div>
+
+<script>
+
+Promise.all([
+    fetch("/data/static.json").then(r => r.json()),
+    fetch("/data/dynamic_24h.json").then(r => r.json())
+])
+.then(([staticData, dynamicData]) => {
+
+    setTimeout(() => location.reload(), 600000);
+
+    // ==========================
+    // SLUNCE (statická data)
+    // ==========================
+    document.getElementById("info").innerHTML = `
+    <b>☀️ Slunce</b>
+    <div class="row"><span class="label">Východ:</span> ${formatTime(staticData.sun.rise)}</div>
+    <div class="row"><span class="label">Západ:</span> ${formatTime(staticData.sun.set)}</div>
+    <div class="row"><span class="label">Kulminace:</span> ${formatTime(staticData.sun.noon)}</div>
+    `;
+
+    // ==========================
+    // NEJBLIŽŠÍ ZÁZNAM
+    // ==========================
+    const now = new Date();
+    let closest = null;
+    let minDiff = Infinity;
+
+    dynamicData.measurements.forEach(row => {
+        const t = new Date(row.timestamp);
+        if (isNaN(t)) return;
+
+        const diff = Math.abs(t - now);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closest = row;
+        }
+    });
+
+    if (!closest) {
+        document.getElementById("current").innerHTML = "Chyba: žádná data";
+        return;
+    }
+
+    // ==========================
+    // AKTUÁLNÍ DATA (jen Slunce)
+    // ==========================
+    document.getElementById("current").innerHTML = `
+    <b>Aktuální stav</b>
+
+    <div class="row"><span class="label">Čas:</span> ${formatTime(closest.timestamp)}</div>
+
+    <div class="row"><span class="label">☀️ Výška:</span> ${closest.sun_alt.toFixed(1)}°</div>
+    `;
+
+    // ==========================
+    // RŮŽICE
+    // ==========================
+    const canvas = document.getElementById("sunrose");
+    const ctx = canvas.getContext("2d");
+
+    const cx = 300, cy = 250, r = 180;
+    ctx.clearRect(0,0,600,600);
+
+    // obzor
+    ctx.strokeStyle="#00ff00";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.stroke();
+
+    // mřížka
+    ctx.strokeStyle="#666";
+    ctx.lineWidth=1;
+    for(let a=0;a<360;a+=30){
+        const rad=(a + 180 - 90)*Math.PI/180;
+        const x=cx+r*Math.cos(rad);
+        const y=cy+r*Math.sin(rad);
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    }
+
+    // kruhy výšky
+    ctx.strokeStyle="#444";
+    for(let h=30; h<90; h+=30){
+        const rr = r*(1 - h/90);
+        ctx.beginPath();
+        ctx.arc(cx,cy,rr,0,Math.PI*2);
+        ctx.stroke();
+    }
+
+    // funkce
+    function toXY(az, alt){
+        const rad = (az + 180 - 90)*Math.PI/180;
+        const rr = r*(1 - alt/90);
+        return { x: cx + rr*Math.cos(rad), y: cy + rr*Math.sin(rad) };
+    }
+
+    function drawPath(azKey, altKey, color){
+        ctx.strokeStyle=color;
+        ctx.beginPath();
+
+        dynamicData.measurements.forEach((row,i)=>{
+            if(row[altKey] === undefined) return;
+            const p = toXY(row[azKey], row[altKey]);
+            if(i===0) ctx.moveTo(p.x,p.y);
+            else ctx.lineTo(p.x,p.y);
+        });
+
+        ctx.stroke();
+    }
+
+    function drawBody(az, alt, color, size){
+        if(az === undefined || alt === undefined) return;
+        const p = toXY(az, alt);
+        ctx.fillStyle=color;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,size,0,Math.PI*2);
+        ctx.fill();
+    }
+
+    // pouze Slunce
+    drawPath("sun_az","sun_alt","rgba(0,255,0,0.4)");
+    drawBody(closest.sun_az, closest.sun_alt, "#ffff00", 8);
+
+	// ==========================
+	// AZIMUT 311° (letní)
+	// ==========================
+	const azimuth1 = 311;
+	const rad1 = (azimuth1 + 180 - 90) * Math.PI / 180;
+	const x1 = cx + r * Math.cos(rad1);
+	const y1 = cy + r * Math.sin(rad1);
+
+	ctx.strokeStyle = "red";
+	ctx.beginPath();
+	ctx.moveTo(cx, cy);
+	ctx.lineTo(x1, y1);
+	ctx.stroke();
+
+	ctx.fillStyle = "red";
+	ctx.beginPath();
+	ctx.arc(x1, y1, 6, 0, Math.PI * 2);
+	ctx.fill();
+
+	ctx.fillText("311° letní", x1 + 8, y1 - 8);
+
+
+	// ==========================
+	// AZIMUT 234° (zimní)
+	// ==========================
+	const azimuth2 = 234;
+	const rad2 = (azimuth2 + 180 - 90) * Math.PI / 180;
+	const x2 = cx + r * Math.cos(rad2);
+	const y2 = cy + r * Math.sin(rad2);
+
+	ctx.strokeStyle = "blue";
+	ctx.beginPath();
+	ctx.moveTo(cx, cy);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+
+	ctx.fillStyle = "blue";
+	ctx.beginPath();
+	ctx.arc(x2, y2, 6, 0, Math.PI * 2);
+	ctx.fill();
+
+	ctx.fillText("234° zimní", x2 + 8, y2 - 8);
+	
+    // světové strany
+    ctx.fillStyle="#aaa";
+    ctx.font="16px monospace";
+    ctx.textAlign="center";
+    ctx.fillText("J",cx,cy-r-10);
+    ctx.fillText("S",cx,cy+r+20);
+    ctx.fillText("Z",cx+r+15,cy+5);
+    ctx.fillText("V",cx-r-15,cy+5);
+
+});
+
+// ==========================
+function formatTime(t){
+    return new Date(t).toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"});
+}
+
+</script>
+
+</body>
+</html>

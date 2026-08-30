@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>github</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+    <h1>linux</h1>
+    <p>
+	   
+	   <a href="flash_zero.html">flash</a> 
+       <a href="disky_soubory.html">disky</a>
+	   <a href="web_lighttpd.html">web</a> 
+	   <a href="samba.html">samba</a>
+	   <a href="../hifi/stavba.html">stavba-remote</a>
+	   <a href="../hifi/stavba_nano.html">stavba-meteo</a>
+	   <a href="../hifi/volumio.html">stavba-volumio</a>
+	   <a href="/pokusy/status.html">⚠️status</a>
+	   <a href="https://jiljiklen.eu/data/data.csv">data.csv</a>
+	   <a href="/pokusy/azkouska.html">zkouška</a> 
+	   <a href="calcurse.html">calcurse</a> 
+	   <a href="github.html">GitHub a Snapshot</a>
+	   <a href="../readme/pozn.md">readme</a><br><br>
+	   <a href="QuickConnect.html">QuickConnect</a><br> 
+	   
+	   <hr class="cara">
+	   		<pre>
+			<h1>GitHub</h1>
+			https://github.com/HonzaMat664
+	   		cd nas-web
+	   		find /home/honza/nas-web \( -name "._*" -o -name ".DS_Store" \) -type f -delete
+	   		git status
+	   		git add .
+	   		git commit -m "med"
+	   		git push origin main
+		
+
+	   		Rychlý workflow (nejčastější)
+
+	   		git add .
+	   		git commit -m “update”
+	   		git push
+	   		<hr class="cara">
+	   		Pokud se poškodí Git repozitář, nejjednodušší je nové nahrání nas-web do git hub:
+
+	   		1. Ověření stavu
+
+	   		git fsck --full
+
+	   		🧹 2. Smaž starý Git (poškozený)
+
+	   		cd ~/nas-web
+	   		rm -rf .git
+	   		Tím odstraníš všechny poškozené objekty.
+
+	   		🆕 3. Vytvoř nový Git repozitář
+
+	   		git init
+
+
+	   		📦 4. Přidej remote (GitHub)
+
+	   		git remote add origin git@github.com:HonzaMat664/nas-web.git
+
+
+	   		🧾 5. Přidej všechny soubory
+
+	   		git add .
+
+
+	   		💾 6. Udělej nový “fresh start” commit
+
+	   		git commit -m "Fresh start - clean import from working directory"
+
+
+	   		🚀 7. Push na GitHub (hlavní větev)
+	   		Nejčastěji dnes GitHub používá main:
+
+	   		git branch -M main
+	   		git push --force -u origin main
+		
+	   		<hr class="cara">
+		
+	   		snapshot<br>
+	   		stav systému v určitém časovém okamžiku<br> 
+	   		jednou denně, v 02:00, záloha je v synology RPI/BACKUP<br>
+
+		
+	       </p>
+	       <script src="../js/menu.js"></script>
+	   	<footer>
+	   	© 2026 – GitHub
+	   	</footer>
+	
+	     </body>
+	   </html>
+	   

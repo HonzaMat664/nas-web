@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Volumio status</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #eee;
+    padding: 20px;
+}
+
+.card {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+/* 🔴 LED kontrolka */
+.led {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+    background: #444; /* stop = default */
+}
+
+/* PLAY = svítí zeleně */
+.led.play {
+    background: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+/* PAUSE = bliká */
+.led.pause {
+    background: #ffcc00;
+    box-shadow: 0 0 10px #ffcc00;
+    animation: blink 1s infinite;
+}
+
+/* STOP = zhasnutá */
+.led.stop {
+    background: #333;
+    box-shadow: none;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+.status {
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+.ok { color: #7CFC00; }
+.err { color: #ff5555; }
+
+button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Volumio status</h1>
+
+    <div>
+        <span id="led" class="led"></span>
+        <span id="stateText">Načítám...</span>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <button onclick="loadStatus()">Obnovit</button>
+</div>
+
+<script>
+const API = "http://192.168.1.139/api/v1/getstate";
+
+async function loadStatus() {
+    const el = document.getElementById("status");
+    const led = document.getElementById("led");
+    const stateText = document.getElementById("stateText");
+
+    el.innerHTML = "Načítám...";
+
+    try {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        const state = (data.status || "").toLowerCase();
+
+        // reset tříd
+        led.className = "led";
+
+        if (state === "play") {
+            led.classList.add("play");
+            stateText.innerText = "PLAY";
+        }
+        else if (state === "pause") {
+            led.classList.add("pause");
+            stateText.innerText = "PAUSE";
+        }
+        else {
+            led.classList.add("stop");
+            stateText.innerText = "STOP";
+        }
+
+        el.innerHTML = `
+            <div><b>Stav:</b> ${data.status || "-"}</div>
+            <div><b>Interpret:</b> ${data.artist || "-"}</div>
+            <div><b>Album:</b> ${data.album || "-"}</div>
+            <div><b>Skladba:</b> ${data.title || "-"}</div>
+            <div><b>Hlasitost:</b> ${data.volume ?? "-"}</div>
+        `;
+
+    } catch (e) {
+        led.className = "led stop";
+        stateText.innerText = "OFFLINE";
+        el.innerHTML = `<span class="err">Chyba připojení k Volumio</span>`;
+    }
+}
+
+loadStatus();
+setInterval(loadStatus, 5000);
+</script>
+
+</body>
+</html>

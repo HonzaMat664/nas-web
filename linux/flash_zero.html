@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>flash_zero</title>
+  </head>
+  <body>
+    <nobr><font face="Courier New, Courier, monospace"><a
+          href="../index.html">zpět</a><br>
+        <br>
+      </font></nobr><nobr><font face="Courier New, Courier, monospace">diskutil
+
+        list # číslo zařízení<br>
+        diskutil unmountDisk /dev/disk4 #odpojení disku<br>
+        sudo dd if=/dev/rdisk4 of="$HOME/Desktop/flash4_backup.img"
+        bs=4m # <b><font color="#ff0000"><span style="caret-color:
+              rgb(0, 0, 0); font-size: medium; font-style: normal;
+              font-variant-caps: normal; letter-spacing: normal;
+              text-align: start; text-indent: 0px; text-transform: none;
+              white-space: normal; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; text-decoration: none;
+              display: inline !important; float: none;">vytvoření image
+              přímo na tvé ploše</span></font></b></font></nobr><b> </b>
+    <meta charset="UTF-8">
+    <b> </b><nobr><font face="Courier New, Courier, monospace"><br>
+      </font></nobr><br>
+    <nobr><font size="+1" face="Courier New, Courier, monospace"><code
+          class="whitespace-pre! language-bash"><span><span>sudo </span><span><span
+                class="hljs-built_in">dd</span></span><span> </span><span><span
+                class="hljs-keyword">if</span></span><span>=</span><span><span
+                class="hljs-string">"<span class="hljs-variable">$HOME</span></span></span><span>/Desktop/flash4_backup.img"
+
+              of=/dev/rdisk4 bs=4m status=progress # <b>nahrání image
+                na SDcard</b><br>
+            </span></span></code><code class="whitespace-pre!
+          language-bash"><span><span>diskutil eject /dev/disk4 3
+              následně znovu zasunout do portu(kontrola)</span></span></code></font></nobr><nobr><font
+        size="+1" face="Courier New, Courier, monospace"><br>
+      </font></nobr><nobr><font size="+1" face="Courier New, Courier,
+        monospace"><code class="whitespace-pre! language-bash"><span><span></span></span></code></font></nobr><nobr><font
+        size="+1" face="Courier New, Courier, monospace"><br>
+      </font></nobr><nobr><font face="Courier New, Courier, monospace"><br>
+      </font></nobr><nobr><font face="Courier New, Courier, monospace">28.6.
+
+        instalace nového zero<br>
+        sudo raspi-config # ssh, wifi<br>
+        ssh-keygen -R 192.168.1.138 # Permission denied, please try
+        again<br>
+        sudo hostnamectl set-hostname remote2 # změna názvu počítače<br>
+        sudo nano /etc/dhcpcd.conf # změna ip adresy<br>
+        sudo apt-get update #&nbsp; update<br>
+        sudo apt-get install mc # instalace MC<br>
+      </font></nobr><br>
+  </body>
+</html>

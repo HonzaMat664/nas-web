@@ -1,0 +1,283 @@
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>hifi</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.box {
+    background: #222;
+    padding: 18px;
+    margin: 15px auto;
+    display: inline-block;
+    border-radius: 15px;
+    min-width: 320px;
+}
+
+button {
+    padding: 10px 14px;
+    margin: 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #2d6cdf;
+    color: white;
+}
+
+button:hover {
+    background: #1f4ea8;
+}
+
+.amp button {
+    background: #e06c2f;
+}
+
+.amp button:hover {
+    background: #b8521f;
+}
+
+input[type=range] {
+    width: 250px;
+}
+
+/* ===== LED ===== */
+.led {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+    background: #444;
+}
+
+.led.play {
+    background: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+.led.pause {
+    background: #ffcc00;
+    box-shadow: 0 0 10px #ffcc00;
+    animation: blink 1s infinite;
+}
+
+.led.stop {
+    background: #333;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+/* ===== ANALOG VU ===== */
+.vu-meter {
+    width: 90px;
+    height: 60px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.vu-scale {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    top: -90px;
+    left: -25px;
+}
+
+.needle {
+    width: 2px;
+    height: 45px;
+    background: #ffcc00;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: rotate(-60deg);
+    transition: transform 0.12s ease-out;
+    box-shadow: 0 0 6px #ffcc00;
+}
+
+.needle::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -4px;
+    left: -3px;
+}
+
+.vu-label {
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    color: #888;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- VOLUMIO 1 -->
+<div class="box">
+
+    Pioneer
+
+    <div style="margin-top:10px;">
+        Stav:
+        <span id="v1-led" class="led"></span>
+        <span id="v1-text">loading...</span>
+    </div>
+
+    <!-- ANALOG VU -->
+    <div style="margin-top:14px;">
+        <div style="font-size:12px; opacity:0.7;">Analog VU</div>
+
+        <div style="display:flex; justify-content:center; gap:40px; margin-top:10px;">
+
+            <div class="vu-meter">
+                <div class="vu-scale"></div>
+                <div class="needle" id="needleL"></div>
+                <div class="vu-label">L</div>
+            </div>
+
+            <div class="vu-meter">
+                <div class="vu-scale"></div>
+                <div class="needle" id="needleR"></div>
+                <div class="vu-label">R</div>
+            </div>
+
+        </div>
+    </div>
+
+    <button onclick="v1('play')">▶</button>
+    <button onclick="v1('pause')">⏸</button>
+    <button onclick="v1('prev')">⏮</button>
+    <button onclick="v1('next')">⏭</button>
+
+    <input type="range" min="0" max="100" value="50"
+           oninput="vol1(this.value)">
+</div>
+
+<!-- AMP -->
+<div class="box amp">
+    ax 496
+
+    <button onclick="amp('0x7A1F')">⏻ ON/OFF</button>
+    <button onclick="amp('0x7A1B')"> - </button>
+    <button onclick="amp('0x7A1A')"> + </button>
+    <button onclick="amp('0x7A19')">MD tv</button>
+    <button onclick="amp('0x7A15')">CD</button>
+    <button onclick="amp('0x7A17')">AUX volumio</button>
+</div>
+
+<script>
+
+const V1 = "http://192.168.1.139:3000/api/v1/commands/?cmd=";
+const AMP = "http://192.168.1.151:5000/send?code=";
+
+let vuMode = "stop";
+let vuLevel = 0;
+
+/* ===== základ ===== */
+function v1(cmd) {
+    fetch(V1 + cmd).catch(console.error);
+}
+
+function vol1(v) {
+    fetch(V1 + "volume&volume=" + v).catch(console.error);
+}
+
+function amp(code) {
+    fetch(AMP + code).catch(console.error);
+}
+
+/* ===== LED + stav ===== */
+async function updateV1Status() {
+    try {
+        const res = await fetch("http://192.168.1.139/api/v1/getstate");
+        const data = await res.json();
+
+        const state = (data.status || "").toLowerCase();
+
+        const led = document.getElementById("v1-led");
+        const text = document.getElementById("v1-text");
+
+        led.className = "led";
+
+        if (state === "play") {
+            led.classList.add("play");
+            text.innerText = "PLAY";
+            vuMode = "play";
+        }
+        else if (state === "pause") {
+            led.classList.add("pause");
+            text.innerText = "PAUSE";
+            vuMode = "pause";
+        }
+        else {
+            led.classList.add("stop");
+            text.innerText = "STOP";
+            vuMode = "stop";
+        }
+
+    } catch (e) {
+        document.getElementById("v1-led").className = "led stop";
+        document.getElementById("v1-text").innerText = "OFFLINE";
+        vuMode = "stop";
+    }
+}
+
+/* ===== analog VU ===== */
+function animateNeedles() {
+    const L = document.getElementById("needleL");
+    const R = document.getElementById("needleR");
+
+    if (vuMode === "stop") {
+        vuLevel *= 0.85;
+    }
+    else if (vuMode === "pause") {
+        vuLevel = Math.random() * 10;
+    }
+    else {
+        vuLevel = Math.random() * 100;
+    }
+
+    const angle = -60 + (vuLevel * 1.2);
+
+    L.style.transform = `rotate(${angle}deg)`;
+    R.style.transform = `rotate(${angle + (Math.random()*6-3)}deg)`;
+}
+
+setInterval(animateNeedles, 80);
+
+updateV1Status();
+setInterval(updateV1Status, 3000);
+
+</script>
+
+</body>
+</html>

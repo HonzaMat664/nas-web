@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>čidla</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+canvas {
+    background-color: #222;
+    display: block;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+pre {
+    font-family: monospace;
+    color: #eee;
+}
+</style>
+  </head>
+  <body>
+    <p>čidla tail -f</p>
+    <pre id="time">Načítám čas…</pre>
+    <pre id="out1">Načítám azimut.csv…</pre>
+    <pre id="out3">Načítám vychod.csv…</pre>
+    <canvas id="rose" width="300" height="300"></canvas>
+    <script>
+function pad(n) {
+    return n.toString().padStart(2,"0");
+}
+
+// formát času
+function formatTime(d) {
+    return d.getFullYear() + "-" +
+           pad(d.getMonth()+1) + "-" +
+           pad(d.getDate()) + " " +
+           pad(d.getHours()) + ":" +
+           pad(d.getMinutes()) + ":" +
+           pad(d.getSeconds());
+}
+
+function updateTime() {
+    document.getElementById("time").innerText = formatTime(new Date());
+}
+
+// načtení posledního řádku CSV
+async function loadLastLine(file, elementId) {
+    const url = file + "?t=" + Date.now();
+    try {
+        const r = await fetch(url, {cache: "no-store"});
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        const text = await r.text();
+        const lines = text.trim().split("\n");
+        document.getElementById(elementId).innerText = lines[lines.length-1];
+        return lines[lines.length-1];
+    } catch(err) {
+        document.getElementById(elementId).innerText = "Chyba: " + err;
+        return null;
+    }
+}
+
+// převod alt/az → x/y pro canvas
+function polar(alt, az, cx, cy, radius) {
+    if(alt < 0) return null;
+    if(alt > 90) alt = 90;
+    const r = radius * (1 - alt/90);
+    const theta = (az + 90) * Math.PI/180;
+    const x = cx + r * Math.cos(theta);
+    const y = cy + r * Math.sin(theta);
+    return [x, y];
+}
+
+// vykreslení grafu Slunce a Měsíce
+function drawRose(sunAlt, sunAz, moonAlt, moonAz) {
+    const canvas = document.getElementById("rose");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+    const cx = w/2;
+    const cy = h/2;
+    const radius = Math.min(cx, cy) - 10;
+
+    ctx.clearRect(0,0,w,h);
+
+    // obzor
+    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI*2);
+    ctx.stroke();
+
+    // hlavní kříž
+    ctx.strokeStyle = "#333";
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-radius);
+    ctx.lineTo(cx, cy+radius);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx-radius, cy);
+    ctx.lineTo(cx+radius, cy);
+    ctx.stroke();
+
+    // druhý kříž - otočený 23°
+    ctx.strokeStyle = "#555";
+    const angleRad = 23 * Math.PI/180;
+    const cos = Math.cos(angleRad);
+    const sin = Math.sin(angleRad);
+    ctx.beginPath();
+    ctx.moveTo(cx - radius*sin, cy - radius*cos);
+    ctx.lineTo(cx + radius*sin, cy + radius*cos);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - radius*cos, cy + radius*sin);
+    ctx.lineTo(cx + radius*cos, cy - radius*sin);
+    ctx.stroke();
+
+    // jih nahoře
+    ctx.fillStyle = "#aaa";
+    ctx.font = "14px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("J", cx, cy-radius-8);
+
+    // Slunce
+    if(!isNaN(sunAlt) && !isNaN(sunAz)) {
+        const pos = polar(sunAlt, sunAz, cx, cy, radius);
+        if(pos){
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(pos[0], pos[1], 6, 0, Math.PI*2);
+            ctx.fill();
+        }
+    }
+
+    // Měsíc
+    if(!isNaN(moonAlt) && !isNaN(moonAz)) {
+        const pos = polar(moonAlt, moonAz, cx, cy, radius);
+        if(pos){
+            ctx.fillStyle = "lightblue";
+            ctx.beginPath();
+            ctx.arc(pos[0], pos[1], 6, 0, Math.PI*2);
+            ctx.fill();
+        }
+    }
+}
+}
+
+async function tick(){
+updateTime();
+const vychod = await loadLastLine("data/vychod.csv");
+const azimut = await loadLastLine("data/azimut.csv");
+
+if(vychod){
+document.getElementById("moonData").innerText =
+`Měsíc
+Azimut: ${vychod[6]}
+Výška: ${vychod[5]}
+Východ: ${vychod[3].split(" ")[1]}
+Západ: ${vychod[4].split(" ")[1]}
+Stáří Měsíce: ${vychod[8]}`;
+}
+
+if(azimut && vychod){
+const sunAlt = parseFloat(azimut[1]);
+const sunAz = parseFloat(azimut[3]);
+const moonAlt = parseFloat(azimut[3]);
+const moonAz = parseFloat(azimut[4]);
+drawRose(sunAlt,sunAz,moonAlt,moonAz);
+
+document.getElementById("sunData").innerText =
+`Slunce
+Azimut: ${azimut[3]}
+Výška: ${azimut[1]}
+Východ: ${vychod[1].split(" ")[1]}
+Západ: ${vychod[2].split(" ")[1]}`;
+}
+}
+
+// hlavní tick
+async function tick() {
+    updateTime();
+    loadLastLine("data/vychod.csv", "out3"); // původní CSV
+
+    const line = await loadLastLine("data/azimut.csv", "out1");
+    if(!line) return;
+    const parts = line.split(",");
+    if(parts.length >= 5){
+        const sunAlt  = parseFloat(parts[1]);
+        const sunAz   = parseFloat(parts[2]);
+        const moonAlt = parseFloat(parts[3]);
+        const moonAz  = parseFloat(parts[4]);
+        drawRose(sunAlt, sunAz, moonAlt, moonAz);
+    }
+}
+
+// spuštění a interval
+tick();
+setInterval(tick, 1000);
+</script>
+  </body>
+</html>

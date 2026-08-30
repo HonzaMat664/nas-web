@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Porovnání tlaku</title>
+    <style>
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.note {
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.source {
+    font-weight: bold;
+}
+</style>
+  </head>
+  <body>
+    <h1>Porovnání tlaku – poslední měření</h1>
+    <div class="note">
+      1. řádek: <code>pressure_correction.csv</code><br>
+      2. řádek: <code>pressure_correction2.csv</code>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Zdroj</th>
+          <th>Čas</th>
+          <th>Surový tlak</th>
+          <th>Tlak na hladinu moře</th>
+          <th>Referenční tlak</th>
+          <th>Korekce</th>
+          <th>Finální tlak</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="row1">
+          <td colspan="7">Načítám…</td>
+        </tr>
+        <tr id="row2">
+          <td colspan="7">Načítám…</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+async function loadCSV(url) {
+    const response = await fetch(url, { cache: "no-store" });
+    const text = await response.text();
+
+    const lines = text.trim().split("\n");
+
+    // BONUS: automatická detekce oddělovače
+    const delimiter = lines[0].includes(";") ? ";" : ",";
+
+    const headers = lines[0].split(delimiter);
+    const values  = lines[lines.length - 1].split(delimiter);
+
+    const data = {};
+    headers.forEach((h, i) => {
+        data[h.trim()] = values[i]?.trim();
+    });
+
+    return data;
+}
+
+function fillRow(rowId, label, d) {
+    document.getElementById(rowId).innerHTML = `
+        <td class="source">${label}</td>
+        <td>${d.timestamp ?? "-"}</td>
+        <td>${d.pressure_raw ?? "-"}</td>
+        <td>${d.pressure_sea ?? "-"}</td>
+        <td>${d.chotusice_pressure ?? "-"}</td>
+        <td>${d.correction ?? "-"}</td>
+        <td>${d.pressure_corrected ?? "-"}</td>
+    `;
+}
+
+async function init() {
+    try {
+        const d1 = await loadCSV("pressure_correction.csv");
+        fillRow("row1", "Meteostanice 1", d1);
+    } catch (e) {
+        document.getElementById("row1").innerHTML =
+            "<td colspan='7'>Chyba načtení pressure_correction.csv</td>";
+    }
+
+    try {
+        const d2 = await loadCSV("pressure_correction2.csv");
+        fillRow("row2", "Meteostanice 2", d2);
+    } catch (e) {
+        document.getElementById("row2").innerHTML =
+            "<td colspan='7'>Chyba načtení pressure_correction2.csv</td>";
+    }
+}
+
+init();
+</script>
+  </body>
+</html>

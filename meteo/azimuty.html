@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Meteostanice – astronomie</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.row {
+    display: flex;
+    margin: 5px 0;
+}
+.label {
+    min-width: 160px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 700px){
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    background: #000;
+    border:1px solid #444;
+}
+
+.card b {
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.nav a {
+    margin-right: 10px;
+    color: #00ffff;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <a href="/index.html">Domů</a>
+  <a href="/meteo/dashboard.html">Dashboard</a>
+  <a href="/meteo/grafy.html">Grafy</a>
+  <a href="/meteo/cidla.html">Čidla</a>
+  <a href="/meteo/sun.html">Poloha Slunce</a>
+  <a href="/meteo/sun_goseck.html">Goseck</a>
+</div>
+
+<div class="page">
+
+<div class="card">
+    <canvas id="sunrose" width="600" height="600"></canvas>
+</div>
+
+<div class="grid">
+    <div class="card" id="info">Načítám...</div>
+    <div class="card" id="current">Načítám aktuální polohu...</div>
+</div>
+
+</div>
+
+<div class="footer">
+    meteostanice • astronomie • refresh 10 min
+</div>
+
+<script>
+
+Promise.all([
+    fetch("/data/static.json").then(r => r.json()),
+    fetch("/data/dynamic_24h.json").then(r => r.json())
+])
+.then(([staticData, dynamicData]) => {
+
+    setTimeout(() => location.reload(), 600000);
+
+    // ==========================
+    // INFO
+    // ==========================
+    document.getElementById("info").innerHTML = `
+    <b>☀️ Slunce</b>
+    <div class="row"><span class="label">Východ:</span> ${formatTime(staticData.sun.rise)}</div>
+    <div class="row"><span class="label">Západ:</span> ${formatTime(staticData.sun.set)}</div>
+    <div class="row"><span class="label">Kulminace:</span> ${formatTime(staticData.sun.noon)}</div>
+    `;
+
+    // ==========================
+    // NEJBLIŽŠÍ DATA
+    // ==========================
+    const now = new Date();
+    let closest = null;
+    let minDiff = Infinity;
+
+    dynamicData.measurements.forEach(row => {
+        const t = new Date(row.timestamp);
+        if (isNaN(t)) return;
+
+        const diff = Math.abs(t - now);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closest = row;
+        }
+    });
+
+    if (!closest) return;
+
+    document.getElementById("current").innerHTML = `
+    <b>Aktuální stav</b>
+    <div class="row"><span class="label">Čas:</span> ${formatTime(closest.timestamp)}</div>
+    <div class="row"><span class="label">☀️ Výška:</span> ${closest.sun_alt.toFixed(1)}°</div>
+    `;
+
+    // ==========================
+    // CANVAS
+    // ==========================
+    const canvas = document.getElementById("sunrose");
+    const ctx = canvas.getContext("2d");
+
+    const cx = 300, cy = 250, r = 180;
+
+    ctx.clearRect(0,0,600,600);
+
+    // obzor
+    ctx.strokeStyle="#00ff00";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.stroke();
+
+    // mřížka
+    ctx.strokeStyle="#666";
+    ctx.lineWidth=1;
+
+    for(let a=0;a<360;a+=30){
+        const rad=(a + 180 - 90)*Math.PI/180;
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(cx+r*Math.cos(rad), cy+r*Math.sin(rad));
+        ctx.stroke();
+    }
+	// TRAJEKTORIE SLUNCE
+	ctx.beginPath();
+
+	let first = true;
+
+	dynamicData.measurements.forEach(row => {
+
+	    if (row.sun_alt < 0) return; // jen nad obzorem
+
+	    const rad = (row.sun_az + 180 - 90) * Math.PI / 180;
+
+	    const rr = r * (1 - row.sun_alt / 90);
+
+	    const x = cx + rr * Math.cos(rad);
+
+	    const y = cy + rr * Math.sin(rad);
+
+	    if (first) {
+
+	        ctx.moveTo(x, y);
+
+	        first = false;
+
+	    } else {
+
+	        ctx.lineTo(x, y);
+
+	    }
+
+	});
+
+	ctx.strokeStyle = "#ffaa00";
+
+	ctx.lineWidth = 1;
+
+	ctx.stroke();
+    // slunce
+    const sunRad = (closest.sun_az + 180 - 90) * Math.PI / 180;
+    const sunR = r * (1 - closest.sun_alt / 90);
+
+    const sx = cx + sunR * Math.cos(sunRad);
+    const sy = cy + sunR * Math.sin(sunRad);
+
+    ctx.fillStyle = "#ffff00";
+    ctx.beginPath();
+    ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ==========================
+    // FUNKCE
+    // ==========================
+    function drawAz(azimuth, color, label){
+        const rad = (azimuth + 180 - 90) * Math.PI / 180;
+
+        const x = cx + r * Math.cos(rad);
+        const y = cy + r * Math.sin(rad);
+
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        const offset = 20;
+        const lx = cx + (r + offset) * Math.cos(rad);
+        const ly = cy + (r + offset) * Math.sin(rad);
+
+        ctx.textAlign = (Math.cos(rad) > 0) ? "left" : "right";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(label, lx, ly);
+    }
+
+    // ==========================
+    // BODY
+    // ==========================
+    drawAz(311, "red", "311° letní");
+    drawAz(234, "blue", "234° zimní");
+    drawAz(294, "orange", "Kaňk 294° (21,6°)");
+	drawAz(300, "orange", "Kolín 300° (21,6°)");
+	drawAz(308, "orange", "Žehušice 308° (21,6°)");
+	drawAz(324, "orange", "Starkoč 324° (21,6°)");
+	drawAz(335, "orange", "Chvaletice 335° (21,6°)");
+	drawAz(9, "orange", "Černá hora 9° (21,6°)");
+	drawAz(68, "orange", "vysílač 68° (21,6°)");
+	drawAz(213, "orange", "Golčův Jeníkov 213°");
+	
+	
+
+
+
+    // ==========================
+    // SVĚTOVÉ STRANY
+    // ==========================
+    ctx.fillStyle = "#aaa";
+    ctx.textAlign = "center";
+    ctx.fillText("J", cx, cy - r - 10);
+    ctx.fillText("S", cx, cy + r + 20);
+    ctx.fillText(" Z 270°", cx + r + 15, cy + 5);
+    ctx.fillText("V", cx - r - 15, cy + 5);
+	// ==========================
+
+	// NAKLONĚNÝ KŘÍŽ -23°
+
+	// ==========================
+
+	ctx.strokeStyle="rgba(0,255,255,0.8)";
+
+	ctx.lineWidth=1;
+
+	const tilt = (-23) * Math.PI/180;
+
+	// poloviční délka
+
+	const cr = r * 0.5;
+
+	// první rameno
+
+	let x1 = cx + cr*Math.cos(tilt);
+
+	let y1 = cy + cr*Math.sin(tilt);
+
+	let x2 = cx - cr*Math.cos(tilt);
+
+	let y2 = cy - cr*Math.sin(tilt);
+
+	ctx.beginPath();
+
+	ctx.moveTo(x1,y1);
+
+	ctx.lineTo(x2,y2);
+
+	ctx.stroke();
+
+	// kolmé rameno
+
+	let tilt2 = tilt + Math.PI/2;
+
+	x1 = cx + cr*Math.cos(tilt2);
+
+	y1 = cy + cr*Math.sin(tilt2);
+
+	x2 = cx - cr*Math.cos(tilt2);
+
+	y2 = cy - cr*Math.sin(tilt2);
+
+	ctx.beginPath();
+
+	ctx.moveTo(x1,y1);
+
+	ctx.lineTo(x2,y2);
+
+	ctx.stroke();
+}); // ✅ důležité!
+
+// ==========================
+function formatTime(t){
+    return new Date(t).toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"});
+}
+
+</script>
+
+</body>
+</html>

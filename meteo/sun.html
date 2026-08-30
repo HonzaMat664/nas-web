@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Meteostanice – astronomie</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.row {
+    display: flex;
+    margin: 5px 0;
+}
+.label {
+    min-width: 160px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 700px){
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    background: #000;
+    border:1px solid #444;
+}
+
+.card b {
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <a href="/index.html">Domů</a>
+  <a href="/meteo/dashboard.html">Dashboard</a>
+  <a href="/meteo/grafy.html">Grafy</a>
+  <a href="/meteo/cidla.html">Čidla</a>
+  <a href="/meteo/sun.html">Slunce</a>
+</div>
+
+<div class="page">
+
+<div class="card">
+    <canvas id="sunrose" width="600" height="600"></canvas>
+</div>
+
+<div class="grid">
+
+    <div class="card" id="info">Načítám...</div>
+
+    <div class="card" id="current">Načítám aktuální polohu...</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+    meteostanice • astronomie • refresh 10 min
+</div>
+
+<script>
+
+Promise.all([
+    fetch("/data/static.json").then(r => r.json()),
+    fetch("/data/dynamic_24h.json").then(r => r.json())
+])
+.then(([staticData, dynamicData]) => {
+
+    setTimeout(() => location.reload(), 600000);
+
+    // ==========================
+    // STATICKÁ DATA
+    // ==========================
+    document.getElementById("info").innerHTML = `
+    <b>☀️ Slunce</b>
+    <div class="row"><span class="label">Východ:</span> ${formatTime(staticData.sun.rise)}</div>
+    <div class="row"><span class="label">Západ:</span> ${formatTime(staticData.sun.set)}</div>
+    <div class="row"><span class="label">Kulminace:</span> ${formatTime(staticData.sun.noon)}</div>
+
+    <br>
+
+    <b>🌙 Měsíc</b>
+    <div class="row"><span class="label">Východ:</span> ${formatTime(staticData.moon.rise)}</div>
+    <div class="row"><span class="label">Západ:</span> ${formatTime(staticData.moon.set)}</div>
+    <div class="row"><span class="label">Fáze:</span> ${staticData.moon.phase} %</div>
+    `;
+
+    // ==========================
+    // NEJBLIŽŠÍ ZÁZNAM
+    // ==========================
+    const now = new Date();
+    let closest = null;
+    let minDiff = Infinity;
+
+    dynamicData.measurements.forEach(row => {
+        const t = new Date(row.timestamp);
+        if (isNaN(t)) return;
+
+        const diff = Math.abs(t - now);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closest = row;
+        }
+    });
+
+    if (!closest) {
+        document.getElementById("current").innerHTML = "Chyba: žádná data";
+        return;
+    }
+
+    // ==========================
+    // PANEL
+    // ==========================
+    document.getElementById("current").innerHTML = `
+    <b>Aktuální stav</b>
+
+    <div class="row"><span class="label">Čas:</span> ${formatTime(closest.timestamp)}</div>
+
+    <div class="row"><span class="label">☀️ Slunce:</span> ${closest.sun_alt.toFixed(1)}°</div>
+    <div class="row"><span class="label">🌙 Měsíc:</span> ${closest.moon_alt.toFixed(1)}°</div>
+
+    <br>
+
+    <b>Planety</b>
+    <div class="row"><span class="label">Venuše:</span> ${closest.venus_alt?.toFixed(1) ?? "--"}°</div>
+    <div class="row"><span class="label">Mars:</span> ${closest.mars_alt?.toFixed(1) ?? "--"}°</div>
+    <div class="row"><span class="label">Jupiter:</span> ${closest.jupiter_alt?.toFixed(1) ?? "--"}°</div>
+
+    <div class="row">
+      <span class="label">M45 Plejády:</span>
+      ${closest.m45_alt?.toFixed(1) ?? "--"}°
+      ${closest.m45_good ? "⭐" : ""}
+    </div>
+    `;
+
+    // ==========================
+    // RŮŽICE
+    // ==========================
+    const canvas = document.getElementById("sunrose");
+    const ctx = canvas.getContext("2d");
+
+    const cx = 300, cy = 250, r = 180;
+    ctx.clearRect(0,0,600,600);
+
+    // obzor
+    ctx.strokeStyle="#00ff00";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.stroke();
+
+    // mřížka
+    ctx.strokeStyle="#666";
+    for(let a=0;a<360;a+=30){
+        const rad=(a + 180 - 90)*Math.PI/180;
+        const x=cx+r*Math.cos(rad);
+        const y=cy+r*Math.sin(rad);
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    }
+
+    // výškové kruhy
+    ctx.strokeStyle="#444";
+    for(let h=30; h<90; h+=30){
+        const rr = r*(1 - h/90);
+        ctx.beginPath();
+        ctx.arc(cx,cy,rr,0,Math.PI*2);
+        ctx.stroke();
+    }
+
+    // osa ekliptiky
+    ctx.strokeStyle="rgba(0,255,0,0.6)";
+    const tilt = (-23) * Math.PI/180;
+
+    ctx.beginPath();
+    ctx.moveTo(
+        cx + r*Math.cos(tilt),
+        cy + r*Math.sin(tilt)
+    );
+    ctx.lineTo(
+        cx - r*Math.cos(tilt),
+        cy - r*Math.sin(tilt)
+    );
+    ctx.stroke();
+
+    // funkce
+    function toXY(az, alt){
+        const rad = (az + 180 - 90)*Math.PI/180;
+        const rr = r*(1 - alt/90);
+        return { x: cx + rr*Math.cos(rad), y: cy + rr*Math.sin(rad) };
+    }
+
+    function drawPath(azKey, altKey, color){
+        ctx.strokeStyle=color;
+        ctx.beginPath();
+
+        dynamicData.measurements.forEach((row,i)=>{
+            if(row[altKey] === undefined) return;
+            const p = toXY(row[azKey], row[altKey]);
+            if(i===0) ctx.moveTo(p.x,p.y);
+            else ctx.lineTo(p.x,p.y);
+        });
+
+        ctx.stroke();
+    }
+
+    function drawBody(az, alt, color, size){
+        if(az === undefined || alt === undefined) return;
+        const p = toXY(az, alt);
+        ctx.fillStyle=color;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,size,0,Math.PI*2);
+        ctx.fill();
+    }
+
+    function drawLabel(az, alt, text, color){
+        if(az === undefined || alt === undefined) return;
+        const p = toXY(az, alt);
+        ctx.fillStyle = color;
+        ctx.font = "14px monospace";
+        ctx.fillText(text, p.x + 10, p.y - 10);
+    }
+
+    // trajektorie
+    drawPath("sun_az","sun_alt","rgba(0,255,0,0.4)");
+    drawPath("moon_az","moon_alt","rgba(150,150,150,0.5)");
+    drawPath("m45_az","m45_alt","rgba(0,150,255,0.5)");
+
+    // body
+    drawBody(closest.sun_az, closest.sun_alt, "#ffff00", 8);
+    drawBody(closest.moon_az, closest.moon_alt, "#cccccc", 6);
+    drawBody(closest.venus_az, closest.venus_alt, "#ffff99", 5);
+    drawBody(closest.mars_az, closest.mars_alt, "#ff4444", 5);
+    drawBody(closest.jupiter_az, closest.jupiter_alt, "#ffaa44", 6);
+
+    // M45 (bonus logika)
+    drawBody(
+        closest.m45_az,
+        closest.m45_alt,
+        closest.m45_good ? "#00ffff" : "#555555",
+        closest.m45_good ? 6 : 3
+    );
+
+    if (closest.m45_good) {
+        drawLabel(
+            closest.m45_az,
+            closest.m45_alt,
+            "M45",
+            "#00ccff"
+        );
+    }
+
+    // světové strany
+    ctx.fillStyle="#aaa";
+    ctx.font="16px monospace";
+    ctx.textAlign="center";
+    ctx.fillText("J",cx,cy-r-10);
+    ctx.fillText("S",cx,cy+r+20);
+    ctx.fillText("Z",cx+r+15,cy+5);
+    ctx.fillText("V",cx-r-15,cy+5);
+
+});
+
+// ==========================
+function formatTime(t){
+    return new Date(t).toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"});
+}
+
+</script>
+
+</body>
+</html>

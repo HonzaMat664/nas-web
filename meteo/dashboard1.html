@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Meteostanice – dashboard</title>
+<link rel="stylesheet" href="/css/style.css?">
+	  </head>
+
+	  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+
+<div class="container">
+
+    <!-- MAIN TEMP -->
+    <div class="temp" id="temp">-- °C</div>
+
+    <!-- SECONDARY DATA -->
+    <div class="row">
+        <div id="hum">-- %</div>
+        <div id="sea">-- hPa</div>
+    </div>
+
+    <!-- QUICK MENU -->
+    <div class="menu">
+        <div onclick="location.href='/meteo/grafy.html'">📊 Grafy</div>
+        <div onclick="location.href='/meteo/cidla.html'">📡 Čidla</div>
+        <div onclick="location.href='/meteo/sun.html'">☀️ Poloha Slunce</div>
+    </div>
+
+</div>
+
+<div class="footer">
+    poslední aktualizace: <span id="time">--:--</span> • 
+    stav: <span id="status">OK</span> • 
+    auto refresh 30s
+</div>
+
+<script>
+function loadData(){
+    fetch("../data/current.json?t=" + Date.now())
+    .then(r => r.json())
+    .then(d => {
+
+        const t = new Date(d.time);
+
+        document.getElementById("time").textContent =
+            t.toLocaleTimeString("cs-CZ", {hour: "2-digit", minute: "2-digit"});
+
+        document.getElementById("temp").textContent =
+            d.temperature.toFixed(1) + " °C";
+
+        document.getElementById("hum").textContent =
+            d.humidity.toFixed(0) + " %";
+
+        document.getElementById("sea").textContent =
+            d.pressure_sl.toFixed(0) + " hPa";
+
+        document.getElementById("status").textContent = "OK";
+    })
+    .catch(e => {
+        document.getElementById("temp").textContent = "⚠️";
+        document.getElementById("status").textContent = "ERROR";
+        console.log(e);
+    });
+}
+
+// init
+loadData();
+setInterval(loadData, 30000);
+</script>
+       <script src="../js/menu.js"></script>
+   	<footer>
+   	© 2026
+   	</footer>
+	
+     </body>
+   </html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Měsíc dnes</title>
+<style>
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: monospace;
+}
+h1, h2 {
+    color: #0ff;
+}
+.data-block {
+    margin: 10px 0;
+}
+</style>
+</head>
+<body>
+<h1>Měsíc dnes</h1>
+
+<div id="obsah">
+Načítám data...
+</div>
+
+<script>
+// globální proměnná pro data
+let moonData = null;
+const obsah = document.getElementById("obsah");
+
+// fetch JSON
+function loadJSON() {
+    fetch("/data/mesic.json")  // absolutní cesta
+        .then(res => {
+            console.log("HTTP status:", res.status);
+            if (!res.ok) throw new Error("HTTP error " + res.status);
+            return res.text(); // nejdřív text
+        })
+        .then(text => {
+            try {
+                moonData = JSON.parse(text); // ručně parsuj
+                renderMoon();
+            } catch(e) {
+                obsah.innerHTML = "Chyba při parsování JSON: " + e;
+                console.error(e);
+            }
+        })
+        .catch(err => {
+            obsah.innerHTML = "Chyba při načítání JSON: " + err;
+            console.error(err);
+        });
+}
+
+// interpolace hodnot pro aktuální čas
+function renderMoon() {
+    if(!moonData) return;
+
+    const now = new Date();
+    const data = moonData.data;
+
+    // najdi dva body pro interpolaci
+    let before = data[0], after = data[data.length-1];
+    for(let i=0; i<data.length; i++){
+        const t = new Date(data[i].cas_utc);
+        if(t <= now) before = data[i];
+        if(t >= now) { after = data[i]; break; }
+    }
+
+    // časová váha pro interpolaci
+    const t0 = new Date(before.cas_utc).getTime();
+    const t1 = new Date(after.cas_utc).getTime();
+    const tn = now.getTime();
+    let w = (tn - t0)/(t1 - t0);
+    if(isNaN(w)) w = 0;
+
+    function interp(a,b){ return a + (b-a)*w; }
+
+    // interpolované hodnoty
+    const azimut = interp(before.azimut_stupne, after.azimut_stupne).toFixed(2);
+    const vyska = interp(before.vyska_stupne, after.vyska_stupne).toFixed(2);
+    const vzdalenost = interp(before.vzdalenost_km, after.vzdalenost_km).toFixed(0);
+    const osv = interp(before.osvetleni_procent, after.osvetleni_procent).toFixed(2);
+    const stari = interp(before.stari_dny, after.stari_dny).toFixed(2);
+
+    obsah.innerHTML = `
+    <div class="data-block"><b>Čas:</b> ${now.toLocaleString()}</div>
+    <div class="data-block"><b>Azimut:</b> ${azimut}°</div>
+    <div class="data-block"><b>Výška:</b> ${vyska}°</div>
+    <div class="data-block"><b>Vzdálenost:</b> ${vzdalenost} km</div>
+    <div class="data-block"><b>Osvětlení disku:</b> ${osv}%</div>
+    <div class="data-block"><b>Stáří Měsíce:</b> ${stari} dny</div>
+    `;
+}
+
+// načti JSON a aktualizuj každých 10 sekund
+loadJSON();
+setInterval(renderMoon, 10000);
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="ChatGPT" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>Hlavní evropské rozvodí - Žďárské vrchy</name>
+    <desc>Orientační průběh rozvodí mezi povodím Labe (Severní moře) a Dunaj (Černé moře)</desc>
+  </metadata>
+
+  <trk>
+    <name>Rozvodí Žďárské vrchy</name>
+    <trkseg>
+
+      <trkpt lat="49.6500" lon="15.9370"><name>Žákova hora</name></trkpt>
+      <trkpt lat="49.6425" lon="15.9500"></trkpt>
+      <trkpt lat="49.6290" lon="15.9720"><name>Devět skal</name></trkpt>
+      <trkpt lat="49.6380" lon="15.9950"></trkpt>
+      <trkpt lat="49.6500" lon="16.0450"><name>Křižánky</name></trkpt>
+      <trkpt lat="49.6200" lon="16.0630"><name>Milovy</name></trkpt>
+      <trkpt lat="49.6480" lon="16.0680"><name>Tři Studně</name></trkpt>
+      <trkpt lat="49.6100" lon="16.0300"></trkpt>
+      <trkpt lat="49.6000" lon="16.0200"><name>Fryšava pod Žákovou horou</name></trkpt>
+      <trkpt lat="49.6350" lon="15.9800"></trkpt>
+      <trkpt lat="49.6500" lon="15.9370"></trkpt>
+
+    </trkseg>
+  </trk>
+
+</gpx>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Test Slunce/Měsíc</title>
+    <style>
+body {
+    font-family: monospace;
+    background: #111;
+    color: #0f0;
+}
+</style>
+  </head>
+  <body>
+    <p>čidla tail -f</p>
+    <pre id="time">Načítám čas…</pre>
+    <pre id="out1">Načítám azimut.csv…</pre>
+    <pre id="out3">Načítám vychod.csv…</pre>
+    <canvas id="rose" width="300" height="300"></canvas>
+    <script>
+function pad(n) {
+return n.toString().padStart(2,"0");
+}
+
+}
+</style>
+  </head>
+  <body>
+    <h3>Měsíc</h3>
+    <pre>Azimut : <span id="mesic_azimut">--</span></pre>
+    <pre>Výška  : <span id="mesic_vyska">--</span></pre>
+    <pre>Východ : <span id="mesic_vychod">--</span></pre>
+    <pre>Západ  : <span id="mesic_zapad">--</span></pre>
+    <h3>Slunce</h3>
+    <pre>Azimut : <span id="slunce_azimut">--</span></pre>
+    <pre>Výška  : <span id="slunce_vyska">--</span></pre>
+    <pre>Východ : <span id="slunce_vychod">--</span></pre>
+    <pre>Západ  : <span id="slunce_zapad">--</span></pre>
+    <script>
+
+// simulace pole vychod (jako z CSV)
+const vychod = [
+    "2026-03-03 10:00:00",  // 0
+    "",                     // 1
+    "",                     // 2
+    "2026-03-03 06:12:00",  // 3 - měsíc východ
+    "2026-03-03 18:45:00",  // 4 - měsíc západ
+    "35°",                  // 5 - výška
+    "120°",                 // 6 - azimut
+    "",                     // 7
+    "5 dní"                 // 8 - stáří
+];
+
+// Měsíc
+document.getElementById("mesic_azimut").innerText = vychod[6];
+document.getElementById("mesic_vyska").innerText = vychod[5];
+document.getElementById("mesic_vychod").innerText = vychod[3].split(" ")[1];
+document.getElementById("mesic_zapad").innerText = vychod[4].split(" ")[1];
+
+// Slunce (jen testovací hodnoty)
+document.getElementById("slunce_azimut").innerText = "210°";
+document.getElementById("slunce_vyska").innerText = "25°";
+document.getElementById("slunce_vychod").innerText = "06:45";
+document.getElementById("slunce_zapad").innerText = "17:58";
+
+</script>
+    <script>
+
+// načtení vychod.csv
+fetch("data/vychod.csv")
+.then(response => response.text())
+.then(text => {
+
+    const lines = text.trim().split("\n");
+    const last = lines[lines.length - 1];
+    const vychod = last.split(",");
+
+    // Měsíc
+    document.getElementById("mesic_azimut").innerText = vychod[6];
+    document.getElementById("mesic_vyska").innerText = vychod[5];
+    document.getElementById("mesic_vychod").innerText = vychod[3].split(" ")[1];
+    document.getElementById("mesic_zapad").innerText = vychod[4].split(" ")[1];
+
+    // Slunce (z vychod.csv)
+    document.getElementById("slunce_vyska").innerText = vychod[7];
+    document.getElementById("slunce_vychod").innerText = vychod[1].split(" ")[1];
+    document.getElementById("slunce_zapad").innerText = vychod[2].split(" ")[1];
+
+});
+
+// načtení azimut.csv
+fetch("data/azimut.csv")
+.then(response => response.text())
+.then(text => {
+
+    const lines = text.trim().split("\n");
+    const last = lines[lines.length - 1];
+    const azimut = last.split(",");
+
+    // Slunce azimut
+    document.getElementById("slunce_azimut").innerText = azimut[1];
+
+});
+
+</script>
+  </body>
+</html>

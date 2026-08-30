@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>instalace_moje_pozn</title>
+  </head>
+  <body>
+    instalace meteostanice 2<br>
+    <br>
+    <pre class="overflow-visible! px-0!" data-start="339" data-end="398" style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><div class="w-full"><div class=""><div class=""><div class="border-token-border-light bg-token-bg-elevated-secondary corner-superellipse/1.1 rounded-3xl border my-4"><div class="relative z-0 flex max-w-full"><div id="e0317915-b1eb-4f5c-acee-8660fcf1ee2d:0:editor" class="Rx43rG_codemirror z-10 flex h-full w-full flex-col items-stretch"><div class="cm-editor ͼ1 ͼ2 ͼd ͼy"><div tabindex="-1" class="cm-scroller"><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" class="cm-content" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Upravit kód" aria-placeholder="" data-language="shell" contenteditable="false"><div class="cm-line">sudo apt update</div><div class="cm-line">sudo apt upgrade -y</div><div class="cm-line">sudo reboot<br><br>sudo apt install -y \<br>  python3 \<br>  python3-venv \<br>  python3-pip \<br>  git \<br>  i2c-tools<br><br><font size="+1" face="Helvetica, Arial, sans-serif">Zapnutí I2C:</font></div></div></div></div></div></div></div></div></div></div></pre>
+    <pre class="overflow-visible! px-0!" data-start="416" data-end="445" style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><div class="w-full"><div class=""><div class=""><div class="border-token-border-light bg-token-bg-elevated-secondary corner-superellipse/1.1 rounded-3xl border my-4"><div class="relative z-0 flex max-w-full"><div id="e0317915-b1eb-4f5c-acee-8660fcf1ee2d:1:editor" class="Rx43rG_codemirror z-10 flex h-full w-full flex-col items-stretch"><div class="cm-editor ͼ1 ͼ2 ͼd ͼy"><div tabindex="-1" class="cm-scroller"><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" class="cm-content" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Upravit kód" data-language="shell" aria-placeholder="" contenteditable="false"><div class="cm-line">sudo raspi-config</div></div></div></div></div></div></div></div></div></div></pre>
+    <ul data-start="446" data-end="493" style="caret-color: rgb(0, 0,
+      0); color: rgb(0, 0, 0); font-style: normal; font-variant-caps:
+      normal; font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: start; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none;">
+      <li data-start="446" data-end="484">
+        <p data-start="448" data-end="484">Interface Options →&nbsp;I2C
+          → Enable</p>
+      </li>
+      <li data-start="485" data-end="493">
+        <p data-start="487" data-end="493">reboot</p>
+      </li>
+    </ul>
+    <p data-start="495" data-end="503" style="caret-color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0); font-style: normal; font-variant-caps:
+      normal; font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: start; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none;">Ověření:</p>
+    <pre class="overflow-visible! px-0!" data-start="504" data-end="528" style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><div class="w-full"><div class=""><div class=""><div class="border-token-border-light bg-token-bg-elevated-secondary corner-superellipse/1.1 rounded-3xl border my-4"><div class="relative z-0 flex max-w-full"><div id="e0317915-b1eb-4f5c-acee-8660fcf1ee2d:2:editor" class="Rx43rG_codemirror z-10 flex h-full w-full flex-col items-stretch"><div class="cm-editor ͼ1 ͼ2 ͼd ͼy"><div tabindex="-1" class="cm-scroller"><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" class="cm-content" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Upravit kód" aria-placeholder="" data-language="shell" contenteditable="false"><div class="cm-line">ls /dev/i2c*</div></div></div></div></div></div></div></div></div></div></pre>
+    <p data-start="529" data-end="553" style="caret-color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0); font-style: normal; font-variant-caps:
+      normal; font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: start; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none;">mělo by
+      být&nbsp;/dev/i2c-</p>
+    font-variant-caps: normal; font-weight: 400; letter-spacing: normal;
+    orphans: auto; text-align: start; text-indent: 0px; text-transform:
+    none; white-space: normal; widows: auto; word-spacing: 0px;
+    -webkit-text-stroke-width: 0px; text-decoration: none;"&gt;Ověření
+    I2C čidel
+    <p data-start="586" data-end="601" style="caret-color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0); font-style: normal; font-variant-caps:
+      normal; font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: start; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none;">Připoj
+      čidla a:</p>
+    <pre class="overflow-visible! px-0!" data-start="602" data-end="658" style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><div class="w-full"><div class=""><div class=""><div class="border-token-border-light bg-token-bg-elevated-secondary corner-superellipse/1.1 rounded-3xl border my-4"><div class="relative z-0 flex max-w-full"><div id="e0317915-b1eb-4f5c-acee-8660fcf1ee2d:3:editor" class="Rx43rG_codemirror z-10 flex h-full w-full flex-col items-stretch"><div class="cm-editor ͼ1 ͼ2 ͼd ͼy"><div tabindex="-1" class="cm-scroller"><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" class="cm-content" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Upravit kód" aria-placeholder="" data-language="shell" contenteditable="false"><div class="cm-line">sudo apt install -y i2c-tools</div><div class="cm-line">i2cdetect -y 1<br><b>uvidíš:</b><br> i2cdetect -y 1<br>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f<br>00:                         -- -- -- -- -- -- -- -- <br>10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>30: -- -- -- -- -- -- -- -- 38 -- -- -- -- -- -- -- <br>40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>70: -- -- -- -- -- -- -- 77  <br><br><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;Courier New&quot;, Courier, monospace; font-size: small; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; display: inline !important; float: none;">sudo apt-get install mc<br><br>sudo apt install -y \<br>&nbsp; python3 \<br>&nbsp; python3-venv \<br>&nbsp; python3-pip \<br>&nbsp; git \<br>&nbsp; i2c-tools<br><br>scp honza@METEO1_IP:/home/honza/meteostanice.py ~/ # kopírování z druhého RPI<br><br><br><br></span>&nbsp;<br><br></div></div></div></div></div></div></div></div></div></div></pre>
+    <meta charset="UTF-8">
+  </body>
+</html>

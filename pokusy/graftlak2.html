@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Meteostanice – aktuální stav</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { font-family: sans-serif; margin: 20px; }
+#values { font-size: 1.1em; margin-bottom: 20px; }
+</style>
+</head>
+
+<body>
+
+<h1>Meteostanice (192.168.1.116)</h1>
+
+<div id="values">Načítám…</div>
+
+<canvas id="pressureChart" height="120"></canvas>
+
+<script>
+const CSV_URL = "data.csv";
+const DAYS_BACK = 3; // kolik dní zpět zobrazit
+
+// barevné hranice tlaku
+const pressureColors = {
+  low: 980,
+  high: 1020
+};
+
+fetch(CSV_URL)
+  .then(r => r.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    const header = lines.shift().split(",");
+
+    const idx = {
+      time: header.indexOf("cas"),
+      tempAHT: header.indexOf("teplota_aht"),
+      hum: header.indexOf("vlhkost_aht"),
+      tempBMP: header.indexOf("teplota_bmp"),
+      pressure: header.indexOf("tlak")
+    };
+
+    const now = Date.now();
+    const limit = now - DAYS_BACK * 24 * 3600 * 1000;
+
+    let labels = [];
+    let pressures = [];
+
+    lines.forEach(line => {
+      const c = line.split(",");
+      const t = new Date(c[idx.time].replace(" ", "T")).getTime();
+      if (t >= limit) {
+        labels.push(new Date(t).toLocaleString("cs-CZ"));
+        pressures.push(parseFloat(c[idx.pressure]));
+      }
+    });
+
+    const last = lines[lines.length - 1].split(",");
+    const lastPressure = parseFloat(last[idx.pressure]);
+
+    document.getElementById("values").innerHTML = `
+      <b>Čas:</b> ${last[idx.time]}<br>
+      <b>Teplota AHT20:</b> ${last[idx.tempAHT]} °C<br>
+      <b>Teplota BMP180:</b> ${last[idx.tempBMP]} °C<br>
+      <b>Vlhkost:</b> ${last[idx.hum]} %<br>
+      <b>Tlak:</b> ${lastPressure.toFixed(1)} hPa
+    `;
+
+    new Chart(document.getElementById("pressureChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Tlak (hPa)",
+          data: pressures,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2,
+          segment: {
+            borderColor: ctx => {
+              const p = ctx.p1.parsed.y;
+              if (p < pressureColors.low) return 'red';
+              if (p > pressureColors.high) return 'blue';
+              return 'green';
+            }
+          }
+        }]
+      },
+      options: {
+        scales: {
+          x: { display: false },
+          y: { ticks: { callback: v => v + " hPa" } }
+        },
+        plugins: {
+          legend: { display: true }
+        }
+      }
+    });
+  })
+  .catch(err => {
+    document.getElementById("values").innerText = "Chyba: " + err;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Meteostanice – grafy</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+   <div class="nav">
+     <a href="/index.html" title="Domů" class="home">
+       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+         <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+       </svg>
+     </a>
+   	<a href="/meteo/dashboard.html">Dashboard</a>
+       <a href="/meteo/grafy.html">Grafy</a>
+       <a href="/meteo/cidla.html">Čidla</a>
+       <a href="/meteo/sun.html">Slunce</a>
+	
+   </div>
+
+<style>
+/* canvas jen lokální úprava */
+canvas {
+    width: 100%;
+    height: 260px;
+    display: block;
+}
+
+/* current panel */
+.current {
+    font-size: 14px;
+}
+
+/* nadpis */
+h1 {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    font-size: 22px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR (sjednocený systém) -->
+<body>
+<div class="nav">
+  
+</div>
+</body>
+
+<div class="page">
+
+<h1>METEOSTANICE – GRAFY</h1>
+
+<!-- CURRENT DATA -->
+<div class="card current" id="current">Načítám...</div>
+
+<!-- GRAF 1 -->
+<div class="card">
+    <h3>Teplota</h3>
+    <canvas id="temp"></canvas>
+</div>
+
+<!-- GRAF 2 -->
+<div class="card">
+    <h3>Vlhkost</h3>
+    <canvas id="hum"></canvas>
+</div>
+
+<!-- GRAF 3 -->
+<div class="card">
+    <h3>Tlak</h3>
+    <canvas id="press"></canvas>
+</div>
+
+<!-- 48H EXTRA -->
+<div class="card">
+    <h3>48h vývoj (extra senzor)</h3>
+    <canvas id="graph48h"></canvas>
+</div>
+
+</div>
+
+<div class="footer">
+    meteostanice • grafy • auto refresh 300s
+</div>
+
+<script>
+
+// ==========================
+// CURRENT JSON
+// ==========================
+fetch("../data/current.json?t=" + Date.now())
+.then(r => r.json())
+.then(d => {
+    document.getElementById("current").innerHTML =
+`TIME:  ${d.time}
+TEMP:  ${d.temperature} °C
+HUM :  ${d.humidity} %
+PRESS: ${d.pressure} hPa
+SEA  : ${d.pressure_sl} hPa`;
+});
+
+// ==========================
+// CSV PARSER
+// ==========================
+function parseCSV(text){
+    return text.trim().split("\n").slice(1).map(r=>{
+        const c = r.split(",");
+        return {
+            time: new Date(c[0].replace(" ", "T")),
+            temp: parseFloat(c[1]),
+            hum: parseFloat(c[2]),
+            press: parseFloat(c[4])
+        };
+    });
+}
+
+// ==========================
+// MAIN DATA
+// ==========================
+fetch("../data/data.csv?t=" + Date.now())
+.then(r => r.text())
+.then(text => {
+
+    const data = parseCSV(text);
+
+    const limit = new Date(Date.now() - 48 * 60 * 60 * 1000);
+    const filtered = data.filter(d => d.time > limit);
+
+    drawChart("temp", filtered.map(d => ({time:d.time, value:d.temp})), "°C");
+    drawChart("hum", filtered.map(d => ({time:d.time, value:d.hum})), "%");
+    drawChart("press", filtered.map(d => ({time:d.time, value:d.press})), "hPa");
+});
+
+// ==========================
+// EXTRA 48H DATA
+// ==========================
+fetch("../data/data4.csv?t=" + Date.now())
+.then(r => r.text())
+.then(text => {
+
+    const lines = text.trim().split("\n");
+    const start = lines[0].includes("time") ? 1 : 0;
+
+    const raw = lines.slice(start).map(line => {
+        const c = line.split(",");
+        return {
+            time: new Date(c[0].replace(" ", "T")),
+            value: parseFloat(c[1])
+        };
+    }).filter(d => !isNaN(d.time) && !isNaN(d.value));
+
+    const limit = new Date(Date.now() - 48 * 60 * 60 * 1000);
+    const data = raw.filter(d => d.time > limit);
+
+    drawChart("graph48h", data, "°C");
+});
+
+// ==========================
+// GRAPH ENGINE (beze změny logiky)
+// ==========================
+function drawChart(canvasId, data, unit){
+
+    const c = document.getElementById(canvasId);
+    const ctx = c.getContext("2d");
+
+    c.width = c.clientWidth;
+    c.height = c.clientHeight;
+
+    ctx.clearRect(0, 0, c.width, c.height);
+
+    if(!data || data.length < 2){
+        ctx.fillStyle = "#00ff66";
+        ctx.fillText("Žádná data", 50, 50);
+        return;
+    }
+
+    const w = c.width;
+    const h = c.height;
+    const p = 50;
+
+    const values = data.map(d => d.value);
+
+    const minV = Math.min(...values);
+    const maxV = Math.max(...values);
+
+    const minT = data[0].time.getTime();
+    const maxT = data[data.length - 1].time.getTime();
+
+    const rangeV = maxV - minV || 1;
+    const rangeT = maxT - minT || 1;
+
+    // rám
+    ctx.strokeStyle = "#00ff66";
+    ctx.strokeRect(p, p, w - 2*p, h - 2*p);
+
+    // grid + Y
+    ctx.font = "10px monospace";
+    ctx.fillStyle = "#00ff66";
+    ctx.strokeStyle = "#12301a";
+
+    const steps = 5;
+
+    for(let i = 0; i <= steps; i++){
+
+        const v = minV + (rangeV / steps) * i;
+        const y = h - p - (i / steps) * (h - 2*p);
+
+        ctx.beginPath();
+        ctx.moveTo(p, y);
+        ctx.lineTo(w - p, y);
+        ctx.stroke();
+
+        ctx.fillText(v.toFixed(1) + unit, 5, y + 3);
+    }
+
+    // X osa
+    const xSteps = 6;
+
+    for(let i = 0; i <= xSteps; i++){
+
+        const x = p + (i / xSteps) * (w - 2*p);
+        const t = minT + (i / xSteps) * rangeT;
+
+        const d = new Date(t);
+
+        const label =
+            d.getHours().toString().padStart(2,'0') + ":" +
+            d.getMinutes().toString().padStart(2,'0');
+
+        ctx.fillText(label, x - 15, h - 5);
+    }
+
+    // křivka
+    ctx.strokeStyle = "#00ff66";
+    ctx.beginPath();
+
+    data.forEach((d, i) => {
+
+        const x = p + (d.time.getTime() - minT) / rangeT * (w - 2*p);
+        const y = h - p - (d.value - minV) / rangeV * (h - 2*p);
+
+        if(i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+
+    ctx.stroke();
+
+    // aktuální hodnota
+    const lastValue = data[data.length - 1].value;
+
+    ctx.fillStyle = "#00ff66";
+    ctx.font = "10px monospace";
+    ctx.textAlign = "right";
+    ctx.fillText("aktuální: " + lastValue.toFixed(1) + unit, w - p, 25);
+}
+
+// auto refresh
+setTimeout(() => location.reload(), 300000);
+
+</script>
+       <script src="../js/menu.js"></script>
+   	<footer>
+   	© 2026 deník
+   	</footer>
+	
+     </body>
+   </html>

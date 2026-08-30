@@ -1,0 +1,259 @@
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>hifi</title>
+	<style>
+    body {
+        font-family: "Courier New", monospace;
+        background: #000;
+        color: #00ff66;
+        text-align: left;
+        margin-top: 30px;
+        text-shadow: 0 0 5px #00ff66;
+    }
+
+    .box {
+        background: #001100;
+        border: 1px solid #00ff66;
+        padding: 18px;
+        margin: 15px auto;
+        display: inline-block;
+        border-radius: 6px;
+        min-width: 320px;
+        box-shadow: 0 0 10px #00ff66;
+    }
+
+    h1, h2, h3 {
+        color: #00ff66;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    button {
+        padding: 10px 14px;
+        margin: 5px;
+        font-size: 14px;
+        font-family: inherit;
+        border: 1px solid #00ff66;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #001100;
+        color: #00ff66;
+        box-shadow: 0 0 5px #00ff66;
+    }
+
+    button:hover {
+        background: #003300;
+        box-shadow: 0 0 15px #00ff66;
+    }
+
+    .amp button {
+        border-color: #00ff66;
+        color: #00ff66;
+    }
+
+    .amp button:hover {
+        background: #003300;
+    }
+
+    input[type=range] {
+        width: 250px;
+        accent-color: #00ff66;
+    }
+
+    a {
+        color: #00ff66;
+    }
+
+    /* blikající kurzor */
+    .cursor::after {
+        content: "_";
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+	input[type="range"] {
+	    width: 250px;
+	    height: 6px;
+	    background: transparent;
+	    -webkit-appearance: none;
+	    appearance: none;
+	}
+
+	/* dráha */
+	input[type="range"]::-webkit-slider-runnable-track {
+	    height: 6px;
+	    background: #003300;
+	    border: 1px solid #00ff66;
+	    border-radius: 3px;
+	    box-shadow: 0 0 5px #00ff66;
+	}
+
+	/* jezdec */
+	input[type="range"]::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    width: 14px;
+	    height: 14px;
+	    border-radius: 50%;
+	    background: #00ff66;
+	    border: 1px solid #00ff66;
+	    box-shadow: 0 0 10px #00ff66;
+	    margin-top: -5px;
+	    cursor: pointer;
+	}
+
+	/* Firefox */
+	input[type="range"]::-moz-range-track {
+	    height: 6px;
+	    background: #003300;
+	    border: 1px solid #00ff66;
+	}
+
+	input[type="range"]::-moz-range-thumb {
+	    width: 14px;
+	    height: 14px;
+	    border-radius: 50%;
+	    background: #00ff66;
+	    border: 1px solid #00ff66;
+	    box-shadow: 0 0 10px #00ff66;
+	}
+</style>
+	
+  </head>
+  <body>
+      <div id="menu"></div>
+     
+	   <!-- VOLUMIO 3 -->
+	  	  <div class="box">
+	  piano
+
+	  	      
+              <button onclick="v3('prev')"><<</button>
+              <button onclick="v3('play')">▶</button>
+	  	      <button onclick="v3('pause')">||</button>
+	  	      <button onclick="v3('next')">>></button>
+
+	  	  </div>
+
+		  <br>
+
+	  <!-- VOLUMIO 1 -->
+	  <div class="box">
+	    <a href="http://pioneer.local/browse">Pioneer</a>
+	
+	      <button onclick="v1('prev')">⏮</button>  
+		  <button onclick="v1('play')">▶</button>
+	      <button onclick="v1('pause')">❚❚</button>
+	      <button onclick="v1('next')">⏭</button>
+	      
+
+	  </div>
+	  
+ 	  <!-- AMPLIFIER -->
+ 	  <div class="box amp">
+ 	      ax 496
+
+ 	      <button onclick="amp('0x7A1F')">⏻</button>
+ 	      <button onclick="amp('0x7A1B')"> - </button>
+ 		  <button onclick="amp('0x7A1A')"> + </button>
+           <button onclick="amp('0x7A19')">MD tv</button>
+ 	      <button onclick="amp('0x7A15')">CD</button>
+ 	      <button onclick="amp('0x7A17')">AUX pioneer</button><br>
+	      
+ 	  </div>
+<br>
+	  <!-- VOLUMIO 2 -->
+	  <div class="box">
+Out
+
+          <button onclick="v2('next')">>></button>
+	      <button onclick="v2('play')">▶</button>
+	      <button onclick="v2('pause')">||</button>
+	      <button onclick="v2('prev')"><<</button>
+	      
+	      <input type="range" min="0" max="100" value="50"
+	             oninput="vol2(this.value)">
+	  </div>
+	  <br>
+	  	 
+	 
+
+	  <script>
+
+	  // Volumio IPs
+	  const V1 = "http://192.168.1.139:3000/api/v1/commands/?cmd=";
+	  const V2 = "http://192.168.1.105:3000/api/v1/commands/?cmd=";
+      const V3 = "http://192.168.1.138:3000/api/v1/commands/?cmd=";
+	  // IR server
+	  const AMP = "http://192.168.1.151:5000/send?code=";
+
+	  function v1(cmd) {
+	      fetch(V1 + cmd).catch(console.error);
+	  }
+
+	  function v2(cmd) {
+	      fetch(V2 + cmd).catch(console.error);
+	  }
+	  function v3(cmd) {
+	      fetch(V3 + cmd).catch(console.error);
+	  }
+
+	  function vol1(v) {
+	      fetch(V1 + "volume&volume=" + v).catch(console.error);
+	  }
+
+	  function vol2(v) {
+	      fetch(V2 + "volume&volume=" + v).catch(console.error);
+	  }
+	  function vol3(v) {
+	      fetch(V3 + "volume&volume=" + v).catch(console.error);
+	  }
+	  function amp(code) {
+	      fetch(AMP + code).catch(console.error);
+	  }
+
+	  </script>
+<br>
+<a href="https://www.manualslib.com/manual/767482/Yamaha-Ax-496.html?page=41">Pioneer manuál</a>   
+
+      <a href="http://192.168.1.151:5000/send?code=0x7A1F">⏻</a>
+	  
+
+	  <script>
+	  function sendCode() {
+	      const btn = document.getElementById("standbyBtn");
+
+	      btn.disabled = true;
+	      btn.innerText = "⏳ Odesílám...";
+
+	      fetch("http://192.168.1.151:5000/send?code=0x7A1F")
+	          .then(() => btn.innerText = "✔ Hotovo")
+	          .catch(() => btn.innerText = "✖ Chyba")
+	          .finally(() => {
+	              setTimeout(() => {
+	                  btn.disabled = false;
+	                  btn.innerText = "Standby";
+	              }, 1200);
+	          });
+	  }
+	  </script>
+
+	 ovladač YAMAHA RAX9, 
+	E 320 pianocraft
+	 <br>
+	curl -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=play"
+     <br>
+	curl -v -X POST "http://192.168.1.132:3000/api/v1/commands/?cmd=pause" # když chceš vidět odpověď
+    <br>
+	<script src="../js/menu.js"></script>
+<footer>
+	© 2026
+</footer>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>m3</title>
+    <style>
+body {
+    font-family: monospace;
+    background-color: #111;
+    color: #eee;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+pre {
+    margin: 4px 0;
+}
+</style>
+  </head>
+  <body>
+    <p>meteo3</p>
+    <pre id="time">Načítám čas…</pre>
+    <pre id="out1">Načítám CSV #1…</pre>
+    <script>
+function pad(n) {
+    return n.toString().padStart(2, "0");
+}
+
+// YYYY-MM-DD HH:MM:SS
+function formatTime(d) {
+    return d.getFullYear() + "-" +
+           pad(d.getMonth() + 1) + "-" +
+           pad(d.getDate()) + " " +
+           pad(d.getHours()) + ":" +
+           pad(d.getMinutes()) + ":" +
+           pad(d.getSeconds());
+}
+
+// aktualizace času každou sekundu
+function updateTime() {
+    document.getElementById("time").innerText =
+        formatTime(new Date());
+}
+
+// načtení posledního řádku CSV (bez cache)
+function loadLastLine(file, elementId) {
+    const url = file + "?t=" + Date.now();
+
+    fetch(url, { cache: "no-store" })
+    .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+    })
+    .then(text => {
+        const lines = text.trim().split("\n");
+        document.getElementById(elementId).innerText =
+            lines[lines.length - 1];
+    })
+    .catch(err => {
+        document.getElementById(elementId).innerText =
+            "Chyba: " + err;
+    });
+}
+
+// jeden „tick“ dashboardu
+function tick() {
+    updateTime();
+    loadLastLine("data3.csv",  "out1");
+}
+
+// první okamžité spuštění
+tick();
+
+// pak každou sekundu
+setInterval(tick, 1000);
+</script>
+  </body>
+</html>

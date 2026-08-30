@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>vzorová stránka</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+    <h1>synchronizace, stav</h1>
+    <div id="git-status">Načítám...</div>
+	
+	<hr class="cara">
+otestování timeru a update.sh:<br>
+systemctl list-timers --all | grep update # historie a plán<br>
+systemctl status update.timer # Zobrazí, zda je timer aktivní (active) nebo neaktivní (inactive),Vypíše i poslední a příští spuštění<br>
+journalctl -u update.service -n 20 # uvidíš, zda update.sh proběhl OK nebo byl problém <br><br>
+lsblk # velikost sd karty<br><br>
+sudo systemctl daemon-reload # aktivace systemových služeb<br>
+sudo systemctl enable --now dynamic.timer # "<br>
+systemctl list-timers # kontrola
+	<script>
+	// Funkce pro načtení a zobrazení statusu z update_status.json
+	function updateGitSyncStatus() {
+	  fetch("../data/update_status.json")
+	    .then(r => r.json())
+	    .then(data => {
+	      const el = document.getElementById("git-status");
+
+	      // Barva podle stavu
+	      let color = "gray";       // default – čekání
+	      if (data.status === "OK") color = "green";
+	      if (data.status === "ERROR") color = "red";
+
+	      // Zobrazíme status a čas
+	      el.innerHTML = `
+	        Git sync: <b style="color:${color}">${data.status}</b>
+	        ${data.time}
+	      `;
+	    })
+	    .catch(() => {
+	      document.getElementById("git-status").innerHTML =
+	        "<span style='color:red'>Chyba načítání stavu</span>";
+	    });
+	}
+
+	// Zavolat hned při načtení stránky
+	updateGitSyncStatus();
+
+	// Automatický refresh každou minutu
+	setInterval(updateGitSyncStatus, 60000);
+	</script>
+	
+    <script src="../js/menu.js"></script>
+	<footer>
+	© 2026 – status update pomocí update_status.json
+	</footer>
+	
+  </body>
+</html>

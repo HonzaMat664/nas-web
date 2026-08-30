@@ -1,0 +1,6 @@
+A:link {color:blue;}
+A:visited {color:blue;}
+.str {font-size:18px;font-family:Times;text-decoration:none;white-space: nowrap;color:#FFFFFF;}
+A.nav {font-size:24px;font-family:Times;text-decoration:none;white-space: nowrap;color:#FFFFFF;}
+A.nav:hover {color:#FF0000;}
+.deact {font-size:24px;font-family:Times;text-decoration:none;white-space: nowrap;color:#000000;}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>denik</title>
+	<link rel="stylesheet" href="/css/style.css?">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+    <h1>denik</h1>
+   
+   
+   
+   
+  
+   <pre>
+	  
+	   <img src="../img/end.gif" alt="end" width="50">
+	   
+   <span class="search">JST</span>- Japan Solderless Terminal # konektor
+   
+   <span class="search">MC</span>
+   mc --nosubshell # když se není možno připojit pomocí SFTP
+   INSERT = Ctrl T v mc označení souboru
+   * F9 (PullDn): Aktivuje horní menu (odtud se dostaneš do nastavení).
+   * Alt + . (tečka): Zobrazit/skrýt skryté soubory (začínající tečkou).
+   * Alt + Enter: Vloží název souboru pod kurzorem do příkazového řádku dole.
+   * Alt + i: Změní druhý panel na stejnou složku, ve které jsi teď.
+   * Ctrl + s: Rychlé vyhledávání (začni psát název souboru a kurzor na něj skočí).
+   * Ctrl + o: Schová panely a ukáže čistý terminál (pro spuštění příkazu), dalším stisknutím panely vrátí.
+
+   <span class="search">práce se scanem, obrázkem # scan</span>
+   pozmámky:
+   naskenované dokumenty
+   exportovat jako pdf
+   rychlý náhled přílohy
+   otevřít v aplikaci Náhled
+   uložit jako jpg
+   XN View:
+   Obrázek > mapa > negativ
+                   > přizpůsobit > zvýraznit barvy
+   Paint S:
+   pipeta 1. ikona
+   
+   MacOS:
+   ⌘ + Shift + 4 pro výběr oblasti obrazovky, snímek obrazovky
+   
+   <span class="search">hledání souborů podle názvu souboru:</span>
+   Ve Finderu to nejrychleji uděláte takto: 
+   1. Začněte psát hledané slovo do vyhledávacího pole vpravo nahoře.
+   2. Pod polem se objeví nabídka s textem: „Název souboru obsahuje: [vaše slovo]“.
+   3. Klikněte na tuto nabídku (nebo ji vyberte šipkou a potvrďte Enterem). 
+   Tím Finderu řeknete, aby ignoroval obsah dokumentů a díval se pouze na jejich jména.
+   
+    <span class="search"> nastavení práv pro snapshot v /etc/fstab</span>
+   //192.168.1.149/web /mnt/nas cifs username=honza,password=pavel,vers=2.0,uid=1000,gid=1000,file_mode=0775,dir_mode=0775,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60 0 0
+   
+   <span class="search">service timer</span>	
+   •	start = jednorázově spustit
+   sudo systemctl start muj.service
+   	•	enable = spustit po restartu
+   sudo systemctl enable muj.service
+   sudo systemctl disable muj.service
+   	•	timer = plánování
+   sudo systemctl daemon-reload
+   sudo systemctl enable muj.timer
+   sudo systemctl start muj.timer
+   
+   systemctl list-units --type=service --state=running, Co běží
+   systemctl list-unit-files --type=service --state=enabled,Co startuje po rebootu
+   systemctl list-timers, Co se spouští plánovaně
+   
+   <span class="search">html do repository</span>
+   find /home/honza/nas-web \( -name "._*" -o -name ".DS_Store" \) -type f -delete # vyčistění adresářů od balastu
+   git status
+   git add . -- '*.html'
+   git commit -m "cisteni del"
+   git push origin main
+   
+   <span class="search">watchdog monitoring bootu </span>
+   
+   journalctl --list-boots
+	•	jak dlouho běžel systém
+   	•	kdy se restartoval
+   	•	jestli jsou podezřelé časy
+	
+	 uptime -s  # výpis přesného startu systemu
+	
+    <span class="search">Sluneční observatoř v Gosecku </span>
+	
+	
+	
+	<div class="grid">
+	  <div>Levý</div>
+	  <div>Pravý</div>
+	</div>
+   
+   Azimuty:
+
+   Černá hora		83,6		9°
+   Dušan			0,154		43°
+   Pardubice		21,36		46°
+   Vysílač			1,242		68°
+   VEl. Kámen		18,82		192°
+   Golčův Jeníkov	10,1		213°
+   Zbraslavice		28,4		250°
+   Štrampouch		14,3		259°
+   Žleby.           5.5			265°
+   Malešov          24,1		276°
+   Čáslav.          12			279°
+   sv.Barbora.      22,02		285°
+   Přistávací dráha 14,4		292°
+   Kaňk.            21,6		294°
+   Kolín.           28,7		300°
+   Říp              106			307°
+   Žehušice.        14			308°
+   Buková hora		128			313°
+   Starkoč koste	6,3			324°
+   Chvaletice		16,7		335°
+
+   dům				-		337°
+   dům				-		157°
+   dům				-		247°
+   dům				-		67° 64
+
+2.5.2026 6:50 78° 10° východ slunce
+cesnet radio https://radio.cesnet.cz   
+https://amp.cesnet.cz:8443/cro3.flac
+
+poloha Žlebské Chvalovice 80 stellarium F6 žch
+15°33'33.263"E,49°53'31.958"N
+obs.lat = '49.892211'
+obs.lon = '15.559240'
+
+studna 18.5.2026 hladina od skruže 3,5m
+
+ps aux # process status
+top # Top processes, procesy na vrcholu využití CPU
+htop # Hisham + top
+ncdu -e # NCurses Disk Usage
+
+M	řazení podle času změny (mtime)
+q	konec programu
+?	kompletní nápověda přímo v ncdu
+
+7.6.2026 oprava Martin radio = vadné diody, při zátěži na výstupu zdroje pouze 1,5V
+	<a href="https://www.facebook.com/profile.php?id=61559997277445&comment_id=Y29tbWVudDoxNDU0NjE4Njg2NDYyOTIxXzk4NzU4MDQ2Mzc1MTQ3MA%3D%3D" title="facebook" class="facebook">Eva Malivánková</a>
+
+<a href="https://www.nationalgeographic.cz/veda/pred-50-lety-jsme-mimozemstanum-poslali-zpravu/" title="vesmír" class="vesmír">Arecibo Message</a> Arecibo (305m) Portoriko 3 Body Problem, inteligentní plán (design),
+
+Mariborská hypnoza Kopališče Mariborski otok, Drava
+
+Tara, Drina, Sava, Dunaj
+
+kenda 26x1.95
+<a href="cyclocomputer.pdf" title="cyklo" class="class cyklo">cyclocomputer</a>
+
+
+       <script src="../js/menu.js"></script>
+   	<footer>
+   	© 2026 deník
+   	</footer>
+	
+     </body>
+   </html>
+   
+   
+   

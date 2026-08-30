@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>linux</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- místo pro menu -->
+    <div id="menu"></div>
+    <h1>linux</h1>
+    <p>
+	   
+	   <a href="flash_zero.html">flash</a> 
+       <a href="disky_soubory.html">disky</a>
+	   <a href="web_lighttpd.html">web</a> 
+	   <a href="samba.html">samba</a>
+	   <a href="../hifi/stavba.html">stavba-remote</a>
+	   <a href="../hifi/stavba_nano.html">stavba-meteo</a>
+	   <a href="../hifi/volumio.html">stavba-volumio</a>
+	   <a href="/pokusy/status.html">⚠️status</a>
+	   <a href="https://jiljiklen.eu/data/data.csv">data.csv</a>
+	   <a href="/pokusy/azkouska.html">zkouška</a> 
+	   <a href="calcurse.html">calcurse</a> 
+	   <a href="github.html">GitHub a Snapshot</a>
+	   <a href="../readme/pozn.md">readme</a><br><br>
+	   <a href="QuickConnect.html">QuickConnect</a><br>
+	   <a href="barvy.html">BARVY</a><br>
+	   
+	   <hr class="cara">
+	   „heartbeat“ / monitoring dostupnosti 👍
+	   Na webu si zobrazíš, jestli počítač odpovídá (ping / HTTP / jiný test).
+	    <hr class="cara">
+		<pre>
+			test, kde jsem, rozbliká se led
+			nano bli
+			
+			#!/bin/bash
+
+			LED=/sys/class/leds/ACT
+
+			echo none | sudo tee $LED/trigger >/dev/null
+
+			for i in {1..10}; do
+			    echo 1 | sudo tee $LED/brightness >/dev/null
+			    sleep 0.2
+			    echo 0 | sudo tee $LED/brightness >/dev/null
+			    sleep 0.2
+			done
+
+			echo mmc0 | sudo tee $LED/trigger >/dev/null
+			echo "Jsem na: $(hostname)"
+			
+			bash bli
+			
+			
+      stavba flash zero disky a soubory samba web server poznámky
+      hledání chyby teplota automatické spuštění jako služba poe<br>
+      antene192.168.1.144 n: pi, p: pavel http://192.168.1.144 ssh
+      pi@192.168.1.136 <br>
+	  meteo ssh honza@192.168.1.101 SYNOLOGY ssh
+      synology@192.168.1.149 192.168.1.149 PIANO(nahoře) 192.168.1.154
+      ssh volumio@192.168.1.154 http://piano.local/dev/ #
+      nastavení/setup volumio remote1 zatím není ssh honza192.168.1.1xx
+      http://192.168.1.1xx PIONEER(dole) 192.168.1.152 ssh
+      volumio@192.168.1.152 remote2 192.168.1.151 ssh
+      honza@192.168.1.151 Cmd + K smb://192.168.1.151/sdilena, jako host
+      meteo2 ssh honza@192.168.1.106 testunor ssh honza@192.168.1.116
+      sklep testzero192.168.1.153 označen jako remote1 teplota
+      vnc://192.168.1.129 <br>
+	  finder: Cmd + K připojení ke vzdálenému macu ssh jan matuška@192.168.1.129<br>
+      <br>
+	  156 testunor.  116 <br>
+	  157 meteo.  101 <br>
+	  158 meteo2 106 <br>
+	  <i>159 meteostanice<i><br> 
+	  160 <br> 
+	  161 meteo4 bojler<br>
+	  162 meteo3 I2C<br> 
+	  <img src="../img/linux/ippozn.jpg" alt="ip" width="500"><br>
+	   
+	  <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/rpizero_remote2.html">stavba</a>&nbsp;&nbsp;&nbsp;
+
+
+        <a href="file:///Volumes/nas-web/linux/flash_zero.html">flash
+          zero&nbsp;</a>&nbsp; <a
+          href="file:///Volumes/nas-web/linux/disky_soubory.html">disky
+          a soubory</a>&nbsp;<a
+          href="file:///Volumes/html/knihy&amp;hudba/knyhy&amp;hudba.html">
+        </a></font> <font face="Times New Roman, Times, serif"> </font>
+    </p>
+    <div align="left"><font face="Times New Roman, Times, serif"><br>
+        <a href="file:///Volumes/nas-web/linux/linux/samba.html">samba</a>&nbsp;&nbsp;&nbsp;
+        <br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/web_lighttpd.html">web
+          server</a>&nbsp; <br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/linux_pozn.html">poznámky</a><br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/hledani_chyby.html">hledání
+          chyby</a><br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/Teplota.html">teplota</a><br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/automaticke_spusteni.html">automatické
+          spuštění jako služba</a><br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="file:///Volumes/nas-web/linux/linux/poe.html">poe</a><br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+      </font> <font face="Times New Roman, Times, serif">antene192.168.1.144
+
+
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; n: pi, p: pavel<br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="http://192.168.1.136">http://192.168.1.144</a><br>
+        ssh pi@192.168.1.136<br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+        meteo<br>
+    
+      </font> <font face="Times New Roman, Times, serif">SYNOLOGY&nbsp;
+        ssh synology@192.168.1.149<br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="http://192.168.1.137">192.168.1.149</a><br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+      </font> <font face="Times New Roman, Times, serif">PIANO(nahoře)&nbsp;
+
+
+        <a href="http://piano.local/playback">192.168.1.154</a><br>
+        ssh volumio@192.168.1.154&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <span class="s1">http://piano.local/dev/
+# nastavení/setup volumio</span><br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+        remote1 zatím není<br>
+      </font> <font size="-1" face="Times New Roman, Times, serif">ssh
+        honza</font><font face="Times New Roman, Times, serif">192.168.1.1xx<br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="http://192.168.1.148">http://192.168.1.1xx</a><br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+      </font> <font face="Times New Roman, Times, serif">PIONEER(dole)
+        <a href="http://pioneer.local/queue">192.168.1.152&nbsp;</a> <br>
+        ssh volumio@192.168.1.152<br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+      </font> <font face="Times New Roman, Times, serif">remote2<br>
+      </font> <font face="Times New Roman, Times, serif"><a
+          href="http://192.168.1.151">192.168.1.151</a><br>
+      </font> <font size="-1" face="Times New Roman, Times, serif">ssh
+        honza@192.168.1.151&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </font><font size="-1"
+        face="Times New Roman, Times, serif"><font size="-1">Cmd +
+          K&nbsp; smb://192.168.1.151/sdilena, jako host</font><br>
+      </font><font face="Times New Roman, Times, serif"><br>
+        meteo2<br>
+      
+          <font size="-1">ssh honza@192.168.1.116</font> </span><br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+        sklep<br>
+        testzero192.168.1.153 označen jako remote1&nbsp;&nbsp;&nbsp; <a
+          href="http://192.168.1.153:5000/temp">teplota</a> <br>
+      </font> <font face="Times New Roman, Times, serif"><br>
+        vnc://192.168.1.129&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; finder: Cmd + K připojení ke vzdálenému macu<br>
+        &nbsp;ssh jan matuška@192.168.1.129 </font> </div>
+    <font face="Times New Roman, Times, serif"> &nbsp; </font><font
+      face="Times New Roman, Times, serif"><a href="http://192.168.1.1"><span
+          class="s6"></span></a></font> <font face="Times New Roman,
+      Times, serif"><a href="http://192.168.1.1"><span class="s6"></span></a></font>
+  </pre>
+    <script src="../js/menu.js"></script>
+  </body>
+</html>

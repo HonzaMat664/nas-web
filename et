@@ -1,0 +1,809 @@
+ CNAME                                                                      |     1 [31m-[m
+ architektura.html                                                          |    46 [31m-[m
+ css/style.css                                                              |   169 [31m-[m
+ cyclocomputer.pdf                                                          | 28117 [31m-----------------------------[m
+ data/.gitignore                                                            |     2 [31m-[m
+ data/current.json                                                          |     2 [32m+[m[31m-[m
+ data/data.csv                                                              |     6 [32m+[m
+ data/data4.csv                                                             |     8 [32m+[m
+ data/data4.json                                                            |     2 [32m+[m[31m-[m
+ denik.html                                                                 |   174 [31m-[m
+ deniktajny.html                                                            |    44 [31m-[m
+ hifi/DR05_nahravky.txt                                                     |   126 [31m-[m
+ hifi/FV/inverter-digital-all.pdf                                           |   Bin [31m5804666[m -> [32m0[m bytes
+ hifi/TVHEADEND.html                                                        |    38 [31m-[m
+ hifi/boss/BOSS-DAC-Tech-Manual-1.2.pdf                                     |   Bin [31m1166724[m -> [32m0[m bytes
+ hifi/boss/BOSS1.2-Power.pdf                                                |   Bin [31m265728[m -> [32m0[m bytes
+ hifi/boss/allo-cards-configuration.pdf                                     |   Bin [31m233222[m -> [32m0[m bytes
+ hifi/index.html                                                            |   289 [31m-[m
+ hifi/indexr.html                                                           |   337 [31m-[m
+ hifi/stavba tvheadend.html                                                 |    97 [31m-[m
+ hifi/stavba.html                                                           |    80 [31m-[m
+ hifi/stavba_nano.html                                                      |    26 [31m-[m
+ hifi/testy/do.html                                                         |   131 [31m-[m
+ hifi/testy/i.html                                                          |    76 [31m-[m
+ hifi/testy/inde.html                                                       |   283 [31m-[m
+ hifi/testy/index.html                                                      |   259 [31m-[m
+ hifi/testy/index1.html                                                     |   138 [31m-[m
+ hifi/testy/index2.html                                                     |   195 [31m-[m
+ hifi/testy/index3.html                                                     |   230 [31m-[m
+ hifi/testy/index4.html                                                     |   204 [31m-[m
+ hifi/testy/json.html                                                       |   148 [31m-[m
+ hifi/volumio.html                                                          |   106 [31m-[m
+ img/629.jpg                                                                |   Bin [31m434436[m -> [32m0[m bytes
+ img/IMGP5849kolin.jpg                                                      |   Bin [31m78824[m -> [32m0[m bytes
+ img/Pasted Graphic.jpg                                                     |   Bin [31m1041971[m -> [32m0[m bytes
+ img/Using_sextant.gif                                                      |   Bin [31m2207086[m -> [32m0[m bytes
+ img/bylany.jpeg                                                            |   Bin [31m612279[m -> [32m0[m bytes
+ img/cesno.jpg                                                              |   Bin [31m793381[m -> [32m0[m bytes
+ img/cidla.jpg                                                              |   Bin [31m1219151[m -> [32m0[m bytes
+ img/end.gif                                                                |   Bin [31m23296[m -> [32m0[m bytes
+ img/end2.gif                                                               |   Bin [31m1633[m -> [32m0[m bytes
+ img/harfa.gif                                                              |   Bin [31m2876[m -> [32m0[m bytes
+ img/hifi/BC547b.jpg                                                        |   Bin [31m21765[m -> [32m0[m bytes
+ img/hifi/adafruit.jpg                                                      |   Bin [31m213322[m -> [32m0[m bytes
+ img/hifi/bonnet.jpg                                                        |   Bin [31m205670[m -> [32m0[m bytes
+ img/hifi/bonnet2.paint                                                     |   Bin [31m467535[m -> [32m0[m bytes
+ img/hifi/bonnet3.jpg                                                       |   Bin [31m1003544[m -> [32m0[m bytes
+ img/hifi/bonnet3.paint                                                     |   Bin [31m474585[m -> [32m0[m bytes
+ img/hifi/bonnet4.jpg                                                       |   Bin [31m1009779[m -> [32m0[m bytes
+ img/hifi/bonnet4.paint                                                     |   Bin [31m476944[m -> [32m0[m bytes
+ img/hifi/bonnet_empty.jpg                                                  |   Bin [31m977775[m -> [32m0[m bytes
+ img/hifi/bonnet_o.jpg                                                      |   Bin [31m1037003[m -> [32m0[m bytes
+ img/hifi/led.jpg                                                           |   Bin [31m8165[m -> [32m0[m bytes
+ img/hifi/raspberryGPIO.jpg                                                 |   Bin [31m255600[m -> [32m0[m bytes
+ img/hifi/rpi.paint                                                         |   Bin [31m9016[m -> [32m0[m bytes
+ img/hifi/rpi1.paint                                                        |   Bin [31m9733[m -> [32m0[m bytes
+ img/hifi/rpi3.paint                                                        |   Bin [31m458831[m -> [32m0[m bytes
+ img/hifi/smd2.jpeg                                                         |   Bin [31m464312[m -> [32m0[m bytes
+ img/hifi/tranzistor.paint                                                  |   Bin [31m1642[m -> [32m0[m bytes
+ img/hifi/zeropin.jpg                                                       |   Bin [31m299605[m -> [32m0[m bytes
+ img/joga/jahly.jpg                                                         |   Bin [31m258017[m -> [32m0[m bytes
+ img/joga/meditation.jpg                                                    |   Bin [31m1584546[m -> [32m0[m bytes
+ img/joga/strava.jpg                                                        |   Bin [31m948506[m -> [32m0[m bytes
+ img/kalich.gif                                                             |   Bin [31m3123[m -> [32m0[m bytes
+ img/knihy/roseta.jpg                                                       |   Bin [31m7536[m -> [32m0[m bytes
+ img/knihy/valova.jpg                                                       |   Bin [31m40624[m -> [32m0[m bytes
+ img/kridla.gif                                                             |   Bin [31m4148[m -> [32m0[m bytes
+ img/linux/ippozn.jpeg                                                      |   Bin [31m926366[m -> [32m0[m bytes
+ img/linux/ippozn.jpg                                                       |   Bin [31m544708[m -> [32m0[m bytes
+ img/linux/studna.jpg                                                       |   Bin [31m23308[m -> [32m0[m bytes
+ img/matka.jpg                                                              |   Bin [31m49492[m -> [32m0[m bytes
+ img/nebra.jpg                                                              |   Bin [31m599733[m -> [32m0[m bytes
+ img/oddelek.jpg                                                            |   Bin [31m1416040[m -> [32m0[m bytes
+ img/paprsky.jpg                                                            |   Bin [31m385732[m -> [32m0[m bytes
+ img/predsadka.gif                                                          |   Bin [31m2900[m -> [32m0[m bytes
+ img/ryby.gif                                                               |   Bin [31m9160[m -> [32m0[m bytes
+ img/sextant.jpg                                                            |   Bin [31m415040[m -> [32m0[m bytes
+ img/skolni.jpg                                                             |   Bin [31m700487[m -> [32m0[m bytes
+ img/stit.gif                                                               |   Bin [31m4330[m -> [32m0[m bytes
+ img/test.jpg                                                               |   Bin [31m296280[m -> [32m0[m bytes
+ img/vcely/klicka.jpg                                                       |   Bin [31m714519[m -> [32m0[m bytes
+ img/vcely/matka/1.jpg                                                      |   Bin [31m2215465[m -> [32m0[m bytes
+ img/vcely/matka/2.jpg                                                      |   Bin [31m2331600[m -> [32m0[m bytes
+ img/vcely/matka/3.jpg                                                      |   Bin [31m2095635[m -> [32m0[m bytes
+ img/vcely/matka/4.jpg                                                      |   Bin [31m2300153[m -> [32m0[m bytes
+ img/vcely/oddelek_jenter.jpg                                               |   Bin [31m1466688[m -> [32m0[m bytes
+ img/vesmir.jpg                                                             |   Bin [31m22780[m -> [32m0[m bytes
+ img/vesmir.pdf                                                             |   Bin [31m364927[m -> [32m0[m bytes
+ img/vykres.svg                                                             |    52 [31m-[m
+ index.html                                                                 |   187 [31m-[m
+ js/cidla.js                                                                |   214 [31m-[m
+ js/menu.js                                                                 |     5 [31m-[m
+ knihy-hudba/honigberg.html                                                 |    44 [31m-[m
+ knihy-hudba/index.html                                                     |    43 [31m-[m
+ knihy-hudba/insearch.html                                                  |   275 [31m-[m
+ knihy-hudba/knihy/Eliade - Mytus.pdf                                       |   Bin [31m1337111[m -> [32m0[m bytes
+ ...\233jiny n\303\241bo\305\276ensk\303\251ho my\305\241len\303\255 1.pdf" |   Bin [31m16554764[m -> [32m0[m bytes
+ ...\233jiny n\303\241bo\305\276ensk\303\251ho my\305\241len\303\255 2.pdf" |   Bin [31m19043465[m -> [32m0[m bytes
+ ...\233jiny n\303\241bo\305\276ensk\303\251ho my\305\241len\303\255 3.pdf" |   Bin [31m13086643[m -> [32m0[m bytes
+ ...\233jiny n\303\241bo\305\276ensk\303\251ho my\305\241len\303\255 4.pdf" |   Bin [31m19234728[m -> [32m0[m bytes
+ knihy-hudba/knihy/Eliade, Mircea - Mefisto a Androgyn.pdf                  |   Bin [31m871004[m -> [32m0[m bytes
+ knihy-hudba/knihy/Eliade, Mircea - Obrazy a symboly.pdf                    |   Bin [31m1073039[m -> [32m0[m bytes
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -001 obsah.html     |   541 [31m-[m
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -001 obsah.odt      |   Bin [31m15160[m -> [32m0[m bytes
+ .../Mircea E -001b P\305\230EDMLUVA.html"                                  |   611 [31m-[m
+ .../Mircea E -001b P\305\230EDMLUVA.odt"                                   |   Bin [31m27548[m -> [32m0[m bytes
+ .../Mircea E -001c V\303\275chodisko.html"                                 |   675 [31m-[m
+ .../Mircea E -001c V\303\275chodisko.odt"                                  |   Bin [31m23573[m -> [32m0[m bytes
+ .../Mircea E -001d Z\303\201V\304\232RY  str. 269  .html"                  |   349 [31m-[m
+ .../Mircea E -001d Z\303\201V\304\232RY  str. 269  .odt"                   |   Bin [31m23373[m -> [32m0[m bytes
+ .../Mircea E -002 Rovnice utrpeni - existence.html                         |   381 [31m-[m
+ .../Mircea E -002 Rovnice utrpeni - existence.odt                          |   Bin [31m20773[m -> [32m0[m bytes
+ .../Mircea E -003 Nadosobn\303\255 j\303\241.html"                         |   334 [31m-[m
+ .../Mircea E -003 Nadosobn\303\255 j\303\241.odt"                          |   Bin [31m20307[m -> [32m0[m bytes
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -004 Prahmota.html  |   622 [31m-[m
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -004 Prahmota.odt   |   Bin [31m22132[m -> [32m0[m bytes
+ .../Mircea E -005 Vztah puru\305\241a -prakrti.html"                       |   453 [31m-[m
+ .../Mircea E -005 Vztah puru\305\241a -prakrti.odt"                        |   Bin [31m19909[m -> [32m0[m bytes
+ ...Mircea E -006  Jak je toto osvobozen\303\255 mo\305\276n\303\251 .html" |   398 [31m-[m
+ .../Mircea E -006  Jak je toto osvobozen\303\255 mo\305\276n\303\251 .odt" |   Bin [31m21392[m -> [32m0[m bytes
+ .../Mircea E -007 Struktura psychick\303\251 zku\305\241enosti.html"       |   426 [31m-[m
+ .../Mircea E -007 Struktura psychick\303\251 zku\305\241enosti.odt"        |   Bin [31m22128[m -> [32m0[m bytes
+ .../Mircea E -008 Podv\304\233dom\303\255.html"                            |   393 [31m-[m
+ .../Mircea E -008 Podv\304\233dom\303\255.odt"                             |   Bin [31m21133[m -> [32m0[m bytes
+ .../Mircea E -009 Soust\305\231ed\304\233n\303\255 do jednoho bodu.html"   |   484 [31m-[m
+ .../Mircea E -009 Soust\305\231ed\304\233n\303\255 do jednoho bodu.odt"    |   Bin [31m20023[m -> [32m0[m bytes
+ .../Mircea E -010 Jogicke Asany a Pranajama.html                           |   487 [31m-[m
+ .../Mircea E -010 Jogicke Asany a Pranajama.odt                            |   Bin [31m22626[m -> [32m0[m bytes
+ ... -011 pr\303\241n\303\241j\303\241ma v mimoindick\303\251 askezi .html" |   593 [31m-[m
+ ...E -011 pr\303\241n\303\241j\303\241ma v mimoindick\303\251 askezi .odt" |   Bin [31m24801[m -> [32m0[m bytes
+ .../Mircea E -012 Jogova koncentrace meditace .html                        |   604 [31m-[m
+ .../Mircea E -012 Jogova koncentrace meditace .odt                         |   Bin [31m24552[m -> [32m0[m bytes
+ .../Mircea E -013 \303\232loha \303\215\305\241vary.html"                  |   252 [31m-[m
+ .../Mircea E -013 \303\232loha \303\215\305\241vary.odt"                   |   Bin [31m19019[m -> [32m0[m bytes
+ .../Mircea E -014 Enst\303\241ze a hypn\303\263za.html"                    |   260 [31m-[m
+ .../Mircea E -014 Enst\303\241ze a hypn\303\263za.odt"                     |   Bin [31m19867[m -> [32m0[m bytes
+ .../Mircea E -015 Samadhi s oporou.html                                    |   439 [31m-[m
+ .../Mircea E -015 Samadhi s oporou.odt                                     |   Bin [31m22079[m -> [32m0[m bytes
+ .../Mircea E -016 Siddhi -z\303\241zra\304\215n\303\251 schopnosti.html"   |   419 [31m-[m
+ .../Mircea E -016 Siddhi -z\303\241zra\304\215n\303\251 schopnosti.odt"    |   Bin [31m22399[m -> [32m0[m bytes
+ .../Mircea E -017 Sam\303\241dhi bez opory.html"                           |   371 [31m-[m
+ .../Mircea E -017 Sam\303\241dhi bez opory.odt"                            |   Bin [31m21551[m -> [32m0[m bytes
+ .../Mircea E -018 Splynut\303\255 a svoboda.html"                          |   385 [31m-[m
+ .../Mircea E -018 Splynut\303\255 a svoboda.odt"                           |   Bin [31m21832[m -> [32m0[m bytes
+ .../Mircea E -019 Asketov\303\251 a extatici ve v\303\251d\303\241ch.html" |   388 [31m-[m
+ .../Mircea E -019 Asketov\303\251 a extatici ve v\303\251d\303\241ch.odt"  |   Bin [31m18255[m -> [32m0[m bytes
+ .../Mircea E -020 Tapas a j\303\263ga.html"                                |   402 [31m-[m
+ .../Mircea E -020 Tapas a j\303\263ga.odt"                                 |   Bin [31m22301[m -> [32m0[m bytes
+ ...cea E -021 Ritu\303\241ln\303\255 zvnit\305\231n\304\233n\303\255.html" |   342 [31m-[m
+ ...rcea E -021 Ritu\303\241ln\303\255 zvnit\305\231n\304\233n\303\255.odt" |   Bin [31m19595[m -> [32m0[m bytes
+ ...022 Symbolika a pozn\303\241n\303\255 v upani\305\241ad\303\241ch.html" |   273 [31m-[m
+ ...-022 Symbolika a pozn\303\241n\303\255 v upani\305\241ad\303\241ch.odt" |   Bin [31m20397[m -> [32m0[m bytes
+ .../Mircea E -023 Nesmrtelnost a osvobozen\303\255.html"                   |   439 [31m-[m
+ .../Mircea E -023 Nesmrtelnost a osvobozen\303\255.odt"                    |   Bin [31m21416[m -> [32m0[m bytes
+ .../Mircea E -024 J\303\263ga v Maitrjupani\305\241ad\304\233.html"        |   211 [31m-[m
+ .../Mircea E -024 J\303\263ga v Maitrjupani\305\241ad\304\233.odt"         |   Bin [31m19421[m -> [32m0[m bytes
+ .../Mircea E -025 Sannj\303\241sinsk\303\251 upani\305\241ady.html"        |   172 [31m-[m
+ .../Mircea E -025 Sannj\303\241sinsk\303\251 upani\305\241ady.odt"         |   Bin [31m18919[m -> [32m0[m bytes
+ .../Mircea E -026 J\303\263gick\303\251 upani\305\241ady.html"             |   503 [31m-[m
+ .../Mircea E -026 J\303\263gick\303\251 upani\305\241ady.odt"              |   Bin [31m23474[m -> [32m0[m bytes
+ .../Mircea E -027 Magie a  j\303\263ga Rgvidh\303\241na.html"              |   261 [31m-[m
+ .../Mircea E -027 Magie a  j\303\263ga Rgvidh\303\241na.odt"               |   Bin [31m20683[m -> [32m0[m bytes
+ ...\303\255matel\303\251, dob\305\231\303\255 a \305\241patn\303\255.html" |   389 [31m-[m
+ ...j\303\255matel\303\251, dob\305\231\303\255 a \305\241patn\303\255.odt" |   Bin [31m20848[m -> [32m0[m bytes
+ .../Mircea E -029 J\303\263ga a hinduismus.html"                           |   277 [31m-[m
+ .../Mircea E -029 J\303\263ga a hinduismus.odt"                            |   Bin [31m17081[m -> [32m0[m bytes
+ .../Mircea E -030 J\303\263ga v Mah\303\241bh\303\241rat\304\233.html"     |   227 [31m-[m
+ .../Mircea E -030 J\303\263ga v Mah\303\241bh\303\241rat\304\233.odt"      |   Bin [31m19541[m -> [32m0[m bytes
+ .../Mircea E -031 J\303\263ga a s\303\241nkhja.html"                       |   201 [31m-[m
+ .../Mircea E -031 J\303\263ga a s\303\241nkhja.odt"                        |   Bin [31m18126[m -> [32m0[m bytes
+ ...ea E -032 Techniky j\303\263gy v Mah\303\241bh\303\241rat\304\233.html" |   322 [31m-[m
+ ...cea E -032 Techniky j\303\263gy v Mah\303\241bh\303\241rat\304\233.odt" |   Bin [31m19750[m -> [32m0[m bytes
+ .../Mircea E -033 J\303\263gick\303\275 folkl\303\263r.html"               |   136 [31m-[m
+ .../Mircea E -033 J\303\263gick\303\275 folkl\303\263r.odt"                |   Bin [31m17552[m -> [32m0[m bytes
+ .../Mircea E -034 Poselstv\303\255 Bhagavadg\303\255ty.html"               |   217 [31m-[m
+ .../Mircea E -034 Poselstv\303\255 Bhagavadg\303\255ty.odt"                |   Bin [31m19236[m -> [32m0[m bytes
+ .../Mircea E -035 Kr\305\241n\305\257v p\305\231\303\255klad.html"         |   268 [31m-[m
+ .../Mircea E -035 Kr\305\241n\305\257v p\305\231\303\255klad.odt"          |   Bin [31m18436[m -> [32m0[m bytes
+ .../Mircea E -036 Skutky a ob\304\233ti.html"                              |   202 [31m-[m
+ .../Mircea E -036 Skutky a ob\304\233ti.odt"                               |   Bin [31m18686[m -> [32m0[m bytes
+ .../Mircea E -037 Technika j\303\263gy v Bhagavadg\303\255t\304\233.html"  |   279 [31m-[m
+ .../Mircea E -037 Technika j\303\263gy v Bhagavadg\303\255t\304\233.odt"   |   Bin [31m19405[m -> [32m0[m bytes
+ ...a E -038 Cesta nirv\303\241ny a symbolika zasv\304\233cen\303\255.html" |   445 [31m-[m
+ ...ea E -038 Cesta nirv\303\241ny a symbolika zasv\304\233cen\303\255.odt" |   Bin [31m18127[m -> [32m0[m bytes
+ .../Mircea E -039 D\305\276b\303\241ny a sam\303\241patti.html"            |   560 [31m-[m
+ .../Mircea E -039 D\305\276b\303\241ny a sam\303\241patti.odt"             |   Bin [31m22620[m -> [32m0[m bytes
+ .../Mircea E -040 J\303\263gini a metafyzikov\303\251.html"                |   305 [31m-[m
+ .../Mircea E -040 J\303\263gini a metafyzikov\303\251.odt"                 |   Bin [31m19313[m -> [32m0[m bytes
+ .../Mircea E -041 Z\303\241zra\304\215n\303\251 schopnosti.html"           |   283 [31m-[m
+ .../Mircea E -041 Z\303\241zra\304\215n\303\251 schopnosti.odt"            |   Bin [31m19948[m -> [32m0[m bytes
+ ... -042 Pozn\303\241n\303\255 minul\303\275ch \305\276ivot\305\257 .html" |   416 [31m-[m
+ ...E -042 Pozn\303\241n\303\255 minul\303\275ch \305\276ivot\305\257 .odt" |   Bin [31m22109[m -> [32m0[m bytes
+ .../Mircea E -043 Paribb\303\241d\305\276akov\303\251.html"                |   312 [31m-[m
+ .../Mircea E -043 Paribb\303\241d\305\276akov\303\251.odt"                 |   Bin [31m19086[m -> [32m0[m bytes
+ ...a E -044 Makkhali G\303\263sala a ad\305\276\303\255vikov\303\251.html" |   299 [31m-[m
+ ...ea E -044 Makkhali G\303\263sala a ad\305\276\303\255vikov\303\251.odt" |   Bin [31m19826[m -> [32m0[m bytes
+ .../Mircea E -045 Metafyzick\303\251 pozn\303\241n\303\255 a mystika.html" |   670 [31m-[m
+ .../Mircea E -045 Metafyzick\303\251 pozn\303\241n\303\255 a mystika.odt"  |   Bin [31m25011[m -> [32m0[m bytes
+ .../Mircea E -046 J\303\263ga a tantrismus v\305\241eobecne.html"          |   498 [31m-[m
+ .../Mircea E -046 J\303\263ga a tantrismus v\305\241eobecne.odt"           |   Bin [31m20106[m -> [32m0[m bytes
+ .../Mircea E -047 vizualizace, nj\303\241sa, mudra .html"                  |   413 [31m-[m
+ .../Mircea E -047 vizualizace, nj\303\241sa, mudra .odt"                   |   Bin [31m20712[m -> [32m0[m bytes
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -048 Dhikr.html     |   231 [31m-[m
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -048 Dhikr.odt      |   Bin [31m19632[m -> [32m0[m bytes
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -049 Mandala.html   |   644 [31m-[m
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -049 Mandala.odt    |   Bin [31m23010[m -> [32m0[m bytes
+ .../Mircea E -050 Veleben\303\255 t\304\233la, Hathaj\303\263ga.html"      |   644 [31m-[m
+ .../Mircea E -050 Veleben\303\255 t\304\233la, Hathaj\303\263ga.odt"       |   Bin [31m25071[m -> [32m0[m bytes
+ .../Mircea E -051 N\303\241d\303\255 ida, pingala, su\305\241umna.html"    |   428 [31m-[m
+ .../Mircea E -051 N\303\241d\303\255 ida, pingala, su\305\241umna.odt"     |   Bin [31m18858[m -> [32m0[m bytes
+ .../Mircea E -052 \304\214akry.html"                                       |   408 [31m-[m
+ .../Mircea E -052 \304\214akry.odt"                                        |   Bin [31m19270[m -> [32m0[m bytes
+ .../Mircea E -053 Kundalin\303\255.html"                                   |   366 [31m-[m
+ .../Mircea E -053 Kundalin\303\255.odt"                                    |   Bin [31m20988[m -> [32m0[m bytes
+ .../Mircea E -054 Z\303\241m\304\233rn\303\275 jazyk.html"                 |   516 [31m-[m
+ .../Mircea E -054 Z\303\241m\304\233rn\303\275 jazyk.odt"                  |   Bin [31m21719[m -> [32m0[m bytes
+ .../Mircea E -055 Erotick\303\241 mystika.html"                            |   364 [31m-[m
+ .../Mircea E -055 Erotick\303\241 mystika.odt"                             |   Bin [31m20769[m -> [32m0[m bytes
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -056 Maithuna.html  |   627 [31m-[m
+ .../Mircea Eliade HTML -Joga nesmrt  HTML odt/Mircea E -056 Maithuna.odt   |   Bin [31m25335[m -> [32m0[m bytes
+ .../Mircea E -057 Spojen\303\255 protiklad\305\257.html"                   |   419 [31m-[m
+ .../Mircea E -057 Spojen\303\255 protiklad\305\257.odt"                    |   Bin [31m21893[m -> [32m0[m bytes
+ .../Mircea E -058 Legendy oj\303\263ginech alchymistech.html"              |   372 [31m-[m
+ .../Mircea E -058 Legendy oj\303\263ginech alchymistech.odt"               |   Bin [31m17440[m -> [32m0[m bytes
+ .../Mircea E -059 Tantrismus, hathaj\303\263ga a alchymie.html"            |   460 [31m-[m
+ .../Mircea E -059 Tantrismus, hathaj\303\263ga a alchymie.odt"             |   Bin [31m23022[m -> [32m0[m bytes
+ .../Mircea E -060 \304\214\303\255nsk\303\241 alchymie.html"               |   575 [31m-[m
+ .../Mircea E -060 \304\214\303\255nsk\303\241 alchymie.odt"                |   Bin [31m21701[m -> [32m0[m bytes
+ .../Mircea E -061 Alchymie duchovn\303\255 technika.html"                  |   251 [31m-[m
+ .../Mircea E -061 Alchymie duchovn\303\255 technika.odt"                   |   Bin [31m19091[m -> [32m0[m bytes
+ .../Mircea E -062 Cesty ke svobod\304\233.html"                            |   284 [31m-[m
+ .../Mircea E -062 Cesty ke svobod\304\233.odt"                             |   Bin [31m15955[m -> [32m0[m bytes
+ ...a E -063 Agh\303\263rov\303\251 a k\303\241p\303\241likov\303\251.html" |   422 [31m-[m
+ ...ea E -063 Agh\303\263rov\303\251 a k\303\241p\303\241likov\303\251.odt" |   Bin [31m22116[m -> [32m0[m bytes
+ .../Mircea E -064 G\303\263rakhn\303\241th a 84 siddh\303\241.html"        |   496 [31m-[m
+ .../Mircea E -064 G\303\263rakhn\303\241th a 84 siddh\303\241.odt"         |   Bin [31m22345[m -> [32m0[m bytes
+ ...Matsj\303\251ndran\303\241th a m\303\275tus o u\304\215en\303\255.html" |   304 [31m-[m
+ ... Matsj\303\251ndran\303\241th a m\303\275tus o u\304\215en\303\255.odt" |   Bin [31m19163[m -> [32m0[m bytes
+ .../Mircea E -066 \305\240amansk\303\241 magie a nesmrtelnost.html"        |   502 [31m-[m
+ .../Mircea E -066 \305\240amansk\303\241 magie a nesmrtelnost.odt"         |   Bin [31m23429[m -> [32m0[m bytes
+ .../Mircea E -067 J\303\263ga a \305\241amanismus.html"                    |   563 [31m-[m
+ .../Mircea E -067 J\303\263ga a \305\241amanismus.odt"                     |   Bin [31m23415[m -> [32m0[m bytes
+ .../Mircea E -068 V\303\275stup na nebesa a mystick\303\275 let.html"      |   440 [31m-[m
+ .../Mircea E -068 V\303\275stup na nebesa a mystick\303\275 let.odt"       |   Bin [31m20710[m -> [32m0[m bytes
+ ...E -069 Magick\303\251 teplo a vnit\305\231n\303\255 sv\304\233tlo.html" |   455 [31m-[m
+ ... E -069 Magick\303\251 teplo a vnit\305\231n\303\255 sv\304\233tlo.odt" |   Bin [31m21201[m -> [32m0[m bytes
+ .../Mircea E -070 Podobnosti a rozd\303\255ly.html"                        |   529 [31m-[m
+ .../Mircea E -070 Podobnosti a rozd\303\255ly.odt"                         |   Bin [31m22285[m -> [32m0[m bytes
+ ...-071 j\303\263ga a lidov\303\241 n\303\241bo\305\276enstv\303\255.html" |   560 [31m-[m
+ ... -071 j\303\263ga a lidov\303\241 n\303\241bo\305\276enstv\303\255.odt" |   Bin [31m22828[m -> [32m0[m bytes
+ ...72 Dr\303\241vidsk\303\251 d\304\233dictv\303\255, Mundov\303\251.html" |   388 [31m-[m
+ ...072 Dr\303\241vidsk\303\251 d\304\233dictv\303\255, Mundov\303\251.odt" |   Bin [31m21479[m -> [32m0[m bytes
+ .../Mircea E -073 Harappa a Mohend\305\276o-daro.html"                     |   447 [31m-[m
+ .../Mircea E -073 Harappa a Mohend\305\276o-daro.odt"                      |   Bin [31m21611[m -> [32m0[m bytes
+ .../Mircea-Eliade--\342\200\224-M\303\275ty,-sny-a-myst\303\251ria.pdf"    |   Bin [31m4980688[m -> [32m0[m bytes
+ knihy-hudba/knihy/mytus-o-vecnem-navratu-eliade pres MultiLoad.cz.pdf      |   Bin [31m683487[m -> [32m0[m bytes
+ knihy-hudba/literatura/4dohody.html                                        |    34 [31m-[m
+ knihy-hudba/literatura/5_rings/5_rings.txt                                 |   981 [31m-[m
+ "knihy-hudba/literatura/Co je t\305\231eba \305\231\303\255ct lidem.html"  |   148 [31m-[m
+ knihy-hudba/literatura/EMERSON.html                                        |    16 [31m-[m
+ knihy-hudba/literatura/Egypt.html                                          |   400 [31m-[m
+ knihy-hudba/literatura/Emerson_ESSAYS.htm                                  | 10711 [31m-----------[m
+ knihy-hudba/literatura/Emerson_Essays, First Series.html                   |  8516 [31m---------[m
+ knihy-hudba/literatura/Emerson_Essays, Second Series.html                  |  7014 [31m--------[m
+ knihy-hudba/literatura/Emerson_May_Day.htm                                 |  3323 [31m----[m
+ "knihy-hudba/literatura/Jan Zahradn\303\255\304\215ek.html"                |    46 [31m-[m
+ knihy-hudba/literatura/JosefFlorian.html                                   |    14 [31m-[m
+ knihy-hudba/literatura/Le Petit prince.html                                |  1840 [31m--[m
+ knihy-hudba/literatura/Mircea Eliade.html                                  |    50 [31m-[m
+ knihy-hudba/literatura/Neodarwinismus.html                                 |    93 [31m-[m
+ knihy-hudba/literatura/PaserackouStezkou.html                              |    20 [31m-[m
+ knihy-hudba/literatura/Reynek.html                                         |   247 [31m-[m
+ knihy-hudba/literatura/Tolstoj.html                                        |    40 [31m-[m
+ knihy-hudba/literatura/buddhova nauka.html                                 |   524 [31m-[m
+ knihy-hudba/literatura/cas.html                                            |   744 [31m-[m
+ knihy-hudba/literatura/citadela.html                                       |  9696 [31m----------[m
+ knihy-hudba/literatura/drtikol.html                                        |   987 [31m-[m
+ knihy-hudba/literatura/ebooks/Exupery.epub                                 |   Bin [31m6030[m -> [32m0[m bytes
+ knihy-hudba/literatura/eduard_tomas.html                                   |   108 [31m-[m
+ knihy-hudba/literatura/end.gif                                             |   Bin [31m9547[m -> [32m0[m bytes
+ knihy-hudba/literatura/heidegger.html                                      |  3939 [31m----[m
+ knihy-hudba/literatura/index.html                                          |   301 [31m-[m
+ knihy-hudba/literatura/jancep.html                                         |    59 [31m-[m
+ knihy-hudba/literatura/jancep_aluze.html                                   |   575 [31m-[m
+ knihy-hudba/literatura/jancep_nkp.html                                     |   146 [31m-[m
+ knihy-hudba/literatura/jancep_slavik.html                                  |   143 [31m-[m
+ knihy-hudba/literatura/jancep_vk.html                                      |   184 [31m-[m
+ knihy-hudba/literatura/jancep_zivotopis.html                               |   102 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/index.html                     |    21 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/joga_velikeho_symbolu-big.jpg  |   Bin [31m39704[m -> [32m0[m bytes
+ knihy-hudba/literatura/joga_velkeho symbolu/joga_velikeho_symbolu-s.jpg    |   Bin [31m7837[m -> [32m0[m bytes
+ knihy-hudba/literatura/joga_velkeho symbolu/joga_velikeho_symbolu.html     |    35 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/joga_velikeho_symbolu.jpg      |   Bin [31m19438[m -> [32m0[m bytes
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs1.html                      |   104 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs10.html                     |    94 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs2.html                      |    91 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs3.html                      |    84 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs4.html                      |    93 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs5.html                      |    86 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs6.html                      |    77 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs7.html                      |    84 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs8.html                      |    59 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/jvs9.html                      |    74 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/obalka.html                    |    21 [31m-[m
+ knihy-hudba/literatura/joga_velkeho symbolu/obsah.html                     |    36 [31m-[m
+ knihy-hudba/literatura/kalich.gif                                          |   Bin [31m7491[m -> [32m0[m bytes
+ knihy-hudba/literatura/little prince.html                                  |  3453 [31m----[m
+ knihy-hudba/literatura/ma_zivotni_cesta/gicin_funakoshi.jpg                |   Bin [31m2995[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/index.html                         |    21 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-01.html           |    92 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-02.html           |   139 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-03.html           |   158 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-04.html           |   104 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-05.html           |    96 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-06.html           |    76 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-07.html           |    66 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/ma_zivotni_cesta-s.jpg             |   Bin [31m9729[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka.jpg                         |   Bin [31m53404[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka1.html                       |    26 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka2.html                       |    21 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka2.jpg                        |   Bin [31m33960[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka3.html                       |    19 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obalka4.html                       |    26 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr1.html                          |    20 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr1.jpg                           |   Bin [31m44543[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr2.html                          |    21 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr2.jpg                           |   Bin [31m27456[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr3.html                          |    20 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr3.jpg                           |   Bin [31m28302[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr4.html                          |    20 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr4.jpg                           |   Bin [31m36599[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr5.html                          |    22 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr5.jpg                           |   Bin [31m27174[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr6.html                          |    21 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr6.jpg                           |   Bin [31m26082[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr7.html                          |    23 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/obr7a.jpg                          |   Bin [31m7320[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obr7b.jpg                          |   Bin [31m7220[m -> [32m0[m bytes
+ knihy-hudba/literatura/ma_zivotni_cesta/obsah.html                         |   121 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/predmluva.html                     |    40 [31m-[m
+ knihy-hudba/literatura/ma_zivotni_cesta/uvod.html                          |    33 [31m-[m
+ knihy-hudba/literatura/maly princ.html                                     |  2202 [31m---[m
+ knihy-hudba/literatura/maly_princ/baobaby.jpg                              |   Bin [31m40945[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/beranek1.gif                             |   Bin [31m3628[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/beranek2.gif                             |   Bin [31m3778[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/beranek3.gif                             |   Bin [31m3296[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/beranek4.gif                             |   Bin [31m4633[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/byznys.jpg                               |   Bin [31m17125[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/domysliv.jpg                             |   Bin [31m17485[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/duch.gif                                 |   Bin [31m16754[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/had.jpg                                  |   Bin [31m20564[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/hroznys0.jpg                             |   Bin [31m10376[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/hroznys1.jpg                             |   Bin [31m4499[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/hroznys2.gif                             |   Bin [31m6699[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/hroznysi.jpg                             |   Bin [31m8418[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/hvezdar.gif                              |   Bin [31m22093[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/index.html                               |    19 [31m-[m
+ knihy-hudba/literatura/maly_princ/konev.jpg                                |   Bin [31m11718[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/krajina.gif                              |   Bin [31m5349[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/kral.jpg                                 |   Bin [31m20397[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/kvetina1.jpg                             |   Bin [31m8214[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/kvetina2.gif                             |   Bin [31m12327[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/kvetinap.jpg                             |   Bin [31m14464[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/lampar.jpg                               |   Bin [31m19226[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/lezici.jpg                               |   Bin [31m12109[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/liska.jpg                                |   Bin [31m15851[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/logo.gif                                 |   Bin [31m1244[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/lovec.jpg                                |   Bin [31m14729[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/maly_princ-s.jpg                         |   Bin [31m7733[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/matika1.jpg                              |   Bin [31m11081[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/matika2.jpg                              |   Bin [31m10624[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/nora.jpg                                 |   Bin [31m19167[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/obalka.html                              |    28 [31m-[m
+ knihy-hudba/literatura/maly_princ/obalka.jpg                               |   Bin [31m42897[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/obrazky.html                             |    67 [31m-[m
+ knihy-hudba/literatura/maly_princ/obsah.html                               |    55 [31m-[m
+ knihy-hudba/literatura/maly_princ/padajici.jpg                             |   Bin [31m12470[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/pijan.jpg                                |   Bin [31m20002[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/planeta.jpg                              |   Bin [31m16644[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/poklop.gif                               |   Bin [31m12436[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/poust.jpg                                |   Bin [31m17056[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/princ01.html                             |    29 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ02.html                             |    62 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ03.html                             |    46 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ04.html                             |    29 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ05.html                             |    35 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ06.html                             |    29 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ07.html                             |    49 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ08.html                             |    44 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ09.html                             |    33 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ1.jpg                               |   Bin [31m23105[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/princ10.html                             |    75 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ11.html                             |    37 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ12.html                             |    28 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ13.html                             |    70 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ14.html                             |    55 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ15.html                             |    66 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ16.html                             |    21 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ17.html                             |    47 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ18.html                             |    25 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ19.html                             |    25 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ2.jpg                               |   Bin [31m18779[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/princ20.html                             |    28 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ21.html                             |    83 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ22.html                             |    34 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ23.html                             |    24 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ24.html                             |    44 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ25.html                             |    65 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ26.html                             |   106 [31m-[m
+ knihy-hudba/literatura/maly_princ/princ27.html                             |    26 [31m-[m
+ knihy-hudba/literatura/maly_princ/ruze.jpg                                 |   Bin [31m22425[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/sedici.gif                               |   Bin [31m20059[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/skala.gif                                |   Bin [31m25594[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/sopky.jpg                                |   Bin [31m21768[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/studanka.gif                             |   Bin [31m38900[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/studna.jpg                               |   Bin [31m32567[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/tygr.gif                                 |   Bin [31m11196[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/venovani.html                            |    23 [31m-[m
+ knihy-hudba/literatura/maly_princ/zahradka.jpg                             |   Bin [31m16723[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/zastena.jpg                              |   Bin [31m11701[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/zed.jpg                                  |   Bin [31m17921[m -> [32m0[m bytes
+ knihy-hudba/literatura/maly_princ/zemepis.jpg                              |   Bin [31m13964[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/1.jpg                                           |   Bin [31m21540[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/10.jpg                                          |   Bin [31m15110[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/2.jpg                                           |   Bin [31m25035[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/3.jpg                                           |   Bin [31m26082[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/4.jpg                                           |   Bin [31m23181[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/5.jpg                                           |   Bin [31m19357[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/6.jpg                                           |   Bin [31m22370[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/7.jpg                                           |   Bin [31m29429[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/8.jpg                                           |   Bin [31m23744[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/9.jpg                                           |   Bin [31m19180[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/index.html                                      |    19 [31m-[m
+ knihy-hudba/literatura/muz/index1.htm                                      |    24 [31m-[m
+ knihy-hudba/literatura/muz/index2.htm                                      |    68 [31m-[m
+ knihy-hudba/literatura/muz/jean_giono.jpg                                  |   Bin [31m2137[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/muz-s.jpg                                       |   Bin [31m6021[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/muz1.htm                                        |    52 [31m-[m
+ knihy-hudba/literatura/muz/muz2.htm                                        |    62 [31m-[m
+ knihy-hudba/literatura/muz/muz3.htm                                        |    63 [31m-[m
+ knihy-hudba/literatura/muz/muz4.htm                                        |    72 [31m-[m
+ knihy-hudba/literatura/muz/muz5.htm                                        |    83 [31m-[m
+ knihy-hudba/literatura/muz/muz6.htm                                        |    49 [31m-[m
+ knihy-hudba/literatura/muz/muz7.htm                                        |    48 [31m-[m
+ knihy-hudba/literatura/muz/muz8.htm                                        |    34 [31m-[m
+ knihy-hudba/literatura/muz/obalka.jpg                                      |   Bin [31m18336[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/obrazky.htm                                     |    36 [31m-[m
+ knihy-hudba/literatura/muz/pozadi.jpg                                      |   Bin [31m10229[m -> [32m0[m bytes
+ knihy-hudba/literatura/muz/uvod.htm                                        |    26 [31m-[m
+ knihy-hudba/literatura/neruda.html                                         |    46 [31m-[m
+ knihy-hudba/literatura/oci.html                                            |   779 [31m-[m
+ knihy-hudba/literatura/poprava.jpg                                         |   Bin [31m63023[m -> [32m0[m bytes
+ knihy-hudba/literatura/prochazkova.html                                    |    19 [31m-[m
+ knihy-hudba/literatura/reynek4.jpg                                         |   Bin [31m77844[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/page.css                                 |     6 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-1.html                        |    91 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-10.html                       |   103 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-11.html                       |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-12.html                       |    91 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-13.html                       |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-14.html                       |    97 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-15.html                       |    82 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-16.html                       |    55 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-17.html                       |   107 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-18.html                       |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-19.html                       |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-2.html                        |   119 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-20.html                       |    83 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-21.html                       |    82 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-22.html                       |    87 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-23.html                       |   107 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-24.html                       |    91 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-25.html                       |    90 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-26.html                       |    84 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-27.html                       |    89 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-28.html                       |    79 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-29.html                       |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-3.html                        |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-30.html                       |    79 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-31.html                       |    95 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-32.html                       |    95 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-33.html                       |    79 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-34.html                       |    91 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-35.html                       |    84 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-36.html                       |    97 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-37.html                       |    85 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-38.html                       |    85 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-39.html                       |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-4.html                        |    92 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-40.html                       |    78 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-41.html                       |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-42.html                       |    87 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-43.html                       |    88 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-44.html                       |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-45.html                       |    89 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-46.html                       |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-47.html                       |    87 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-48.html                       |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-49.html                       |    91 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-5.html                        |    78 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-50.html                       |    82 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-51.html                       |    87 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-52.html                       |    95 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-53.html                       |    83 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-54.html                       |   113 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-6.html                        |    99 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-7.html                        |    82 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-8.html                        |    80 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha-9.html                        |    81 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha.html                          |     8 [31m-[m
+ knihy-hudba/literatura/siddhartha/siddhartha001.png                        |   Bin [31m21123[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha002.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha003.png                        |   Bin [31m3305[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha006.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha010.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha014.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha017.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha023.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha027.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha031.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha036.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha042.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha046.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha049.png                        |   Bin [31m3327[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha054.png                        |   Bin [31m3370[m -> [32m0[m bytes
+ knihy-hudba/literatura/siddhartha/siddhartha_ind.html                      |    61 [31m-[m
+ knihy-hudba/literatura/tao/tao.html                                        |    12 [31m-[m
+ knihy-hudba/literatura/ti.html                                             |    23 [31m-[m
+ knihy-hudba/literatura/tibet2/image.log                                    |     3 [31m-[m
+ knihy-hudba/literatura/tibet2/index-1.html                                 |    23 [31m-[m
+ knihy-hudba/literatura/tibet2/index-10.html                                |   346 [31m-[m
+ knihy-hudba/literatura/tibet2/index-100.html                               |   370 [31m-[m
+ knihy-hudba/literatura/tibet2/index-101.html                               |   377 [31m-[m
+ knihy-hudba/literatura/tibet2/index-102.html                               |   279 [31m-[m
+ knihy-hudba/literatura/tibet2/index-103.html                               |   299 [31m-[m
+ knihy-hudba/literatura/tibet2/index-104.html                               |   345 [31m-[m
+ knihy-hudba/literatura/tibet2/index-105.html                               |   310 [31m-[m
+ knihy-hudba/literatura/tibet2/index-106.html                               |   308 [31m-[m
+ knihy-hudba/literatura/tibet2/index-107.html                               |   336 [31m-[m
+ knihy-hudba/literatura/tibet2/index-108.html                               |   337 [31m-[m
+ knihy-hudba/literatura/tibet2/index-109.html                               |   328 [31m-[m
+ knihy-hudba/literatura/tibet2/index-11.html                                |   375 [31m-[m
+ knihy-hudba/literatura/tibet2/index-110.html                               |   278 [31m-[m
+ knihy-hudba/literatura/tibet2/index-111.html                               |   308 [31m-[m
+ knihy-hudba/literatura/tibet2/index-112.html                               |   321 [31m-[m
+ knihy-hudba/literatura/tibet2/index-113.html                               |   339 [31m-[m
+ knihy-hudba/literatura/tibet2/index-114.html                               |   393 [31m-[m
+ knihy-hudba/literatura/tibet2/index-115.html                               |   339 [31m-[m
+ knihy-hudba/literatura/tibet2/index-116.html                               |   344 [31m-[m
+ knihy-hudba/literatura/tibet2/index-117.html                               |   371 [31m-[m
+ knihy-hudba/literatura/tibet2/index-118.html                               |   384 [31m-[m
+ knihy-hudba/literatura/tibet2/index-119.html                               |   333 [31m-[m
+ knihy-hudba/literatura/tibet2/index-12.html                                |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-120.html                               |   317 [31m-[m
+ knihy-hudba/literatura/tibet2/index-121.html                               |   323 [31m-[m
+ knihy-hudba/literatura/tibet2/index-122.html                               |   339 [31m-[m
+ knihy-hudba/literatura/tibet2/index-123.html                               |   364 [31m-[m
+ knihy-hudba/literatura/tibet2/index-124.html                               |   337 [31m-[m
+ knihy-hudba/literatura/tibet2/index-125.html                               |   359 [31m-[m
+ knihy-hudba/literatura/tibet2/index-126.html                               |   285 [31m-[m
+ knihy-hudba/literatura/tibet2/index-127.html                               |   311 [31m-[m
+ knihy-hudba/literatura/tibet2/index-128.html                               |   327 [31m-[m
+ knihy-hudba/literatura/tibet2/index-129.html                               |   343 [31m-[m
+ knihy-hudba/literatura/tibet2/index-13.html                                |   383 [31m-[m
+ knihy-hudba/literatura/tibet2/index-130.html                               |   382 [31m-[m
+ knihy-hudba/literatura/tibet2/index-131.html                               |   361 [31m-[m
+ knihy-hudba/literatura/tibet2/index-132.html                               |   378 [31m-[m
+ knihy-hudba/literatura/tibet2/index-133.html                               |   370 [31m-[m
+ knihy-hudba/literatura/tibet2/index-134.html                               |   384 [31m-[m
+ knihy-hudba/literatura/tibet2/index-135.html                               |   389 [31m-[m
+ knihy-hudba/literatura/tibet2/index-136.html                               |   392 [31m-[m
+ knihy-hudba/literatura/tibet2/index-137.html                               |   377 [31m-[m
+ knihy-hudba/literatura/tibet2/index-138.html                               |   388 [31m-[m
+ knihy-hudba/literatura/tibet2/index-139.html                               |   377 [31m-[m
+ knihy-hudba/literatura/tibet2/index-14.html                                |   354 [31m-[m
+ knihy-hudba/literatura/tibet2/index-140.html                               |   334 [31m-[m
+ knihy-hudba/literatura/tibet2/index-141.html                               |   350 [31m-[m
+ knihy-hudba/literatura/tibet2/index-142.html                               |   334 [31m-[m
+ knihy-hudba/literatura/tibet2/index-143.html                               |   324 [31m-[m
+ knihy-hudba/literatura/tibet2/index-144.html                               |   304 [31m-[m
+ knihy-hudba/literatura/tibet2/index-145.html                               |   347 [31m-[m
+ knihy-hudba/literatura/tibet2/index-146.html                               |   331 [31m-[m
+ knihy-hudba/literatura/tibet2/index-147.html                               |   370 [31m-[m
+ knihy-hudba/literatura/tibet2/index-148.html                               |   388 [31m-[m
+ knihy-hudba/literatura/tibet2/index-149.html                               |   340 [31m-[m
+ knihy-hudba/literatura/tibet2/index-15.html                                |   386 [31m-[m
+ knihy-hudba/literatura/tibet2/index-150.html                               |   362 [31m-[m
+ knihy-hudba/literatura/tibet2/index-151.html                               |   329 [31m-[m
+ knihy-hudba/literatura/tibet2/index-152.html                               |   313 [31m-[m
+ knihy-hudba/literatura/tibet2/index-153.html                               |   263 [31m-[m
+ knihy-hudba/literatura/tibet2/index-154.html                               |   321 [31m-[m
+ knihy-hudba/literatura/tibet2/index-155.html                               |   395 [31m-[m
+ knihy-hudba/literatura/tibet2/index-156.html                               |   354 [31m-[m
+ knihy-hudba/literatura/tibet2/index-157.html                               |   309 [31m-[m
+ knihy-hudba/literatura/tibet2/index-158.html                               |   362 [31m-[m
+ knihy-hudba/literatura/tibet2/index-159.html                               |   372 [31m-[m
+ knihy-hudba/literatura/tibet2/index-16.html                                |   353 [31m-[m
+ knihy-hudba/literatura/tibet2/index-160.html                               |   341 [31m-[m
+ knihy-hudba/literatura/tibet2/index-161.html                               |   178 [31m-[m
+ knihy-hudba/literatura/tibet2/index-162.html                               |   185 [31m-[m
+ knihy-hudba/literatura/tibet2/index-163.html                               |   275 [31m-[m
+ knihy-hudba/literatura/tibet2/index-164.html                               |   345 [31m-[m
+ knihy-hudba/literatura/tibet2/index-165.html                               |   345 [31m-[m
+ knihy-hudba/literatura/tibet2/index-166.html                               |   366 [31m-[m
+ knihy-hudba/literatura/tibet2/index-167.html                               |   361 [31m-[m
+ knihy-hudba/literatura/tibet2/index-168.html                               |   377 [31m-[m
+ knihy-hudba/literatura/tibet2/index-169.html                               |   417 [31m-[m
+ knihy-hudba/literatura/tibet2/index-17.html                                |   368 [31m-[m
+ knihy-hudba/literatura/tibet2/index-170.html                               |   419 [31m-[m
+ knihy-hudba/literatura/tibet2/index-171.html                               |   385 [31m-[m
+ knihy-hudba/literatura/tibet2/index-172.html                               |   388 [31m-[m
+ knihy-hudba/literatura/tibet2/index-173.html                               |   380 [31m-[m
+ knihy-hudba/literatura/tibet2/index-174.html                               |   347 [31m-[m
+ knihy-hudba/literatura/tibet2/index-175.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-176.html                               |   303 [31m-[m
+ knihy-hudba/literatura/tibet2/index-177.html                               |   321 [31m-[m
+ knihy-hudba/literatura/tibet2/index-178.html                               |   334 [31m-[m
+ knihy-hudba/literatura/tibet2/index-179.html                               |   364 [31m-[m
+ knihy-hudba/literatura/tibet2/index-18.html                                |   369 [31m-[m
+ knihy-hudba/literatura/tibet2/index-180.html                               |   384 [31m-[m
+ knihy-hudba/literatura/tibet2/index-181.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-182.html                               |   417 [31m-[m
+ knihy-hudba/literatura/tibet2/index-183.html                               |   375 [31m-[m
+ knihy-hudba/literatura/tibet2/index-184.html                               |   415 [31m-[m
+ knihy-hudba/literatura/tibet2/index-185.html                               |   323 [31m-[m
+ knihy-hudba/literatura/tibet2/index-186.html                               |   315 [31m-[m
+ knihy-hudba/literatura/tibet2/index-187.html                               |   334 [31m-[m
+ knihy-hudba/literatura/tibet2/index-188.html                               |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-189.html                               |   388 [31m-[m
+ knihy-hudba/literatura/tibet2/index-19.html                                |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-190.html                               |   342 [31m-[m
+ knihy-hudba/literatura/tibet2/index-191.html                               |   356 [31m-[m
+ knihy-hudba/literatura/tibet2/index-192.html                               |   380 [31m-[m
+ knihy-hudba/literatura/tibet2/index-193.html                               |   387 [31m-[m
+ knihy-hudba/literatura/tibet2/index-194.html                               |   307 [31m-[m
+ knihy-hudba/literatura/tibet2/index-195.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-196.html                               |   311 [31m-[m
+ knihy-hudba/literatura/tibet2/index-197.html                               |   365 [31m-[m
+ knihy-hudba/literatura/tibet2/index-198.html                               |   366 [31m-[m
+ knihy-hudba/literatura/tibet2/index-199.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-2.html                                 |    32 [31m-[m
+ knihy-hudba/literatura/tibet2/index-20.html                                |   341 [31m-[m
+ knihy-hudba/literatura/tibet2/index-200.html                               |   395 [31m-[m
+ knihy-hudba/literatura/tibet2/index-201.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-202.html                               |   340 [31m-[m
+ knihy-hudba/literatura/tibet2/index-203.html                               |   329 [31m-[m
+ knihy-hudba/literatura/tibet2/index-204.html                               |   378 [31m-[m
+ knihy-hudba/literatura/tibet2/index-205.html                               |   381 [31m-[m
+ knihy-hudba/literatura/tibet2/index-206.html                               |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-207.html                               |   299 [31m-[m
+ knihy-hudba/literatura/tibet2/index-208.html                               |   315 [31m-[m
+ knihy-hudba/literatura/tibet2/index-209.html                               |   330 [31m-[m
+ knihy-hudba/literatura/tibet2/index-21.html                                |    55 [31m-[m
+ knihy-hudba/literatura/tibet2/index-210.html                               |   305 [31m-[m
+ knihy-hudba/literatura/tibet2/index-211.html                               |   372 [31m-[m
+ knihy-hudba/literatura/tibet2/index-212.html                               |   361 [31m-[m
+ knihy-hudba/literatura/tibet2/index-213.html                               |   341 [31m-[m
+ knihy-hudba/literatura/tibet2/index-214.html                               |   318 [31m-[m
+ knihy-hudba/literatura/tibet2/index-215.html                               |   388 [31m-[m
+ knihy-hudba/literatura/tibet2/index-216.html                               |   393 [31m-[m
+ knihy-hudba/literatura/tibet2/index-217.html                               |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-218.html                               |   387 [31m-[m
+ knihy-hudba/literatura/tibet2/index-219.html                               |   322 [31m-[m
+ knihy-hudba/literatura/tibet2/index-22.html                                |   263 [31m-[m
+ knihy-hudba/literatura/tibet2/index-220.html                               |   310 [31m-[m
+ knihy-hudba/literatura/tibet2/index-221.html                               |   321 [31m-[m
+ knihy-hudba/literatura/tibet2/index-222.html                               |   335 [31m-[m
+ knihy-hudba/literatura/tibet2/index-223.html                               |   303 [31m-[m
+ knihy-hudba/literatura/tibet2/index-224.html                               |   285 [31m-[m
+ knihy-hudba/literatura/tibet2/index-225.html                               |   366 [31m-[m
+ knihy-hudba/literatura/tibet2/index-226.html                               |   346 [31m-[m
+ knihy-hudba/literatura/tibet2/index-227.html                               |   335 [31m-[m
+ knihy-hudba/literatura/tibet2/index-228.html                               |   352 [31m-[m
+ knihy-hudba/literatura/tibet2/index-229.html                               |   276 [31m-[m
+ knihy-hudba/literatura/tibet2/index-23.html                                |   328 [31m-[m
+ knihy-hudba/literatura/tibet2/index-230.html                               |   319 [31m-[m
+ knihy-hudba/literatura/tibet2/index-231.html                               |   330 [31m-[m
+ knihy-hudba/literatura/tibet2/index-232.html                               |   328 [31m-[m
+ knihy-hudba/literatura/tibet2/index-233.html                               |   341 [31m-[m
+ knihy-hudba/literatura/tibet2/index-234.html                               |   335 [31m-[m
+ knihy-hudba/literatura/tibet2/index-235.html                               |   340 [31m-[m
+ knihy-hudba/literatura/tibet2/index-236.html                               |   341 [31m-[m
+ knihy-hudba/literatura/tibet2/index-237.html                               |   326 [31m-[m
+ knihy-hudba/literatura/tibet2/index-238.html                               |   362 [31m-[m
+ knihy-hudba/literatura/tibet2/index-239.html                               |   387 [31m-[m
+ knihy-hudba/literatura/tibet2/index-24.html                                |   382 [31m-[m
+ knihy-hudba/literatura/tibet2/index-240.html                               |   376 [31m-[m
+ knihy-hudba/literatura/tibet2/index-241.html                               |   379 [31m-[m
+ knihy-hudba/literatura/tibet2/index-242.html                               |   288 [31m-[m
+ knihy-hudba/literatura/tibet2/index-243.html                               |   396 [31m-[m
+ knihy-hudba/literatura/tibet2/index-244.html                               |   386 [31m-[m
+ knihy-hudba/literatura/tibet2/index-245.html                               |    84 [31m-[m
+ knihy-hudba/literatura/tibet2/index-246.html                               |    27 [31m-[m
+ knihy-hudba/literatura/tibet2/index-247.html                               |   130 [31m-[m
+ knihy-hudba/literatura/tibet2/index-248.html                               |   115 [31m-[m
+ knihy-hudba/literatura/tibet2/index-249.html                               |   159 [31m-[m
+ knihy-hudba/literatura/tibet2/index-25.html                                |   390 [31m-[m
+ knihy-hudba/literatura/tibet2/index-250.html                               |   192 [31m-[m
+ knihy-hudba/literatura/tibet2/index-251.html                               |   229 [31m-[m
+ knihy-hudba/literatura/tibet2/index-252.html                               |   233 [31m-[m
+ knihy-hudba/literatura/tibet2/index-253.html                               |   246 [31m-[m
+ knihy-hudba/literatura/tibet2/index-254.html                               |   244 [31m-[m
+ knihy-hudba/literatura/tibet2/index-255.html                               |   236 [31m-[m
+ knihy-hudba/literatura/tibet2/index-256.html                               |   111 [31m-[m
+ knihy-hudba/literatura/tibet2/index-257.html                               |    92 [31m-[m
+ knihy-hudba/literatura/tibet2/index-26.html                                |   339 [31m-[m
+ knihy-hudba/literatura/tibet2/index-27.html                                |   218 [31m-[m
+ knihy-hudba/literatura/tibet2/index-28.html                                |   212 [31m-[m
+ knihy-hudba/literatura/tibet2/index-29.html                                |   290 [31m-[m
+ knihy-hudba/literatura/tibet2/index-3.html                                 |    32 [31m-[m
+ knihy-hudba/literatura/tibet2/index-30.html                                |   372 [31m-[m
+ knihy-hudba/literatura/tibet2/index-31.html                                |   303 [31m-[m
+ knihy-hudba/literatura/tibet2/index-32.html                                |   386 [31m-[m
+ knihy-hudba/literatura/tibet2/index-33.html                                |   211 [31m-[m
+ knihy-hudba/literatura/tibet2/index-34.html                                |   241 [31m-[m
+ knihy-hudba/literatura/tibet2/index-35.html                                |   349 [31m-[m
+ knihy-hudba/literatura/tibet2/index-36.html                                |   390 [31m-[m
+ knihy-hudba/literatura/tibet2/index-37.html                                |   343 [31m-[m
+ knihy-hudba/literatura/tibet2/index-38.html                                |   262 [31m-[m
+ knihy-hudba/literatura/tibet2/index-39.html                                |   234 [31m-[m
+ knihy-hudba/literatura/tibet2/index-4.html                                 |    54 [31m-[m
+ knihy-hudba/literatura/tibet2/index-40.html                                |   267 [31m-[m
+ knihy-hudba/literatura/tibet2/index-41.html                                |   369 [31m-[m
+ knihy-hudba/literatura/tibet2/index-42.html                                |   387 [31m-[m
+ knihy-hudba/literatura/tibet2/index-43.html                                |   336 [31m-[m
+ knihy-hudba/literatura/tibet2/index-44.html                                |   365 [31m-[m
+ knihy-hudba/literatura/tibet2/index-45.html                                |   320 [31m-[m
+ knihy-hudba/literatura/tibet2/index-46.html                                |   136 [31m-[m
+ knihy-hudba/literatura/tibet2/index-47.html                                |   317 [31m-[m
+ knihy-hudba/literatura/tibet2/index-48.html                                |   381 [31m-[m
+ knihy-hudba/literatura/tibet2/index-49.html                                |   378 [31m-[m
+ knihy-hudba/literatura/tibet2/index-5.html                                 |    87 [31m-[m
+ knihy-hudba/literatura/tibet2/index-50.html                                |   334 [31m-[m
+ knihy-hudba/literatura/tibet2/index-51.html                                |   382 [31m-[m
+ knihy-hudba/literatura/tibet2/index-52.html                                |   385 [31m-[m
+ knihy-hudba/literatura/tibet2/index-53.html                                |   303 [31m-[m
+ knihy-hudba/literatura/tibet2/index-54.html                                |   294 [31m-[m
+ knihy-hudba/literatura/tibet2/index-55.html                                |   344 [31m-[m
+ knihy-hudba/literatura/tibet2/index-56.html                                |   360 [31m-[m
+ knihy-hudba/literatura/tibet2/index-57.html                                |   331 [31m-[m
+ knihy-hudba/literatura/tibet2/index-58.html                                |   300 [31m-[m
+ knihy-hudba/literatura/tibet2/index-59.html                                |   316 [31m-[m
+ knihy-hudba/literatura/tibet2/index-6.html                                 |   620 [31m-[m
+ knihy-hudba/literatura/tibet2/index-60.html                                |   298 [31m-[m
+ knihy-hudba/literatura/tibet2/index-61.html                                |   355 [31m-[m
+ knihy-hudba/literatura/tibet2/index-62.html                                |   379 [31m-[m
+ knihy-hudba/literatura/tibet2/index-63.html                                |   369 [31m-[m
+ knihy-hudba/literatura/tibet2/index-64.html                                |   370 [31m-[m
+ knihy-hudba/literatura/tibet2/index-65.html                                |   353 [31m-[m
+ knihy-hudba/literatura/tibet2/index-66.html                                |   372 [31m-[m
+ knihy-hudba/literatura/tibet2/index-67.html                                |   370 [31m-[m
+ knihy-hudba/literatura/tibet2/index-68.html                                |   286 [31m-[m
+ knihy-hudba/literatura/tibet2/index-69.html                                |   314 [31m-[m
+ knihy-hudba/literatura/tibet2/index-7.html                                 |   799 [31m-[m
+ knihy-hudba/literatura/tibet2/index-70.html                                |   310 [31m-[m
+ knihy-hudba/literatura/tibet2/index-71.html                                |   407 [31m-[m
+ knihy-hudba/literatura/tibet2/index-72.html                                |   360 [31m-[m
+ knihy-hudba/literatura/tibet2/index-73.html                                |   363 [31m-[m
+ knihy-hudba/literatura/tibet2/index-74.html                                |   364 [31m-[m
+ knihy-hudba/literatura/tibet2/index-75.html                                |   368 [31m-[m
+ knihy-hudba/literatura/tibet2/index-76.html                                |   371 [31m-[m
+ knihy-hudba/literatura/tibet2/index-77.html                                |   277 [31m-[m
+ knihy-hudba/literatura/tibet2/index-78.html                                |   312 [31m-[m
+ knihy-hudba/literatura/tibet2/index-79.html                                |   337 [31m-[m
+ knihy-hudba/literatura/tibet2/index-8.html                                 |   202 [31m-[m
+ knihy-hudba/literatura/tibet2/index-80.html                                |   389 [31m-[m
+ knihy-hudba/literatura/tibet2/index-81.html                                |   381 [31m-[m
+ knihy-hudba/literatura/tibet2/index-82.html                                |   372 [31m-[m
+ knihy-hudba/literatura/tibet2/index-83.html                                |   357 [31m-[m
+ knihy-hudba/literatura/tibet2/index-84.html                                |   373 [31m-[m
+ knihy-hudba/literatura/tibet2/index-85.html                                |   378 [31m-[m
+ knihy-hudba/literatura/tibet2/index-86.html                                |   380 [31m-[m
+ knihy-hudba/literatura/tibet2/index-87.html                                |   329 [31m-[m
+ knihy-hudba/literatura/tibet2/index-88.html                                |   274 [31m-[m
+ knihy-hudba/literatura/tibet2/index-89.html                                |   326 [31m-[m
+ knihy-hudba/literatura/tibet2/index-9.html                                 |    23 [31m-[m
+ knihy-hudba/literatura/tibet2/index-90.html                                |   387 [31m-[m
+ knihy-hudba/literatura/tibet2/index-91.html                                |   360 [31m-[m
+ knihy-hudba/literatura/tibet2/index-92.html                                |   344 [31m-[m
+ knihy-hudba/literatura/tibet2/index-93.html                                |   345 [31m-[m
+ knihy-hudba/literatura/tibet2/index-94.html                                |   320 [31m-[m
+ knihy-hudba/literatura/tibet2/index-95.html                                |   357 [31m-[m
+ knihy-hudba/literatura/tibet2/index-96.html                                |   359 [31m-[m
+ knihy-hudba/literatura/tibet2/index-97.html                                |   290 [31m-[m
+ knihy-hudba/literatura/tibet2/index-98.html                                |   288 [31m-[m
+ knihy-hudba/literatura/tibet2/index-99.html                                |   377 [31m-[m
+ knihy-hudba/literatura/tibet2/index.html                                   |     9 [31m-[m
+ knihy-hudba/literatura/tibet2/index001.png                                 |   Bin [31m27893[m -> [32m0[m bytes
+ knihy-hudba/literatura/tibet2/index002.png                                 |   Bin [31m2082[m -> [32m0[m bytes
+ knihy-hudba/literatura/tibet2/index003.png                                 |   Bin [31m2927[m -> [32m0[m bytes
+ knihy-hudba/literatura/tibet2/index247.png                                 |   Bin [31m2778[m -> [32m0[m bytes
+ knihy-hudba/literatura/tibet2/index248.png                                 |   Bin [31m2781[m -> [32m0[m bytes
+ knihy-hudba/literatura/tibet2/index_ind.html                               |   265 [31m-[m
+ knihy-hudba/literatura/tibet2/page.css                                     |     6 [31m-[m
+ knihy-hudba/literatura/tnt/cas.html                                        |   642 [31m-[m
+ knihy-hudba/literatura/tnt/index.html                                      |    21 [31m-[m
+ knihy-hudba/literatura/tnt/obalka.html                                     |    21 [31m-[m
+ knihy-hudba/literatura/tnt/obalka.jpg                                      |   Bin [31m26424[m -> [32m0[m bytes
+ knihy-hudba/literatura/tnt/obsah.html                                      |    36 [31m-[m
+ knihy-hudba/literatura/tnt/tajne_nauky_tibetu-big.jpg                      |   Bin [31m26424[m -> [32m0[m bytes
+ knihy-hudba/literatura/tnt/tajne_nauky_tibetu-s.jpg                        |   Bin [31m6895[m -> [32m0[m bytes
+ knihy-hudba/literatura/tnt/tajne_nauky_tibetu.html                         |    38 [31m-[m
+ knihy-hudba/literatura/tnt/tajne_nauky_tibetu.jpg                          |   Bin [31m15621[m -> [32m0[m bytes
+ knihy-hudba/literatura/tnt/tnt1.html                                       |   232 [31m-[m
+ knihy-hudba/literatura/tnt/tnt10.html                                      |   308 [31m-[m
+ knihy-hudba/literatura/tnt/tnt2.html                                       |   170 [31m-[m
+ knihy-hudba/literatura/tnt/tnt3.html                                       |   191 [31m-[m
+ knihy-hudba/literatura/tnt/tnt4.html                                       |   167 [31m-[m
+ knihy-hudba/literatura/tnt/tnt5.html                                       |  

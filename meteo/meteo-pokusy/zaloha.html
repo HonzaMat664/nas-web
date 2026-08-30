@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>zaloha</title>
+  </head>
+  <body>
+    <br>
+    <p style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+      font-style: normal; font-variant-caps: normal; font-weight: 400;
+      letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span>Cílem je mít<span
+          class="Apple-converted-space">&nbsp;</span></span><strong><span>jedním
+          příkazem</span></strong><span><span
+          class="Apple-converted-space">&nbsp;</span>zazálohované:</span></p>
+    <ul data-spread="false" style="caret-color: rgb(0, 0, 0); color:
+      rgb(0, 0, 0); font-style: normal; font-variant-caps: normal;
+      font-weight: 400; letter-spacing: normal; orphans: auto;
+      text-align: start; text-indent: 0px; text-transform: none;
+      white-space: normal; widows: auto; word-spacing: 0px;
+      -webkit-text-stroke-width: 0px; text-decoration: none;">
+      <li>
+        <p><span>konfigurace systému (systemd služby, cron)</span></p>
+      </li>
+      <li>
+        <p><span>Python projekt + virtuální prostředí</span></p>
+      </li>
+      <li>
+        <p><span>CSV data</span></p>
+      </li>
+      <li>
+        <p><span>Git repozitář (stav + remote)</span></p>
+      </li>
+    </ul>
+    <b>
+      <meta charset="UTF-8">
+      <br>
+      struktura záloh:</b><br>
+    <meta charset="UTF-8">
+    <br>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/backups/</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">├─ meteo-backup-YYYY-MM-DD.tar.gz</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">└─ meteo-backup-latest.tar.gz</div>
+    <meta charset="UTF-8">
+    <br>
+    <br>
+    <br>
+    <b>backup.sh:</b><br>
+    <br>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼi">#!/bin/bash</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼk">set</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-e</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">BACKUP_DIR</span>=<span
+        class="ͼl">"</span><span class="ͼo">$HOME</span><span class="ͼl">/backups"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">DATE</span>=<span
+        class="ͼh">$(date +%F)</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">NAME</span>=<span
+        class="ͼl">"meteo-backup-</span><span class="ͼo">$DATE</span><span
+        class="ͼl">.tar.gz"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">LATEST</span>=<span
+        class="ͼl">"meteo-backup-latest.tar.gz"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">mkdir</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-p</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$BACKUP_DIR</span><span class="ͼl">"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>tar czf<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$BACKUP_DIR</span><span class="ͼl">/</span><span
+        class="ͼo">$NAME</span><span class="ͼl">"</span><span
+        class="Apple-converted-space">&nbsp;</span>\</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/etc/systemd/system/meteostanice.service \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/etc/systemd/system/meteostanice.timer \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/etc/cron.d \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/home/honza/nas-web \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/home/honza/venv \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/var/www/html/meteostanice \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/etc/timezone \</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">/etc/localtime</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">cp</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$BACKUP_DIR</span><span class="ͼl">/</span><span
+        class="ͼo">$NAME</span><span class="ͼl">"</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$BACKUP_DIR</span><span class="ͼl">/</span><span
+        class="ͼo">$LATEST</span><span class="ͼl">"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">echo</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"✅
+        Záloha hotová:<span class="Apple-converted-space">&nbsp;</span></span><span
+        class="ͼo">$BACKUP_DIR</span><span class="ͼl">/</span><span
+        class="ͼo">$NAME</span><span class="ͼl">"</span></div>
+    <meta charset="UTF-8">
+    <br>
+    <b>restore.sh:</b><br>
+    <br>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼi">#!/bin/bash</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼk">set</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-e</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">ARCHIVE</span>=<span
+        class="ͼo">$1</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼk">if</span><span
+        class="Apple-converted-space">&nbsp;</span>[<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-z</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$ARCHIVE</span><span class="ͼl">"</span><span
+        class="Apple-converted-space">&nbsp;</span>];<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼk">then</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">echo</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"Použití:
+        ./restore.sh meteo-backup-YYYY-MM-DD.tar.gz"</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼk">exit</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼm">1</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼk">fi</span></div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>tar xzf<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"</span><span
+        class="ͼo">$ARCHIVE</span><span class="ͼl">"</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-C</span><span
+        class="Apple-converted-space">&nbsp;</span>/</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>systemctl
+      daemon-reexec</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>systemctl
+      daemon-reload</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>systemctl enable
+      meteostanice.service</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">sudo</span><span
+        class="Apple-converted-space">&nbsp;</span>systemctl<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼo">start</span><span
+        class="Apple-converted-space">&nbsp;</span>meteostanice.service</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">cd</span><span
+        class="Apple-converted-space">&nbsp;</span>/home/honza/nas-web</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">source</span><span
+        class="Apple-converted-space">&nbsp;</span>/home/honza/venv/bin/activate</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;">pip install<span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼn">-r</span><span
+        class="Apple-converted-space">&nbsp;</span>requirements.txt</div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><br>
+    </div>
+    <div class="cm-line" style="caret-color: rgb(0, 0, 0); color: rgb(0,
+      0, 0); font-style: normal; font-variant-caps: normal; font-weight:
+      400; letter-spacing: normal; orphans: auto; text-align: start;
+      text-indent: 0px; text-transform: none; white-space: normal;
+      widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      text-decoration: none;"><span class="ͼo">echo</span><span
+        class="Apple-converted-space">&nbsp;</span><span class="ͼl">"♻️
+        Obnova dokončena"<br>
+        <br>
+        Ověření:<br>
+        <br>
+      </span><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0,
+        0); font-family: -webkit-standard; font-size: medium;
+        font-style: normal; font-variant-caps: normal; font-weight: 400;
+        letter-spacing: normal; orphans: auto; text-align: start;
+        text-indent: 0px; text-transform: none; white-space: normal;
+        widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+        text-decoration: none; display: inline !important; float: none;">tar
+        tzf ~/backups/meteo-backup-latest.tar.gz | less<br>
+      </span><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0,
+        0); font-family: -webkit-standard; font-size: medium;
+        font-style: normal; font-variant-caps: normal; font-weight: 400;
+        letter-spacing: normal; orphans: auto; text-align: start;
+        text-indent: 0px; text-transform: none; white-space: normal;
+        widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+        text-decoration: none; display: inline !important; float: none;">systemctl
+        status meteostanice</span><br>
+      <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);
+        font-family: -webkit-standard; font-size: medium; font-style:
+        normal; font-variant-caps: normal; font-weight: 400;
+        letter-spacing: normal; orphans: auto; text-align: start;
+        text-indent: 0px; text-transform: none; white-space: normal;
+        widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;
+        text-decoration: none; display: inline !important; float: none;"></span><span
+        class="ͼl"></span></div>
+    <meta charset="UTF-8">
+  </body>
+</html>

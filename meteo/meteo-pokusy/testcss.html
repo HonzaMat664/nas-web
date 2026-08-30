@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+
+<head>
+<meta charset="UTF-8">
+<title>Test style.css</title>
+
+<link rel="stylesheet" href="/css/style.css?v=1.0">
+
+</head>
+
+<body>
+
+<header>
+<h1>Test všech prvků style.css</h1>
+</header>
+
+<nav>
+<a href="#">Domů</a>
+<a href="#">Meteo</a>
+<a href="#">Grafy</a>
+<a href="#">Data</a>
+<a href="#">O projektu</a>
+</nav>
+
+<main>
+
+<p>
+Tato stránka ukazuje všechny prvky definované v souboru <b>style.css</b>.
+</p>
+
+<div id="out">
+Načítání dat...
+
+<span class="out-ok">✓ Senzor připojen</span> <span class="out-warning">⚠ Slabý signál</span> <span class="out-error">✗ Chyba komunikace</span>
+
+</div>
+
+<section class="section">
+
+<p>Užitečné odkazy:</p>
+
+<a href="#">Meteostanice</a> <a href="#">Historie dat</a> <a href="#">GitHub</a> <a href="#">Dokumentace</a>
+
+</section>
+
+<canvas id="graf" width="800" height="300"></canvas>
+
+<p>
+Graf výše je test vykreslení do canvasu.
+</p>
+
+</main>
+
+<footer>
+© 2026 Meteostanice
+</footer>
+
+<script>
+
+const canvas = document.getElementById("graf");
+const ctx = canvas.getContext("2d");
+
+const w = canvas.width;
+const h = canvas.height;
+
+/* pozadí */
+ctx.fillStyle = "#222";
+ctx.fillRect(0,0,w,h);
+
+/* osa */
+ctx.strokeStyle = "#555";
+ctx.beginPath();
+ctx.moveTo(0,h/2);
+ctx.lineTo(w,h/2);
+ctx.stroke();
+
+/* graf */
+ctx.strokeStyle = "#00cc66";
+ctx.lineWidth = 2;
+ctx.beginPath();
+
+for (let x = 0; x < w; x++) {
+
+let y = h/2 + Math.sin(x*0.02)*80;
+
+if (x === 0)
+ctx.moveTo(x,y);
+else
+ctx.lineTo(x,y);
+
+}
+
+ctx.stroke();
+
+</script>
+
+</body>
+</html>

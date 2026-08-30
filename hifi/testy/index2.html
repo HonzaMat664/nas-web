@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HiFi Control</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.box {
+    background: #222;
+    padding: 18px;
+    margin: 15px auto;
+    display: inline-block;
+    border-radius: 15px;
+    min-width: 320px;
+}
+
+button {
+    padding: 10px 14px;
+    margin: 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #2d6cdf;
+    color: white;
+}
+
+button:hover {
+    background: #1f4ea8;
+}
+
+.amp button {
+    background: #e06c2f;
+}
+
+.amp button:hover {
+    background: #b8521f;
+}
+
+input[type=range] {
+    width: 250px;
+}
+
+/* LED */
+.led {
+    display:inline-block;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#444;
+    margin-left:10px;
+    border:1px solid #222;
+}
+
+.led.play {
+    background:lime;
+    box-shadow:0 0 8px lime;
+}
+
+.led.pause {
+    background:lime;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity:0; }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- VOLUMIO 1 -->
+<div class="box">
+    <a href="http://pioneer.local/browse">Pioneer</a>
+    <span id="led1" class="led"></span>
+
+    <button onclick="v1('play')">▶</button>
+    <button onclick="v1('pause')">⏸</button>
+    <button onclick="v1('stop')">⏹</button>
+    <button onclick="v1('next')">⏭</button>
+
+    <input type="range" min="0" max="100" value="50"
+           oninput="vol1(this.value)">
+</div>
+
+<!-- AMPLIFIER -->
+<div class="box amp">
+ax 496
+
+<button onclick="amp('0x7A1F')">⏻</button>
+<button onclick="amp('0x7A1A')">+</button>
+<button onclick="amp('0x7A1B')">-</button>
+<button onclick="amp('0x7A15')">CD</button>
+</div>
+
+<!-- VOLUMIO 2 -->
+<div class="box">
+Out
+<span id="led2" class="led"></span>
+
+<button onclick="v2('play')">▶</button>
+<button onclick="v2('pause')">⏸</button>
+<button onclick="v2('stop')">⏹</button>
+
+<input type="range" min="0" max="100" value="50"
+       oninput="vol2(this.value)">
+</div>
+
+<!-- VOLUMIO 3 -->
+<div class="box">
+Půda
+<span id="led3" class="led"></span>
+
+<button onclick="v3('play')">▶</button>
+<button onclick="v3('pause')">⏸</button>
+<button onclick="v3('stop')">⏹</button>
+
+<input type="range" min="0" max="100" value="50"
+       oninput="vol3(this.value)">
+</div>
+
+<script>
+
+/* IPs */
+const V1 = "http://192.168.1.139:3000/api/v1/commands/?cmd=";
+const V2 = "http://192.168.1.105:3000/api/v1/commands/?cmd=";
+const V3 = "http://192.168.1.138:3000/api/v1/commands/?cmd=";
+const AMP = "http://192.168.1.151:5000/send?code=";
+
+/* commands */
+function v1(cmd) { fetch(V1 + cmd).catch(console.error); }
+function v2(cmd) { fetch(V2 + cmd).catch(console.error); }
+function v3(cmd) { fetch(V3 + cmd).catch(console.error); }
+
+function vol1(v) { fetch(V1 + "volume&volume=" + v).catch(console.error); }
+function vol2(v) { fetch(V2 + "volume&volume=" + v).catch(console.error); }
+function vol3(v) { fetch(V3 + "volume&volume=" + v).catch(console.error); }
+
+function amp(code) { fetch(AMP + code).catch(console.error); }
+
+/* LED */
+function setLed(id, state) {
+    const led = document.getElementById(id);
+    if (!led) return;
+
+    led.classList.remove("play", "pause");
+
+    if (state === "play") led.classList.add("play");
+    else if (state === "pause") led.classList.add("pause");
+}
+
+/* SYNC Volumio */
+function sync(url, ledId) {
+    fetch(url)
+        .then(r => r.json())
+        .then(data => {
+            const state = data.status;
+
+            if (state === "play") setLed(ledId, "play");
+            else if (state === "pause") setLed(ledId, "pause");
+            else setLed(ledId, "stop");
+        })
+        .catch(console.error);
+}
+
+function sync1() { sync(V1 + "getState", "led1"); }
+function sync2() { sync(V2 + "getState", "led2"); }
+function sync3() { sync(V3 + "getState", "led3"); }
+
+/* start */
+sync1();
+sync2();
+sync3();
+
+/* auto refresh */
+setInterval(() => {
+    sync1();
+    sync2();
+    sync3();
+}, 2000);
+
+</script>
+
+</body>
+</html>

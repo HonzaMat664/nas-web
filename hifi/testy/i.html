@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>LED TEST</title>
+
+<style>
+body {
+    background:#111;
+    color:#fff;
+    text-align:center;
+    font-family:Arial;
+    margin-top:50px;
+}
+
+.led {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#444;
+    margin:20px;
+    border:2px solid #222;
+}
+
+/* PLAY = svítí */
+.play {
+    background:lime;
+    box-shadow:0 0 15px lime;
+}
+
+/* PAUSE = bliká */
+.pause {
+    background:lime;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    50% { opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<h2>LED TEST</h2>
+
+<div id="led1" class="led"></div>
+
+<br>
+
+<button onclick="setLed('play')">PLAY</button>
+<button onclick="setLed('pause')">PAUSE</button>
+<button onclick="setLed('stop')">STOP</button>
+
+<script>
+function setLed(state) {
+    const led = document.getElementById("led1");
+
+    // reset
+    led.classList.remove("play", "pause");
+
+    if (state === "play") {
+        led.classList.add("play");
+    }
+
+    if (state === "pause") {
+        led.classList.add("pause");
+    }
+
+    // stop = nic (zhasne)
+}
+</script>
+
+</body>
+</html>
