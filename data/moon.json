@@ -1,0 +1,14 @@
+[
+  {
+    "time": "2026-04-08T16:00:05.940839",
+    "altitude_deg": -68.58,
+    "azimuth_deg": 0.74,
+    "phase_percent": 64.6,
+    "illuminated_fraction": 0.646,
+    "angular_diameter_deg": 0.486,
+    "rise_time": "2026-04-09T02:52:53.330714",
+    "set_time": "2026-04-09T09:59:14.056844",
+    "next_new_moon": "2026-04-17T13:51:44.166872",
+    "next_full_moon": "2026-05-01T19:23:06.539206"
+  }
+]

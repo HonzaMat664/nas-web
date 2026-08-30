@@ -1,0 +1,875 @@
+{
+    "interval_min": 10,
+    "vychod": "2026-04-19T05:56:59.247544+02:00",
+    "zapad": "2026-04-19T19:57:47.481784+02:00",
+    "kulminace": "2026-04-19T12:56:52.367364+02:00",
+    "delka_dne_hod": 14.01,
+    "nejblizsi_slunovrat": "2026-06-21T10:24:31.360142+02:00",
+    "nejblizsi_rovnodennost": "2026-09-23T02:05:09.386934+02:00",
+    "data": [
+        {
+            "cas": "2026-04-19T00:00:00+02:00",
+            "azimut_stellarium": 164.16,
+            "azimut_stupne": 344.16,
+            "vyska_stupne": -27.77
+        },
+        {
+            "cas": "2026-04-19T00:10:00+02:00",
+            "azimut_stellarium": 166.9,
+            "azimut_stupne": 346.9,
+            "vyska_stupne": -28.17
+        },
+        {
+            "cas": "2026-04-19T00:20:00+02:00",
+            "azimut_stellarium": 169.66,
+            "azimut_stupne": 349.66,
+            "vyska_stupne": -28.49
+        },
+        {
+            "cas": "2026-04-19T00:30:00+02:00",
+            "azimut_stellarium": 172.45,
+            "azimut_stupne": 352.45,
+            "vyska_stupne": -28.74
+        },
+        {
+            "cas": "2026-04-19T00:40:00+02:00",
+            "azimut_stellarium": 175.24,
+            "azimut_stupne": 355.24,
+            "vyska_stupne": -28.91
+        },
+        {
+            "cas": "2026-04-19T00:50:00+02:00",
+            "azimut_stellarium": 178.04,
+            "azimut_stupne": 358.04,
+            "vyska_stupne": -29.0
+        },
+        {
+            "cas": "2026-04-19T01:00:00+02:00",
+            "azimut_stellarium": 180.85,
+            "azimut_stupne": 0.85,
+            "vyska_stupne": -29.02
+        },
+        {
+            "cas": "2026-04-19T01:10:00+02:00",
+            "azimut_stellarium": 183.65,
+            "azimut_stupne": 3.65,
+            "vyska_stupne": -28.95
+        },
+        {
+            "cas": "2026-04-19T01:20:00+02:00",
+            "azimut_stellarium": 186.45,
+            "azimut_stupne": 6.45,
+            "vyska_stupne": -28.81
+        },
+        {
+            "cas": "2026-04-19T01:30:00+02:00",
+            "azimut_stellarium": 189.23,
+            "azimut_stupne": 9.23,
+            "vyska_stupne": -28.59
+        },
+        {
+            "cas": "2026-04-19T01:40:00+02:00",
+            "azimut_stellarium": 192.0,
+            "azimut_stupne": 12.0,
+            "vyska_stupne": -28.29
+        },
+        {
+            "cas": "2026-04-19T01:50:00+02:00",
+            "azimut_stellarium": 194.75,
+            "azimut_stupne": 14.75,
+            "vyska_stupne": -27.91
+        },
+        {
+            "cas": "2026-04-19T02:00:00+02:00",
+            "azimut_stellarium": 197.48,
+            "azimut_stupne": 17.48,
+            "vyska_stupne": -27.46
+        },
+        {
+            "cas": "2026-04-19T02:10:00+02:00",
+            "azimut_stellarium": 200.17,
+            "azimut_stupne": 20.17,
+            "vyska_stupne": -26.94
+        },
+        {
+            "cas": "2026-04-19T02:20:00+02:00",
+            "azimut_stellarium": 202.84,
+            "azimut_stupne": 22.84,
+            "vyska_stupne": -26.35
+        },
+        {
+            "cas": "2026-04-19T02:30:00+02:00",
+            "azimut_stellarium": 205.46,
+            "azimut_stupne": 25.46,
+            "vyska_stupne": -25.69
+        },
+        {
+            "cas": "2026-04-19T02:40:00+02:00",
+            "azimut_stellarium": 208.06,
+            "azimut_stupne": 28.06,
+            "vyska_stupne": -24.96
+        },
+        {
+            "cas": "2026-04-19T02:50:00+02:00",
+            "azimut_stellarium": 210.61,
+            "azimut_stupne": 30.61,
+            "vyska_stupne": -24.17
+        },
+        {
+            "cas": "2026-04-19T03:00:00+02:00",
+            "azimut_stellarium": 213.12,
+            "azimut_stupne": 33.12,
+            "vyska_stupne": -23.31
+        },
+        {
+            "cas": "2026-04-19T03:10:00+02:00",
+            "azimut_stellarium": 215.6,
+            "azimut_stupne": 35.6,
+            "vyska_stupne": -22.4
+        },
+        {
+            "cas": "2026-04-19T03:20:00+02:00",
+            "azimut_stellarium": 218.03,
+            "azimut_stupne": 38.03,
+            "vyska_stupne": -21.44
+        },
+        {
+            "cas": "2026-04-19T03:30:00+02:00",
+            "azimut_stellarium": 220.41,
+            "azimut_stupne": 40.41,
+            "vyska_stupne": -20.41
+        },
+        {
+            "cas": "2026-04-19T03:40:00+02:00",
+            "azimut_stellarium": 222.76,
+            "azimut_stupne": 42.76,
+            "vyska_stupne": -19.34
+        },
+        {
+            "cas": "2026-04-19T03:50:00+02:00",
+            "azimut_stellarium": 225.07,
+            "azimut_stupne": 45.07,
+            "vyska_stupne": -18.22
+        },
+        {
+            "cas": "2026-04-19T04:00:00+02:00",
+            "azimut_stellarium": 227.33,
+            "azimut_stupne": 47.33,
+            "vyska_stupne": -17.06
+        },
+        {
+            "cas": "2026-04-19T04:10:00+02:00",
+            "azimut_stellarium": 229.56,
+            "azimut_stupne": 49.56,
+            "vyska_stupne": -15.85
+        },
+        {
+            "cas": "2026-04-19T04:20:00+02:00",
+            "azimut_stellarium": 231.75,
+            "azimut_stupne": 51.75,
+            "vyska_stupne": -14.6
+        },
+        {
+            "cas": "2026-04-19T04:30:00+02:00",
+            "azimut_stellarium": 233.9,
+            "azimut_stupne": 53.9,
+            "vyska_stupne": -13.32
+        },
+        {
+            "cas": "2026-04-19T04:40:00+02:00",
+            "azimut_stellarium": 236.02,
+            "azimut_stupne": 56.02,
+            "vyska_stupne": -12.0
+        },
+        {
+            "cas": "2026-04-19T04:50:00+02:00",
+            "azimut_stellarium": 238.11,
+            "azimut_stupne": 58.11,
+            "vyska_stupne": -10.64
+        },
+        {
+            "cas": "2026-04-19T05:00:00+02:00",
+            "azimut_stellarium": 240.16,
+            "azimut_stupne": 60.16,
+            "vyska_stupne": -9.26
+        },
+        {
+            "cas": "2026-04-19T05:10:00+02:00",
+            "azimut_stellarium": 242.19,
+            "azimut_stupne": 62.19,
+            "vyska_stupne": -7.83
+        },
+        {
+            "cas": "2026-04-19T05:20:00+02:00",
+            "azimut_stellarium": 244.19,
+            "azimut_stupne": 64.19,
+            "vyska_stupne": -6.3
+        },
+        {
+            "cas": "2026-04-19T05:30:00+02:00",
+            "azimut_stellarium": 246.17,
+            "azimut_stupne": 66.17,
+            "vyska_stupne": -4.22
+        },
+        {
+            "cas": "2026-04-19T05:40:00+02:00",
+            "azimut_stellarium": 248.13,
+            "azimut_stupne": 68.13,
+            "vyska_stupne": -2.12
+        },
+        {
+            "cas": "2026-04-19T05:50:00+02:00",
+            "azimut_stellarium": 250.07,
+            "azimut_stupne": 70.07,
+            "vyska_stupne": -1.07
+        },
+        {
+            "cas": "2026-04-19T06:00:00+02:00",
+            "azimut_stellarium": 251.99,
+            "azimut_stupne": 71.99,
+            "vyska_stupne": 0.11
+        },
+        {
+            "cas": "2026-04-19T06:10:00+02:00",
+            "azimut_stellarium": 253.9,
+            "azimut_stupne": 73.9,
+            "vyska_stupne": 1.46
+        },
+        {
+            "cas": "2026-04-19T06:20:00+02:00",
+            "azimut_stellarium": 255.79,
+            "azimut_stupne": 75.79,
+            "vyska_stupne": 2.91
+        },
+        {
+            "cas": "2026-04-19T06:30:00+02:00",
+            "azimut_stellarium": 257.68,
+            "azimut_stupne": 77.68,
+            "vyska_stupne": 4.42
+        },
+        {
+            "cas": "2026-04-19T06:40:00+02:00",
+            "azimut_stellarium": 259.57,
+            "azimut_stupne": 79.57,
+            "vyska_stupne": 5.96
+        },
+        {
+            "cas": "2026-04-19T06:50:00+02:00",
+            "azimut_stellarium": 261.45,
+            "azimut_stupne": 81.45,
+            "vyska_stupne": 7.53
+        },
+        {
+            "cas": "2026-04-19T07:00:00+02:00",
+            "azimut_stellarium": 263.33,
+            "azimut_stupne": 83.33,
+            "vyska_stupne": 9.11
+        },
+        {
+            "cas": "2026-04-19T07:10:00+02:00",
+            "azimut_stellarium": 265.21,
+            "azimut_stupne": 85.21,
+            "vyska_stupne": 10.7
+        },
+        {
+            "cas": "2026-04-19T07:20:00+02:00",
+            "azimut_stellarium": 267.1,
+            "azimut_stupne": 87.1,
+            "vyska_stupne": 12.3
+        },
+        {
+            "cas": "2026-04-19T07:30:00+02:00",
+            "azimut_stellarium": 269.0,
+            "azimut_stupne": 89.0,
+            "vyska_stupne": 13.9
+        },
+        {
+            "cas": "2026-04-19T07:40:00+02:00",
+            "azimut_stellarium": 270.91,
+            "azimut_stupne": 90.91,
+            "vyska_stupne": 15.51
+        },
+        {
+            "cas": "2026-04-19T07:50:00+02:00",
+            "azimut_stellarium": 272.83,
+            "azimut_stupne": 92.83,
+            "vyska_stupne": 17.11
+        },
+        {
+            "cas": "2026-04-19T08:00:00+02:00",
+            "azimut_stellarium": 274.78,
+            "azimut_stupne": 94.78,
+            "vyska_stupne": 18.72
+        },
+        {
+            "cas": "2026-04-19T08:10:00+02:00",
+            "azimut_stellarium": 276.75,
+            "azimut_stupne": 96.75,
+            "vyska_stupne": 20.32
+        },
+        {
+            "cas": "2026-04-19T08:20:00+02:00",
+            "azimut_stellarium": 278.74,
+            "azimut_stupne": 98.74,
+            "vyska_stupne": 21.91
+        },
+        {
+            "cas": "2026-04-19T08:30:00+02:00",
+            "azimut_stellarium": 280.77,
+            "azimut_stupne": 100.77,
+            "vyska_stupne": 23.5
+        },
+        {
+            "cas": "2026-04-19T08:40:00+02:00",
+            "azimut_stellarium": 282.82,
+            "azimut_stupne": 102.82,
+            "vyska_stupne": 25.08
+        },
+        {
+            "cas": "2026-04-19T08:50:00+02:00",
+            "azimut_stellarium": 284.92,
+            "azimut_stupne": 104.92,
+            "vyska_stupne": 26.64
+        },
+        {
+            "cas": "2026-04-19T09:00:00+02:00",
+            "azimut_stellarium": 287.06,
+            "azimut_stupne": 107.06,
+            "vyska_stupne": 28.19
+        },
+        {
+            "cas": "2026-04-19T09:10:00+02:00",
+            "azimut_stellarium": 289.25,
+            "azimut_stupne": 109.25,
+            "vyska_stupne": 29.72
+        },
+        {
+            "cas": "2026-04-19T09:20:00+02:00",
+            "azimut_stellarium": 291.49,
+            "azimut_stupne": 111.49,
+            "vyska_stupne": 31.23
+        },
+        {
+            "cas": "2026-04-19T09:30:00+02:00",
+            "azimut_stellarium": 293.79,
+            "azimut_stupne": 113.79,
+            "vyska_stupne": 32.72
+        },
+        {
+            "cas": "2026-04-19T09:40:00+02:00",
+            "azimut_stellarium": 296.15,
+            "azimut_stupne": 116.15,
+            "vyska_stupne": 34.18
+        },
+        {
+            "cas": "2026-04-19T09:50:00+02:00",
+            "azimut_stellarium": 298.58,
+            "azimut_stupne": 118.58,
+            "vyska_stupne": 35.61
+        },
+        {
+            "cas": "2026-04-19T10:00:00+02:00",
+            "azimut_stellarium": 301.07,
+            "azimut_stupne": 121.07,
+            "vyska_stupne": 37.01
+        },
+        {
+            "cas": "2026-04-19T10:10:00+02:00",
+            "azimut_stellarium": 303.65,
+            "azimut_stupne": 123.65,
+            "vyska_stupne": 38.37
+        },
+        {
+            "cas": "2026-04-19T10:20:00+02:00",
+            "azimut_stellarium": 306.31,
+            "azimut_stupne": 126.31,
+            "vyska_stupne": 39.69
+        },
+        {
+            "cas": "2026-04-19T10:30:00+02:00",
+            "azimut_stellarium": 309.06,
+            "azimut_stupne": 129.06,
+            "vyska_stupne": 40.96
+        },
+        {
+            "cas": "2026-04-19T10:40:00+02:00",
+            "azimut_stellarium": 311.89,
+            "azimut_stupne": 131.89,
+            "vyska_stupne": 42.19
+        },
+        {
+            "cas": "2026-04-19T10:50:00+02:00",
+            "azimut_stellarium": 314.83,
+            "azimut_stupne": 134.83,
+            "vyska_stupne": 43.36
+        },
+        {
+            "cas": "2026-04-19T11:00:00+02:00",
+            "azimut_stellarium": 317.86,
+            "azimut_stupne": 137.86,
+            "vyska_stupne": 44.48
+        },
+        {
+            "cas": "2026-04-19T11:10:00+02:00",
+            "azimut_stellarium": 320.99,
+            "azimut_stupne": 140.99,
+            "vyska_stupne": 45.53
+        },
+        {
+            "cas": "2026-04-19T11:20:00+02:00",
+            "azimut_stellarium": 324.23,
+            "azimut_stupne": 144.23,
+            "vyska_stupne": 46.51
+        },
+        {
+            "cas": "2026-04-19T11:30:00+02:00",
+            "azimut_stellarium": 327.57,
+            "azimut_stupne": 147.57,
+            "vyska_stupne": 47.41
+        },
+        {
+            "cas": "2026-04-19T11:40:00+02:00",
+            "azimut_stellarium": 331.01,
+            "azimut_stupne": 151.01,
+            "vyska_stupne": 48.24
+        },
+        {
+            "cas": "2026-04-19T11:50:00+02:00",
+            "azimut_stellarium": 334.55,
+            "azimut_stupne": 154.55,
+            "vyska_stupne": 48.98
+        },
+        {
+            "cas": "2026-04-19T12:00:00+02:00",
+            "azimut_stellarium": 338.17,
+            "azimut_stupne": 158.17,
+            "vyska_stupne": 49.62
+        },
+        {
+            "cas": "2026-04-19T12:10:00+02:00",
+            "azimut_stellarium": 341.88,
+            "azimut_stupne": 161.88,
+            "vyska_stupne": 50.18
+        },
+        {
+            "cas": "2026-04-19T12:20:00+02:00",
+            "azimut_stellarium": 345.66,
+            "azimut_stupne": 165.66,
+            "vyska_stupne": 50.63
+        },
+        {
+            "cas": "2026-04-19T12:30:00+02:00",
+            "azimut_stellarium": 349.5,
+            "azimut_stupne": 169.5,
+            "vyska_stupne": 50.98
+        },
+        {
+            "cas": "2026-04-19T12:40:00+02:00",
+            "azimut_stellarium": 353.39,
+            "azimut_stupne": 173.39,
+            "vyska_stupne": 51.22
+        },
+        {
+            "cas": "2026-04-19T12:50:00+02:00",
+            "azimut_stellarium": 357.3,
+            "azimut_stupne": 177.3,
+            "vyska_stupne": 51.35
+        },
+        {
+            "cas": "2026-04-19T13:00:00+02:00",
+            "azimut_stellarium": 1.23,
+            "azimut_stupne": 181.23,
+            "vyska_stupne": 51.37
+        },
+        {
+            "cas": "2026-04-19T13:10:00+02:00",
+            "azimut_stellarium": 5.15,
+            "azimut_stupne": 185.15,
+            "vyska_stupne": 51.29
+        },
+        {
+            "cas": "2026-04-19T13:20:00+02:00",
+            "azimut_stellarium": 9.05,
+            "azimut_stupne": 189.05,
+            "vyska_stupne": 51.09
+        },
+        {
+            "cas": "2026-04-19T13:30:00+02:00",
+            "azimut_stellarium": 12.91,
+            "azimut_stupne": 192.91,
+            "vyska_stupne": 50.79
+        },
+        {
+            "cas": "2026-04-19T13:40:00+02:00",
+            "azimut_stellarium": 16.72,
+            "azimut_stupne": 196.72,
+            "vyska_stupne": 50.38
+        },
+        {
+            "cas": "2026-04-19T13:50:00+02:00",
+            "azimut_stellarium": 20.46,
+            "azimut_stupne": 200.46,
+            "vyska_stupne": 49.87
+        },
+        {
+            "cas": "2026-04-19T14:00:00+02:00",
+            "azimut_stellarium": 24.12,
+            "azimut_stupne": 204.12,
+            "vyska_stupne": 49.26
+        },
+        {
+            "cas": "2026-04-19T14:10:00+02:00",
+            "azimut_stellarium": 27.69,
+            "azimut_stupne": 207.69,
+            "vyska_stupne": 48.56
+        },
+        {
+            "cas": "2026-04-19T14:20:00+02:00",
+            "azimut_stellarium": 31.17,
+            "azimut_stupne": 211.17,
+            "vyska_stupne": 47.77
+        },
+        {
+            "cas": "2026-04-19T14:30:00+02:00",
+            "azimut_stellarium": 34.55,
+            "azimut_stupne": 214.55,
+            "vyska_stupne": 46.9
+        },
+        {
+            "cas": "2026-04-19T14:40:00+02:00",
+            "azimut_stellarium": 37.83,
+            "azimut_stupne": 217.83,
+            "vyska_stupne": 45.95
+        },
+        {
+            "cas": "2026-04-19T14:50:00+02:00",
+            "azimut_stellarium": 41.01,
+            "azimut_stupne": 221.01,
+            "vyska_stupne": 44.93
+        },
+        {
+            "cas": "2026-04-19T15:00:00+02:00",
+            "azimut_stellarium": 44.09,
+            "azimut_stupne": 224.09,
+            "vyska_stupne": 43.84
+        },
+        {
+            "cas": "2026-04-19T15:10:00+02:00",
+            "azimut_stellarium": 47.06,
+            "azimut_stupne": 227.06,
+            "vyska_stupne": 42.69
+        },
+        {
+            "cas": "2026-04-19T15:20:00+02:00",
+            "azimut_stellarium": 49.94,
+            "azimut_stupne": 229.94,
+            "vyska_stupne": 41.49
+        },
+        {
+            "cas": "2026-04-19T15:30:00+02:00",
+            "azimut_stellarium": 52.72,
+            "azimut_stupne": 232.72,
+            "vyska_stupne": 40.23
+        },
+        {
+            "cas": "2026-04-19T15:40:00+02:00",
+            "azimut_stellarium": 55.42,
+            "azimut_stupne": 235.42,
+            "vyska_stupne": 38.93
+        },
+        {
+            "cas": "2026-04-19T15:50:00+02:00",
+            "azimut_stellarium": 58.03,
+            "azimut_stupne": 238.03,
+            "vyska_stupne": 37.59
+        },
+        {
+            "cas": "2026-04-19T16:00:00+02:00",
+            "azimut_stellarium": 60.56,
+            "azimut_stupne": 240.56,
+            "vyska_stupne": 36.21
+        },
+        {
+            "cas": "2026-04-19T16:10:00+02:00",
+            "azimut_stellarium": 63.02,
+            "azimut_stupne": 243.02,
+            "vyska_stupne": 34.79
+        },
+        {
+            "cas": "2026-04-19T16:20:00+02:00",
+            "azimut_stellarium": 65.4,
+            "azimut_stupne": 245.4,
+            "vyska_stupne": 33.34
+        },
+        {
+            "cas": "2026-04-19T16:30:00+02:00",
+            "azimut_stellarium": 67.73,
+            "azimut_stupne": 247.73,
+            "vyska_stupne": 31.87
+        },
+        {
+            "cas": "2026-04-19T16:40:00+02:00",
+            "azimut_stellarium": 69.99,
+            "azimut_stupne": 249.99,
+            "vyska_stupne": 30.37
+        },
+        {
+            "cas": "2026-04-19T16:50:00+02:00",
+            "azimut_stellarium": 72.2,
+            "azimut_stupne": 252.2,
+            "vyska_stupne": 28.85
+        },
+        {
+            "cas": "2026-04-19T17:00:00+02:00",
+            "azimut_stellarium": 74.36,
+            "azimut_stupne": 254.36,
+            "vyska_stupne": 27.31
+        },
+        {
+            "cas": "2026-04-19T17:10:00+02:00",
+            "azimut_stellarium": 76.48,
+            "azimut_stupne": 256.48,
+            "vyska_stupne": 25.76
+        },
+        {
+            "cas": "2026-04-19T17:20:00+02:00",
+            "azimut_stellarium": 78.56,
+            "azimut_stupne": 258.56,
+            "vyska_stupne": 24.19
+        },
+        {
+            "cas": "2026-04-19T17:30:00+02:00",
+            "azimut_stellarium": 80.6,
+            "azimut_stupne": 260.6,
+            "vyska_stupne": 22.61
+        },
+        {
+            "cas": "2026-04-19T17:40:00+02:00",
+            "azimut_stellarium": 82.61,
+            "azimut_stupne": 262.61,
+            "vyska_stupne": 21.02
+        },
+        {
+            "cas": "2026-04-19T17:50:00+02:00",
+            "azimut_stellarium": 84.59,
+            "azimut_stupne": 264.59,
+            "vyska_stupne": 19.42
+        },
+        {
+            "cas": "2026-04-19T18:00:00+02:00",
+            "azimut_stellarium": 86.54,
+            "azimut_stupne": 266.54,
+            "vyska_stupne": 17.82
+        },
+        {
+            "cas": "2026-04-19T18:10:00+02:00",
+            "azimut_stellarium": 88.48,
+            "azimut_stupne": 268.48,
+            "vyska_stupne": 16.22
+        },
+        {
+            "cas": "2026-04-19T18:20:00+02:00",
+            "azimut_stellarium": 90.4,
+            "azimut_stupne": 270.4,
+            "vyska_stupne": 14.62
+        },
+        {
+            "cas": "2026-04-19T18:30:00+02:00",
+            "azimut_stellarium": 92.3,
+            "azimut_stupne": 272.3,
+            "vyska_stupne": 13.02
+        },
+        {
+            "cas": "2026-04-19T18:40:00+02:00",
+            "azimut_stellarium": 94.19,
+            "azimut_stupne": 274.19,
+            "vyska_stupne": 11.42
+        },
+        {
+            "cas": "2026-04-19T18:50:00+02:00",
+            "azimut_stellarium": 96.08,
+            "azimut_stupne": 276.08,
+            "vyska_stupne": 9.83
+        },
+        {
+            "cas": "2026-04-19T19:00:00+02:00",
+            "azimut_stellarium": 97.96,
+            "azimut_stupne": 277.96,
+            "vyska_stupne": 8.25
+        },
+        {
+            "cas": "2026-04-19T19:10:00+02:00",
+            "azimut_stellarium": 99.85,
+            "azimut_stupne": 279.85,
+            "vyska_stupne": 6.68
+        },
+        {
+            "cas": "2026-04-19T19:20:00+02:00",
+            "azimut_stellarium": 101.73,
+            "azimut_stupne": 281.73,
+            "vyska_stupne": 5.13
+        },
+        {
+            "cas": "2026-04-19T19:30:00+02:00",
+            "azimut_stellarium": 103.62,
+            "azimut_stupne": 283.62,
+            "vyska_stupne": 3.61
+        },
+        {
+            "cas": "2026-04-19T19:40:00+02:00",
+            "azimut_stellarium": 105.51,
+            "azimut_stupne": 285.51,
+            "vyska_stupne": 2.14
+        },
+        {
+            "cas": "2026-04-19T19:50:00+02:00",
+            "azimut_stellarium": 107.42,
+            "azimut_stupne": 287.42,
+            "vyska_stupne": 0.74
+        },
+        {
+            "cas": "2026-04-19T20:00:00+02:00",
+            "azimut_stellarium": 109.34,
+            "azimut_stupne": 289.34,
+            "vyska_stupne": -0.53
+        },
+        {
+            "cas": "2026-04-19T20:10:00+02:00",
+            "azimut_stellarium": 111.27,
+            "azimut_stupne": 291.27,
+            "vyska_stupne": -1.62
+        },
+        {
+            "cas": "2026-04-19T20:20:00+02:00",
+            "azimut_stellarium": 113.22,
+            "azimut_stupne": 293.22,
+            "vyska_stupne": -2.74
+        },
+        {
+            "cas": "2026-04-19T20:30:00+02:00",
+            "azimut_stellarium": 115.19,
+            "azimut_stupne": 295.19,
+            "vyska_stupne": -5.44
+        },
+        {
+            "cas": "2026-04-19T20:40:00+02:00",
+            "azimut_stellarium": 117.19,
+            "azimut_stupne": 297.19,
+            "vyska_stupne": -7.08
+        },
+        {
+            "cas": "2026-04-19T20:50:00+02:00",
+            "azimut_stellarium": 119.2,
+            "azimut_stupne": 299.2,
+            "vyska_stupne": -8.55
+        },
+        {
+            "cas": "2026-04-19T21:00:00+02:00",
+            "azimut_stellarium": 121.25,
+            "azimut_stupne": 301.25,
+            "vyska_stupne": -9.94
+        },
+        {
+            "cas": "2026-04-19T21:10:00+02:00",
+            "azimut_stellarium": 123.33,
+            "azimut_stupne": 303.33,
+            "vyska_stupne": -11.3
+        },
+        {
+            "cas": "2026-04-19T21:20:00+02:00",
+            "azimut_stellarium": 125.43,
+            "azimut_stupne": 305.43,
+            "vyska_stupne": -12.62
+        },
+        {
+            "cas": "2026-04-19T21:30:00+02:00",
+            "azimut_stellarium": 127.57,
+            "azimut_stupne": 307.57,
+            "vyska_stupne": -13.92
+        },
+        {
+            "cas": "2026-04-19T21:40:00+02:00",
+            "azimut_stellarium": 129.75,
+            "azimut_stupne": 309.75,
+            "vyska_stupne": -15.17
+        },
+        {
+            "cas": "2026-04-19T21:50:00+02:00",
+            "azimut_stellarium": 131.96,
+            "azimut_stupne": 311.96,
+            "vyska_stupne": -16.39
+        },
+        {
+            "cas": "2026-04-19T22:00:00+02:00",
+            "azimut_stellarium": 134.21,
+            "azimut_stupne": 314.21,
+            "vyska_stupne": -17.56
+        },
+        {
+            "cas": "2026-04-19T22:10:00+02:00",
+            "azimut_stellarium": 136.5,
+            "azimut_stupne": 316.5,
+            "vyska_stupne": -18.69
+        },
+        {
+            "cas": "2026-04-19T22:20:00+02:00",
+            "azimut_stellarium": 138.83,
+            "azimut_stupne": 318.83,
+            "vyska_stupne": -19.78
+        },
+        {
+            "cas": "2026-04-19T22:30:00+02:00",
+            "azimut_stellarium": 141.2,
+            "azimut_stupne": 321.2,
+            "vyska_stupne": -20.81
+        },
+        {
+            "cas": "2026-04-19T22:40:00+02:00",
+            "azimut_stellarium": 143.61,
+            "azimut_stupne": 323.61,
+            "vyska_stupne": -21.79
+        },
+        {
+            "cas": "2026-04-19T22:50:00+02:00",
+            "azimut_stellarium": 146.06,
+            "azimut_stupne": 326.06,
+            "vyska_stupne": -22.71
+        },
+        {
+            "cas": "2026-04-19T23:00:00+02:00",
+            "azimut_stellarium": 148.55,
+            "azimut_stupne": 328.55,
+            "vyska_stupne": -23.58
+        },
+        {
+            "cas": "2026-04-19T23:10:00+02:00",
+            "azimut_stellarium": 151.08,
+            "azimut_stupne": 331.08,
+            "vyska_stupne": -24.39
+        },
+        {
+            "cas": "2026-04-19T23:20:00+02:00",
+            "azimut_stellarium": 153.66,
+            "azimut_stupne": 333.66,
+            "vyska_stupne": -25.14
+        },
+        {
+            "cas": "2026-04-19T23:30:00+02:00",
+            "azimut_stellarium": 156.26,
+            "azimut_stupne": 336.26,
+            "vyska_stupne": -25.81
+        },
+        {
+            "cas": "2026-04-19T23:40:00+02:00",
+            "azimut_stellarium": 158.91,
+            "azimut_stupne": 338.91,
+            "vyska_stupne": -26.43
+        },
+        {
+            "cas": "2026-04-19T23:50:00+02:00",
+            "azimut_stellarium": 161.58,
+            "azimut_stupne": 341.58,
+            "vyska_stupne": -26.97
+        }
+    ]
+}
