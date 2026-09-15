@@ -1,20 +1,20 @@
 {
-  "cas": "2026-09-14 02:10:02",
+  "cas": "2026-09-15 02:10:19",
   "slunce": {
-    "vzdalenost_AU": 1.0061,
-    "prumer_uhlovy_deg": 30.3608,
-    "vychod": "2026-09-14 06:31:42",
-    "zapad": "2026-09-14 19:14:01",
-    "poledne": "2026-09-14 12:53:21"
+    "vzdalenost_AU": 1.00583,
+    "prumer_uhlovy_deg": 30.3689,
+    "vychod": "2026-09-15 06:33:11",
+    "zapad": "2026-09-15 19:11:50",
+    "poledne": "2026-09-15 12:52:59"
   },
   "mesic": {
-    "faze_procent": 9.34,
-    "vzdalenost_km": 394760,
-    "prumer_uhlovy_deg": 28.9396,
-    "stari_dny": 2.86,
-    "vychod": "2026-09-14 10:33:45",
-    "zapad": "2026-09-14 19:59:26",
-    "kulminace": "2026-09-14 15:22:04",
+    "faze_procent": 16.09,
+    "vzdalenost_km": 399398,
+    "prumer_uhlovy_deg": 28.6035,
+    "stari_dny": 3.86,
+    "vychod": "2026-09-15 11:49:11",
+    "zapad": "2026-09-15 20:20:27",
+    "kulminace": "2026-09-15 16:09:13",
     "pristi_nov": "2026-10-10 17:50:01",
     "prvni_ctvrt": "2026-09-18 22:43:41",
     "uplnek": "2026-09-26 18:48:57",
